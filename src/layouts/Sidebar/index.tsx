@@ -11,9 +11,7 @@ const SidebarContainer = styled.aside<SidebarContainerProps>`
   left: 0;
   top: 0;
   height: 100vh;
-  z-index: 2;
-  background-color: green; // TODO: change to theme color
-  width: ${(props) => props.$width}px;
+  background-color: rgba(29, 29, 29, 0.8); // TODO: change to theme color
 `;
 
 export function Sidebar() {

@@ -11,7 +11,7 @@ const ContentContainer = styled.div<ContentContainerProps>`
   padding: 0 ${(props) => props.$spacing}px;
 `;
 
-export const ROOT_CONTAINER_SPACING = 50;
+export const ROOT_CONTAINER_SPACING = 55;
 
 export function RootLayout() {
   return (
