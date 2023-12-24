@@ -1,10 +1,26 @@
 import { Outlet } from "react-router-dom";
+import { Navbar } from "./Navbar";
+import { Sidebar } from "./Sidebar";
+import styled from "styled-components";
+
+type ContentContainerProps = {
+  $spacing: number;
+};
+
+const ContentContainer = styled.div<ContentContainerProps>`
+  padding: 0 ${(props) => props.$spacing}px;
+`;
+
+export const ROOT_CONTAINER_SPACING = 50;
 
 export function RootLayout() {
   return (
     <>
-      <p>Root layout</p>
-      <Outlet />
+      <Navbar />
+      <Sidebar />
+      <ContentContainer $spacing={ROOT_CONTAINER_SPACING}>
+        <Outlet />
+      </ContentContainer>
     </>
   );
 }
