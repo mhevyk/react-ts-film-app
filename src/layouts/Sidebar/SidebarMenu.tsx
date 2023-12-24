@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { sidebarMenuItems } from "./sidebarMenuItems";
 import { cloneElement } from "react";
 
-const Menu = styled.nav`
+const Menu = styled.ul`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +30,7 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const MenuItemStack = styled.div`
+const MenuItemStack = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 80px;
@@ -38,19 +38,25 @@ const MenuItemStack = styled.div`
 
 export function SidebarMenu() {
   return (
-    <Menu>
-      <Link to="/">
-        <img src={logoImage} alt="Logo" loading="lazy" />
-      </Link>
-      <MenuItemStack>
-        {sidebarMenuItems.map((menuItem, index) => (
-          <Link key={index} to={menuItem.path}>
-            <ImageWrapper>
-              {cloneElement(menuItem.icon, { loading: "lazy" })}
-            </ImageWrapper>
+    <nav>
+      <Menu>
+        <li>
+          <Link to="/">
+            <img src={logoImage} alt="Logo" loading="lazy" />
           </Link>
-        ))}
-      </MenuItemStack>
-    </Menu>
+        </li>
+        <MenuItemStack>
+          {sidebarMenuItems.map((menuItem, index) => (
+            <li key={index}>
+              <Link to={menuItem.path}>
+                <ImageWrapper>
+                  {cloneElement(menuItem.icon, { loading: "lazy" })}
+                </ImageWrapper>
+              </Link>
+            </li>
+          ))}
+        </MenuItemStack>
+      </Menu>
+    </nav>
   );
 }
