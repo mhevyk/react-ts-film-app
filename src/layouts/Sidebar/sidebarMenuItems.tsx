@@ -1,13 +1,8 @@
-import { ReactElement } from "react";
 import homeIcon from "@icons/home.svg";
 import movieIcon from "@icons/movie.svg";
 import tvIcon from "@icons/tv.svg";
 import startStrokeIcon from "@icons/star-stroke.svg";
-
-type MenuItem = {
-  path: string;
-  icon: ReactElement;
-};
+import { MenuItem } from "@layouts/components/Menu";
 
 export const sidebarMenuItems: MenuItem[] = [
   {
