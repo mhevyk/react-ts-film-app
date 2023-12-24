@@ -1,24 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactElement, cloneElement } from "react";
-
-const ImageWrapper = styled.div<{ $iconSize: number }>`
-  width: ${(props) => props.$iconSize}px;
-  aspect-ratio: 1/1;
-  padding: 8px;
-  border-radius: 50%;
-  transition: all 200ms;
-
-  &:hover {
-    scale: 1.12;
-    background-color: rgba(
-      255,
-      255,
-      255,
-      0.2
-    ); // TODO: replace with theme color
-  }
-`;
+import { HoverableIcon } from "@components/HoverableIcon";
 
 type ListStyledProps = Pick<MenuProps, "direction" | "gap">;
 type ListProps = {
@@ -54,9 +37,10 @@ export function Menu({
       {items.map((menuItem, index) => (
         <li key={index}>
           <Link to={menuItem.path}>
-            <ImageWrapper $iconSize={iconSize}>
-              {cloneElement(menuItem.icon, { loading: "lazy" })}
-            </ImageWrapper>
+            <HoverableIcon
+              icon={cloneElement(menuItem.icon, { loading: "lazy" })}
+              size={iconSize}
+            />
           </Link>
         </li>
       ))}

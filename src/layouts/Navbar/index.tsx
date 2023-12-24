@@ -7,9 +7,10 @@ type NavbarContainerProps = {
 };
 
 const NavbarContainer = styled.div<NavbarContainerProps>`
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1;
+  right: 0;
+  z-index: 100;
   margin-left: ${(props) => props.$spacing}px;
 `;
 

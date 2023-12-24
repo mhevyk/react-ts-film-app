@@ -8,7 +8,7 @@ type ContentContainerProps = {
 };
 
 const ContentContainer = styled.div<ContentContainerProps>`
-  padding: 0 ${(props) => props.$spacing}px;
+  padding-left: ${(props) => props.$spacing}px;
 `;
 
 export const ROOT_CONTAINER_SPACING = 55;
