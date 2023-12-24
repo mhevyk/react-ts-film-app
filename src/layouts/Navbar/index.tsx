@@ -10,8 +10,6 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
   position: sticky;
   top: 0;
   z-index: 1;
-  background-color: red; // TODO: change to theme colors
-  height: ${(props) => props.$spacing}px;
   margin-left: ${(props) => props.$spacing}px;
 `;
 
