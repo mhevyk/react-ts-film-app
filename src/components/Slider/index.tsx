@@ -19,7 +19,7 @@ import chevronLeftIcon from "@icons/chevron-left.svg";
 import styled, { RuleSet, css } from "styled-components";
 import { ReactNode, useId, useRef } from "react";
 import { HoverableIcon } from "../HoverableIcon";
-import { useSliderVariantConfig } from "./useSliderVariantConfig";
+import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
 export const SLIDER_PADDING = 24;
 

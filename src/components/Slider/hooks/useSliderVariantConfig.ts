@@ -1,5 +1,5 @@
 import { MutableRefObject, RefObject } from "react";
-import { SliderVariant } from ".";
+import { SliderVariant } from "..";
 import { SwiperRef } from "swiper/react";
 import { useContainerWidth } from "./useContainerWidth";
 
