@@ -17,9 +17,9 @@ import "./Slider.css";
 import chevronRightIcon from "@icons/chevron-right.svg";
 import chevronLeftIcon from "@icons/chevron-left.svg";
 import styled, { RuleSet, css } from "styled-components";
-import { ReactNode, RefObject, useId, useRef } from "react";
+import { ReactNode, useId, useRef } from "react";
 import { HoverableIcon } from "../HoverableIcon";
-import { useContainerWidth } from "./useContainerWidth";
+import { useSliderVariantConfig } from "./useSliderVariantConfig";
 
 export const SLIDER_PADDING = 24;
 
@@ -76,36 +76,7 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
   ${(props) => props.$slideStyles}
 `;
 
-type SliderVariant = "full-screen" | "small" | "medium";
-
-type SliderVariantConfigProps = {
-  slideWidth: number;
-  spaceBetween?: number;
-};
-
-const sliderConfig: Record<SliderVariant, SliderVariantConfigProps> = {
-  "full-screen": {
-    slideWidth: window.innerWidth,
-  },
-  small: {
-    slideWidth: 504,
-  },
-  medium: {
-    slideWidth: 292,
-    spaceBetween: 16,
-  },
-};
-
-function calculateSlidesPerView(
-  sliderWidth: number,
-  slideWidth: number,
-  slideGap?: number
-) {
-  const gap = slideGap ?? 0;
-  const calculatedSlidesPerView =
-    (sliderWidth + gap) / (slideWidth - gap) + 0.45; // 0.45 is kind of salt to receive natural slides division
-  return calculatedSlidesPerView;
-}
+export type SliderVariant = "full-screen" | "small" | "medium";
 
 type SliderProps<T> = {
   slides: T[];
@@ -132,19 +103,10 @@ export function Slider<T>({
 }: SliderProps<T>) {
   const id = useId();
   const swiperRef = useRef<SwiperRef | null>(null);
-  const sliderWidth = useContainerWidth(
-    swiperRef as RefObject<HTMLElement | null>
+  const { slidesPerView, spaceBetween } = useSliderVariantConfig(
+    swiperRef,
+    variant
   );
-  const variantConfig = sliderConfig[variant];
-
-  const slidesPerView =
-    variant !== "full-screen"
-      ? calculateSlidesPerView(
-          sliderWidth,
-          variantConfig.slideWidth,
-          variantConfig.spaceBetween
-        )
-      : 1;
 
   return (
     <SliderWrapper data-id={id} $wrapperStyles={wrapperStyles}>
@@ -170,7 +132,7 @@ manipulations */}
         modules={[A11y, EffectFade, Pagination, Navigation, Autoplay]}
         effect={variant === "full-screen" ? "fade" : undefined}
         slidesPerView={slidesPerView}
-        spaceBetween={variantConfig.spaceBetween}
+        spaceBetween={spaceBetween}
         navigation={
           navigationControls
             ? {
