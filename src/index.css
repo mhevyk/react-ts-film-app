@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: rgb(29, 29, 29); /* TODO: replace with theme colors */
+  background-color: var(--color-background);
 }
 
 img {
