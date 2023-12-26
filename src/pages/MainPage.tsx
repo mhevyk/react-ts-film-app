@@ -1,4 +1,6 @@
-import { Slider } from "@components/Slider";
+import { BackdropSlider } from "@components/BackdropSlider";
+import { FeaturedTvSection } from "@components/FeaturedTvSection";
+import { NewReleasesSection } from "@components/NewReleasesSection";
 import { Navbar } from "@layouts/Navbar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
@@ -12,16 +14,10 @@ const Header = styled.header`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 5;
-  padding: 50px 0 0; // TODO: remove top scacing, its just for test
   background-color: rgb(${({ theme }) => theme.colors.backgroundRGB});
 
   ${media.screens.md} {
-    padding: 50px ${({ theme }) => theme.globals.contentContainerSpacing} 0; // TODO: remove top scacing, its just for test
-  }
-
-  & > div {
-    // TODO: remove later, its just for test
-    margin-bottom: 50px;
+    padding: 0 ${({ theme }) => theme.globals.contentContainerSpacing}; // TODO: remove top scacing, its just for test
   }
 `;
 
@@ -30,28 +26,11 @@ export function MainPage() {
     <>
       <Header>
         <Navbar />
-        <Slider
-          variant="full-screen"
-          slides={[1, 2, 3]}
-          renderSlide={(slide) => `Full-screen slide ${slide}`}
-          pagination
-          navigationControls
-          autoplay
-        />
+        <BackdropSlider />
       </Header>
       <ContentWrapper>
-        <Slider
-          variant="medium"
-          slides={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          renderSlide={(slide) => `Small slide ${slide}`}
-          navigationControls
-        />
-        <Slider
-          variant="small"
-          slides={[1, 2, 3, 4, 5, 6, 7, 8, 9]}
-          renderSlide={(slide) => `Mediaum slide ${slide}`}
-          navigationControls
-        />
+        <NewReleasesSection />
+        <FeaturedTvSection />
       </ContentWrapper>
     </>
   );
