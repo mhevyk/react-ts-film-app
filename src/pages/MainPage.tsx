@@ -1,4 +1,5 @@
 import { Slider } from "@components/Slider";
+import { Navbar } from "@layouts/Navbar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
 
@@ -28,6 +29,7 @@ export function MainPage() {
   return (
     <>
       <Header>
+        <Navbar />
         <Slider
           variant="full-screen"
           slides={[1, 2, 3]}

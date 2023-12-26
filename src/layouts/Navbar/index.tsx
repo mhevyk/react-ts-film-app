@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { NavbarMenu } from "./NavbarMenu";
 
 const NavbarContainer = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   z-index: 100;
