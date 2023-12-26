@@ -1,8 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
+
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: var(--color-background);
+  font-family: roboto;
 }
 
 img {
@@ -14,6 +17,10 @@ ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 .d-none {
