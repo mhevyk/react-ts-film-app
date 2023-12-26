@@ -21,15 +21,13 @@ import { ReactNode, useId, useRef } from "react";
 import { HoverableIcon } from "../HoverableIcon";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
-export const SLIDER_PADDING = 24;
-
 type StyledComponentsCSS = RuleSet<object>;
 
 const SliderWrapper = styled.div<{ $wrapperStyles?: StyledComponentsCSS }>`
   --swiper-navigation-color: white; // TODO: replace with theme styles
   --swiper-pagination-color: rgba(226, 219, 219);
   --swiper-pagination-bullet-horizontal-gap: 8px;
-  --slider-padding: ${SLIDER_PADDING}px;
+  --slider-padding: ${({ theme }) => theme.globals.sliderSpacing};
   position: relative;
   ${(props) => props.$wrapperStyles}
 `;
