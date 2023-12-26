@@ -30,7 +30,8 @@
       "@icons/*": ["src/assets/icons/*"],
       "@images/*": ["src/assets/images/*"],
       "@utils/*": ["src/utils/*"],
-      "@theme/*": ["src/theme/*"]
+      "@theme/*": ["src/theme/*"],
+      "@api/*": ["src/api/*"]
     }
   },
   "include": ["src"],

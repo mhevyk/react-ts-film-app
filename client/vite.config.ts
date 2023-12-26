@@ -18,6 +18,7 @@ export default defineConfig({
       "@images": resolveSource("assets", "images"),
       "@utils": resolveSource("utils"),
       "@theme": resolveSource("theme"),
+      "@api": resolveSource("api"),
     },
   },
   plugins: [react()],
