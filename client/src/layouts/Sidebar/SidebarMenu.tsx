@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
-import logoImage from "@icons/logo.svg";
 import styled from "styled-components";
 import { sidebarMenuItems } from "./sidebarMenuItems";
 import { Menu } from "@layouts/components/Menu";
+import { useMediaQuery } from "@hooks/useMediaQuery";
+import { media } from "@theme/mediaQueries";
+import { Logo } from "./Logo";
 
 const MenuWrapper = styled.nav`
   display: flex;
@@ -13,12 +14,14 @@ const MenuWrapper = styled.nav`
 `;
 
 export function SidebarMenu() {
+  const matches = useMediaQuery(media.screens.md);
+
   return (
-    <MenuWrapper>
-      <Link to="/">
-        <img src={logoImage} alt="Logo" loading="lazy" />
-      </Link>
-      <Menu items={sidebarMenuItems} direction="column" gap={80} />
-    </MenuWrapper>
+    matches && (
+      <MenuWrapper>
+        <Logo />
+        <Menu items={sidebarMenuItems} direction="column" gap={80} />
+      </MenuWrapper>
+    )
   );
 }

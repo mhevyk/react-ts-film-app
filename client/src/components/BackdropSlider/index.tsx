@@ -247,11 +247,11 @@ function composeSlideCSS() {
 
     min-height: 90dvh;
 
-    ${media.screens.md} {
+    @media ${media.screens.md} {
       min-height: 60dvh;
     }
 
-    ${media.screens.lg} {
+    @media ${media.screens.lg} {
       min-height: unset;
       max-height: 648px;
     }

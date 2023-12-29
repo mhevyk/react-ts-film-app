@@ -13,11 +13,11 @@ const Film = styled.article`
   gap: 16px;
   padding: 0 20vw;
 
-  ${media.screens.xs} {
+  @media ${media.screens.xs} {
     padding: 0 12vw;
   }
 
-  ${media.screens.md} {
+  @media ${media.screens.md} {
     padding: 0 12%;
   }
 `;
@@ -27,7 +27,7 @@ const FilmGenres = styled.div`
   flex-direction: column;
   gap: 16px;
 
-  ${media.screens.sm} {
+  @media ${media.screens.sm} {
     flex-direction: row;
   }
 `;
@@ -39,7 +39,7 @@ const FilmTitle = styled.h2`
   color: white;
   margin: 0;
 
-  ${media.screens.lg} {
+  @media ${media.screens.lg} {
     font-size: 56px;
     line-height: 64px;
   }
@@ -55,14 +55,14 @@ const FilmDescription = styled.p`
   overflow-y: scroll;
   padding-right: 16px;
 
-  ${media.screens.sm} {
+  @media ${media.screens.sm} {
     font-size: 16px;
     line-height: 32px;
     overflow-y: unset;
     max-height: unset;
   }
 
-  ${media.screens.lg} {
+  @media ${media.screens.lg} {
     max-width: 632px;
     padding-right: 0;
   }

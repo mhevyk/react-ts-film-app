@@ -6,6 +6,7 @@ const NavbarContainer = styled.div`
   top: 0;
   right: 0;
   z-index: 100;
+  width: 100%;
 `;
 
 export function Navbar() {

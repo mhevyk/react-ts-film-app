@@ -2,6 +2,7 @@ import { BackdropSlider } from "@components/BackdropSlider";
 import { FeaturedTvSection } from "@components/FeaturedTvSection";
 import { NewReleasesSection } from "@components/NewReleasesSection";
 import { Navbar } from "@layouts/Navbar";
+import { Sidebar } from "@layouts/Sidebar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
 
@@ -16,7 +17,7 @@ const ContentWrapper = styled.div`
   z-index: 5;
   background-color: rgb(${({ theme }) => theme.colors.backgroundRGB});
 
-  ${media.screens.md} {
+  @media ${media.screens.md} {
     padding: 0 ${({ theme }) => theme.globals.contentContainerSpacing}; // TODO: remove top scacing, its just for test
   }
 `;
@@ -24,6 +25,7 @@ const ContentWrapper = styled.div`
 export function MainPage() {
   return (
     <>
+      <Sidebar />
       <Header>
         <Navbar />
         <BackdropSlider />
