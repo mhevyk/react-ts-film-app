@@ -10,7 +10,9 @@ const theme = {
     primary: "#E10856",
     secondary: "#BA104D",
     accent: "#0FEFFD",
+    white: "white",
     backgroundRGB: "29, 29, 29",
+    lightRGB: "226, 219, 219",
   },
   globals: {
     contentContainerSpacing: "55px",

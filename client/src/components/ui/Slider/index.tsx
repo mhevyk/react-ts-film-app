@@ -24,8 +24,11 @@ import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 type StyledComponentsCSS = RuleSet<object>;
 
 const SliderWrapper = styled.div<{ $wrapperStyles?: StyledComponentsCSS }>`
-  --swiper-navigation-color: white; // TODO: replace with theme styles
-  --swiper-pagination-color: rgba(226, 219, 219);
+  --swiper-pagination-color: ${({ theme }) => theme.colors.white};
+  --swiper-pagination-bottom: 24px;
+  --swiper-pagination-bullet-inactive-color: rgb(
+    ${({ theme }) => theme.colors.lightRGB}
+  );
   --swiper-pagination-bullet-horizontal-gap: 8px;
   --slider-padding: ${({ theme }) => theme.globals.sliderSpacing};
   position: relative;
@@ -43,7 +46,7 @@ type SlideStyledProps = {
 
 const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
   // TODO: replace with theme styles
-  background-color: gray;
+  background-color: rgb(${({ theme }) => theme.colors.lightRGB});
   ${(props) => {
     if (props.$variant === "small") {
       return css`
@@ -59,11 +62,6 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
 
     return css`
       aspect-ratio: 50/27;
-      min-height: 300px;
-      @media (min-width: 767px) {
-        min-height: unset;
-        max-height: 648px;
-      }
     `;
   }};
 
@@ -146,7 +144,7 @@ manipulations */}
         noSwiping={variant === "full-screen"}
         noSwipingClass="swiper-slide"
         fadeEffect={variant === "full-screen" ? { crossFade: true } : undefined}
-        pagination={pagination ? { clickable: true } : undefined}
+        pagination={pagination ? { clickable: false } : undefined}
         $sliderStyles={sliderStyles}
       >
         {slides.map((slide, index) => (
