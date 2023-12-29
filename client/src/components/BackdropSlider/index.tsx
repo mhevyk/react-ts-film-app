@@ -240,17 +240,8 @@ export const slidesMock = [
   },
 ];
 
-function composeSlideCSS(backdrop_path: string) {
+function composeSlideCSS() {
   return css`
-    --overlay-color: rgba(${({ theme }) => theme.colors.backgroundRGB}, 0.6);
-    background-image: linear-gradient(
-        var(--overlay-color),
-        var(--overlay-color)
-      ),
-      url("https://image.tmdb.org/t/p/original${backdrop_path}");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
     display: flex; // TODO: remove it, it is just for testing
     align-items: center;
 
@@ -273,10 +264,10 @@ export function BackdropSlider() {
       variant="full-screen"
       slides={slidesMock}
       renderSlide={renderBackdropSlide}
-      slideStyles={(slide) => composeSlideCSS(slide.backdrop_path)}
+      slideStyles={() => composeSlideCSS()}
       pagination
       navigationControls
-      autoplay
+      // autoplay
     />
   );
 }

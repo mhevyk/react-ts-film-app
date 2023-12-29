@@ -17,6 +17,7 @@ type ButtonStyledProps = PrefixWith$<
 const baseButtonStyles = css`
   --hover-transition: all 500ms;
   position: relative;
+  z-index: 20;
   text-align: center;
   padding: 16px;
   cursor: pointer;
@@ -30,6 +31,7 @@ const baseButtonStyles = css`
 const gradientButtonStyles = css<Pick<ButtonStyledProps, "$outlined">>`
   border: none;
   background-color: transparent;
+  z-index: 21;
 
   svg {
     position: absolute;

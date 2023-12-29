@@ -5,6 +5,7 @@ import { StarRating } from "@components/ui/StarRating";
 import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { media } from "@theme/mediaQueries";
+import { LazyImage } from "@components/ui/LazyImage";
 
 const Film = styled.article`
   display: flex;
@@ -52,6 +53,7 @@ const FilmDescription = styled.p`
   text-align: justify;
   max-height: 10em;
   overflow-y: scroll;
+  padding-right: 16px;
 
   ${media.screens.sm} {
     font-size: 16px;
@@ -62,7 +64,18 @@ const FilmDescription = styled.p`
     max-width: 632px;
     max-height: unset;
     overflow-y: unset;
+    padding-right: 0;
   }
+`;
+
+const Poster = styled(LazyImage)`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: brightness(40%);
+  object-fit: cover;
+  z-index: -1;
 `;
 
 export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
@@ -81,6 +94,10 @@ export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
         {/* TODO: change link */}
         Watch now
       </Button>
+      <Poster
+        src={`https://image.tmdb.org/t/p/original${slide.backdrop_path}`}
+      />{" "}
+      {/* TODO: add src set to improve performance */}
     </Film>
   );
 }

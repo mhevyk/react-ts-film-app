@@ -45,7 +45,7 @@ type SlideStyledProps = {
 };
 
 const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
-  // TODO: replace with theme styles
+  position: relative;
   background-color: rgb(${({ theme }) => theme.colors.lightRGB});
   ${(props) => {
     if (props.$variant === "small") {
