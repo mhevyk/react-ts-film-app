@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactElement, cloneElement } from "react";
-import { HoverableIcon } from "@components/HoverableIcon";
+import { HoverableIcon } from "@components/ui/HoverableIcon";
 
 type ListStyledProps = Pick<MenuProps, "direction" | "gap">;
 type ListProps = {

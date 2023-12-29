@@ -1,5 +1,5 @@
-import { Section } from "./Section";
-import { Slider } from "./Slider";
+import { Section } from "@components/ui/Section";
+import { Slider } from "@components/ui/Slider";
 
 export function NewReleasesSection() {
   return (

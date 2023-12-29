@@ -67,10 +67,6 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
     `;
   }};
 
-  display: flex; // TODO: remove it, it is just for testing
-  align-items: center;
-  justify-content: center;
-
   ${(props) => props.$slideStyles}
 `;
 
@@ -85,7 +81,7 @@ type SliderProps<T> = {
   navigationControls?: boolean;
   wrapperStyles?: StyledComponentsCSS;
   sliderStyles?: StyledComponentsCSS;
-  slideStyles?: StyledComponentsCSS;
+  slideStyles?: (slide: T) => StyledComponentsCSS;
 };
 
 export function Slider<T>({
@@ -156,7 +152,7 @@ manipulations */}
         {slides.map((slide, index) => (
           <SlideStyled
             key={index}
-            $slideStyles={slideStyles}
+            $slideStyles={slideStyles?.(slide)}
             $variant={variant}
           >
             {renderSlide(slide)}
