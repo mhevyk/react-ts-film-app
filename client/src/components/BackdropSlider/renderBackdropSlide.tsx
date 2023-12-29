@@ -48,8 +48,8 @@ const FilmTitle = styled.h2`
 const FilmDescription = styled.p`
   color: white;
   font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
+  font-size: 14px;
+  line-height: 24px;
   text-align: justify;
   max-height: 10em;
   overflow-y: scroll;
@@ -58,12 +58,12 @@ const FilmDescription = styled.p`
   ${media.screens.sm} {
     font-size: 16px;
     line-height: 32px;
+    overflow-y: unset;
+    max-height: unset;
   }
 
   ${media.screens.lg} {
     max-width: 632px;
-    max-height: unset;
-    overflow-y: unset;
     padding-right: 0;
   }
 `;
