@@ -1,4 +1,4 @@
-import { PrefixWith$ } from "../types/helpers";
+import { PrefixWith$ } from "../../types/helpers";
 import {
   ComponentPropsWithoutRef,
   ElementType,
@@ -17,10 +17,11 @@ type ButtonStyledProps = PrefixWith$<
 const baseButtonStyles = css`
   --hover-transition: all 500ms;
   position: relative;
+  text-align: center;
   padding: 16px;
   cursor: pointer;
-  max-width: 288px;
-  font-size: 18px;
+  max-width: 200px;
+  font-size: 1.15em;
   line-height: 24px;
   color: white;
   transition: var(--hover-transition);
