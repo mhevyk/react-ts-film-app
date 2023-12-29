@@ -4,7 +4,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
 import "./index.css";
 import { ThemeProvider } from "styled-components";
-import { theme } from "./theme/theme";
+import theme from "@theme/theme";
 import { GlobalStyles } from "./theme/global";
 
 const rootElement = document.getElementById("root")!;

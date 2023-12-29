@@ -1,4 +1,4 @@
-export const theme = {
+const theme = {
   breakpoints: {
     xs: "480px",
     sm: "640px",
@@ -7,7 +7,9 @@ export const theme = {
     xl: "1280px",
   },
   colors: {
-    primary: "#0FEFFD",
+    primary: "#E10856",
+    secondary: "#BA104D",
+    accent: "#0FEFFD",
     backgroundRGB: "29, 29, 29",
   },
   globals: {
@@ -16,3 +18,7 @@ export const theme = {
     sliderSpacing: "24px",
   },
 } as const;
+
+export default theme;
+
+export type Theme = typeof theme;

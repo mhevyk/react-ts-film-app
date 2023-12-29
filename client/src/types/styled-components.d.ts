@@ -1,4 +1,4 @@
-import { theme } from "src/theme/theme";
+import theme from "@theme/theme";
 import "styled-components";
 
 type CustomTheme = typeof theme;
