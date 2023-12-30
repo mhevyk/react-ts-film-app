@@ -2,13 +2,11 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ReactElement, cloneElement } from "react";
 import { HoverableIcon } from "@components/ui/HoverableIcon";
+import { PrefixWith$ } from "src/types/helpers";
 
-type ListStyledProps = Pick<MenuProps, "direction" | "gap">;
-type ListProps = {
-  [K in keyof ListStyledProps as `$${string & K}`]: ListStyledProps[K];
-};
+type ListStyledProps = PrefixWith$<Pick<MenuProps, "direction" | "gap">>;
 
-const List = styled.ul<ListProps>`
+const List = styled.ul<ListStyledProps>`
   display: flex;
   flex-direction: ${(props) => props.$direction};
   gap: ${(props) => props.$gap}px;
