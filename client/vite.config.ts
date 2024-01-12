@@ -19,6 +19,7 @@ export default defineConfig({
       "@utils": resolveSource("utils"),
       "@theme": resolveSource("theme"),
       "@api": resolveSource("api"),
+      "@store": resolveSource("store"),
     },
   },
   plugins: [react()],

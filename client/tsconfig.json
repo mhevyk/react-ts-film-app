@@ -31,7 +31,8 @@
       "@images/*": ["src/assets/images/*"],
       "@utils/*": ["src/utils/*"],
       "@theme/*": ["src/theme/*"],
-      "@api/*": ["src/api/*"]
+      "@api/*": ["src/api/*"],
+      "@store/*": ["src/store/*"]
     }
   },
   "include": ["src"],
