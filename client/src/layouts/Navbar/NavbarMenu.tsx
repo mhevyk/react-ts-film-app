@@ -20,11 +20,11 @@ const MenuWrapper = styled.nav`
 
 export function NavbarMenu() {
   const matches = useMediaQuery(media.screens.lg);
-  const toggle = useSidebarStore((store) => store.toggle);
+  const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
 
   return (
     <MenuWrapper>
-      {!matches && <Logo onClick={() => toggle()} />}
+      {!matches && <Logo onClick={() => setIsSidebarOpen(true)} />}
       <Menu items={navbarMenuItems} gap={30} iconSize={24} />
     </MenuWrapper>
   );

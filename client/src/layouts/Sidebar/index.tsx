@@ -37,16 +37,16 @@ const SidebarContainer = styled.aside`
 export const Sidebar = () => {
   const sidebarContainerRef = useRef<HTMLDivElement | null>(null);
   const isLargeScreen = useMediaQuery(media.screens.lg);
-  const isOpen = useSidebarStore((store) => store.isOpen);
-  const setIsOpen = useSidebarStore((store) => store.setIsOpen);
+  const isSidebarOpen = useSidebarStore((store) => store.isOpen);
+  const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
 
   useEffect(() => {
-    setIsOpen(isLargeScreen);
+    setIsSidebarOpen(isLargeScreen);
   }, [isLargeScreen]);
 
   return (
     <CSSTransition
-      in={isOpen}
+      in={isSidebarOpen}
       timeout={ANIMATION_DURATION}
       mountOnEnter
       unmountOnExit
@@ -55,7 +55,7 @@ export const Sidebar = () => {
     >
       <SidebarContainer ref={sidebarContainerRef}>
         {!isLargeScreen && (
-          <CloseIcon src={closeIcon} onClick={() => setIsOpen(false)} />
+          <CloseIcon src={closeIcon} onClick={() => setIsSidebarOpen(false)} />
         )}
         <SidebarMenu isLargeScreen={isLargeScreen} />
       </SidebarContainer>
