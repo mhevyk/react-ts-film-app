@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import logoImage from "@icons/logo.svg";
+import { ComponentProps } from "react";
 
-export function Logo() {
+type LogoProps = Omit<ComponentProps<typeof Link>, "to">;
+
+export function Logo(props: LogoProps) {
   return (
-    <Link to="/">
+    <Link to="/" {...props}>
       <img src={logoImage} alt="Logo" loading="lazy" />
     </Link>
   );
