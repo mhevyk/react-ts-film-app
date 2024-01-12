@@ -140,7 +140,6 @@ manipulations */}
             disableOnInteraction: true,
           }
         }
-        onSwiper={(swiper) => console.log(swiper)}
         noSwiping={variant === "full-screen"}
         noSwipingClass="swiper-slide"
         fadeEffect={variant === "full-screen" ? { crossFade: true } : undefined}

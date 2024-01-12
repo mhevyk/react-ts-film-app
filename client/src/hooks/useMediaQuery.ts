@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 
-function getMatches(query: string) {
+export function checkMediaQueryMatches(query: string) {
   return window.matchMedia(query).matches;
 }
 
 export function useMediaQuery(query: string) {
-  const [matches, setMatches] = useState(getMatches(query));
+  const [matches, setMatches] = useState(checkMediaQueryMatches(query));
 
   function handleChange() {
-    setMatches(getMatches(query));
+    setMatches(checkMediaQueryMatches(query));
   }
 
   useEffect(() => {
