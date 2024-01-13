@@ -18,7 +18,8 @@ const Film = styled.article`
   }
 
   @media ${media.screens.md} {
-    padding: 0 12%;
+    padding: 0
+      calc(${({ theme }) => theme.globals.contentContainerSpacing} + 10%);
   }
 `;
 

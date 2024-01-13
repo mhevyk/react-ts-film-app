@@ -14,7 +14,7 @@ const ANIMATION_CLASSNAME = "fade";
 const CloseIcon = styled.img`
   position: absolute;
   top: 20px;
-  right: 32px;
+  right: ${({ theme }) => theme.globals.contentContainerSpacing};
   width: 40px;
   height: 40px;
   cursor: pointer;

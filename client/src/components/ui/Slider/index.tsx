@@ -17,7 +17,7 @@ import "./Slider.css";
 import chevronRightIcon from "@icons/chevron-right.svg";
 import chevronLeftIcon from "@icons/chevron-left.svg";
 import styled, { RuleSet, css } from "styled-components";
-import { ReactNode, useId, useRef } from "react";
+import { ComponentPropsWithoutRef, ReactNode, useId, useRef } from "react";
 import { HoverableIcon } from "../HoverableIcon";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
@@ -80,7 +80,7 @@ type SliderProps<T> = {
   wrapperStyles?: StyledComponentsCSS;
   sliderStyles?: StyledComponentsCSS;
   slideStyles?: (slide: T) => StyledComponentsCSS;
-};
+} & ComponentPropsWithoutRef<"div">;
 
 export function Slider<T>({
   slides,
@@ -92,6 +92,7 @@ export function Slider<T>({
   wrapperStyles,
   sliderStyles,
   slideStyles,
+  ...rest
 }: SliderProps<T>) {
   const id = useId();
   const swiperRef = useRef<SwiperRef | null>(null);
@@ -101,7 +102,7 @@ export function Slider<T>({
   );
 
   return (
-    <SliderWrapper data-id={id} $wrapperStyles={wrapperStyles}>
+    <SliderWrapper data-id={id} $wrapperStyles={wrapperStyles} {...rest}>
       {/* used data-id in order to not to sanitize id and use it directly without
 manipulations */}
       {navigationControls && (

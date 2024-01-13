@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import theme from "./theme";
+import { media } from "./mediaQueries";
 
 export const GlobalStyles = createGlobalStyle`
   :root {
@@ -8,4 +9,10 @@ export const GlobalStyles = createGlobalStyle`
     --color-accent: ${theme.colors.accent};
     --color-background: rgb(${theme.colors.backgroundRGB});
   }
+
+  @media ${media.screens.lg} {
+      .backdrop-slider .navigation-button-prev {
+        left: calc(${theme.globals.sliderSpacing} + ${theme.globals.contentContainerSpacing});
+      }
+    }
 `;

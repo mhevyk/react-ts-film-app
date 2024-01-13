@@ -245,10 +245,10 @@ function composeSlideCSS() {
     display: flex; // TODO: remove it, it is just for testing
     align-items: center;
 
-    min-height: 90dvh;
+    min-height: 90vh;
 
     @media ${media.screens.md} {
-      min-height: 60dvh;
+      min-height: 70vh;
     }
 
     @media ${media.screens.lg} {
@@ -265,9 +265,10 @@ export function BackdropSlider() {
       slides={slidesMock}
       renderSlide={renderBackdropSlide}
       slideStyles={() => composeSlideCSS()}
+      className="backdrop-slider"
       pagination
       navigationControls
-      // autoplay
+      autoplay
     />
   );
 }
