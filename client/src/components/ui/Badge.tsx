@@ -8,6 +8,7 @@ const BadgeStyled = styled.div`
   border-radius: 0 8px;
   cursor: default;
   width: fit-content; // used to prevent stretching elements to full width
+  white-space: nowrap;
 
   &:hover {
     text-decoration: underline;
