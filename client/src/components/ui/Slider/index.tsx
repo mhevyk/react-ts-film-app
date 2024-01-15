@@ -21,32 +21,30 @@ import { ComponentPropsWithoutRef, ReactNode, useId, useRef } from "react";
 import { HoverableIcon } from "../HoverableIcon";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
-type StyledComponentsCSS = RuleSet<object>;
-
-const SliderWrapper = styled.div<{ $wrapperStyles?: StyledComponentsCSS }>`
-  --swiper-pagination-color: ${({ theme }) => theme.colors.white};
+const SliderWrapper = styled.div<{ $wrapperStyles?: RuleSet }>`
+  --swiper-pagination-color: ${(props) => props.theme.colors.white};
   --swiper-pagination-bottom: 24px;
-  --swiper-pagination-bullet-inactive-color: rgb(
-    ${({ theme }) => theme.colors.lightRGB}
-  );
+  --swiper-pagination-bullet-inactive-color: ${(props) =>
+    props.theme.colors.light};
   --swiper-pagination-bullet-horizontal-gap: 8px;
-  --slider-padding: ${({ theme }) => theme.globals.sliderSpacing};
+  --slider-padding: ${(props) => props.theme.globals.sliderSpacing};
   position: relative;
+
   ${(props) => props.$wrapperStyles}
 `;
 
-const SwiperStyled = styled(Swiper)<{ $sliderStyles?: StyledComponentsCSS }>`
+const SwiperStyled = styled(Swiper)<{ $sliderStyles?: RuleSet }>`
   ${(props) => props.$sliderStyles}
 `;
 
 type SlideStyledProps = {
-  $slideStyles?: StyledComponentsCSS;
+  $slideStyles?: RuleSet;
   $variant: SliderVariant;
 };
 
 const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
   position: relative;
-  background-color: rgb(${({ theme }) => theme.colors.lightRGB});
+  background-color: ${(props) => props.theme.colors.light};
   ${(props) => {
     if (props.$variant === "small") {
       return css`
@@ -77,9 +75,9 @@ type SliderProps<T> = {
   autoplay?: boolean;
   pagination?: boolean;
   navigationControls?: boolean;
-  wrapperStyles?: StyledComponentsCSS;
-  sliderStyles?: StyledComponentsCSS;
-  slideStyles?: (slide: T) => StyledComponentsCSS;
+  wrapperStyles?: RuleSet;
+  sliderStyles?: RuleSet;
+  slideStyles?: (slide: T) => RuleSet;
 } & ComponentPropsWithoutRef<"div">;
 
 export function Slider<T>({

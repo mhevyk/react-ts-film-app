@@ -1,9 +1,8 @@
 import styled from "styled-components";
 
 const BadgeStyled = styled.div`
-  background-color: ${({ theme }) =>
-    `rgba(${theme.colors.backgroundRGB}, 0.6)`};
-  color: ${({ theme }) => theme.colors.accent};
+  background-color: ${(props) => props.theme.colors.backgroundWithOpacity(0.6)};
+  color: ${(props) => props.theme.colors.accent};
   font-size: 14px;
   padding: 4px 8px;
   border-radius: 0 8px;

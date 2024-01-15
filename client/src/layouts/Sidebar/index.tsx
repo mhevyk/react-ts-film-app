@@ -26,10 +26,8 @@ const SidebarContainer = styled.aside<{ $isLargeScreen: boolean }>`
   top: 0;
   height: 100vh;
   z-index: 100;
-  background-color: rgba(
-    ${({ theme }) => theme.colors.backgroundRGB},
-    ${(props) => (props.$isLargeScreen ? 0.8 : 1)}
-  );
+  background-color: ${(props) =>
+    props.theme.colors.backgroundWithOpacity(props.$isLargeScreen ? 0.8 : 1)};
   width: 100%;
 
   @media ${media.screens.lg} {

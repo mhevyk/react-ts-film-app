@@ -11,8 +11,11 @@ const theme = {
     secondary: "#BA104D",
     accent: "#0FEFFD",
     white: "white",
-    backgroundRGB: "29, 29, 29",
-    lightRGB: "226, 219, 219",
+    whiteWithOpacity: (opacity: number) => `rgba(255, 255, 255, ${opacity})`,
+    background: "rgb(29, 29, 29)",
+    backgroundWithOpacity: (opacity: number) => `rgba(29, 29, 29, ${opacity})`,
+    light: "rgb(226, 219, 219)",
+    lightWithOpacity: (opacity: number) => `rgba(226, 219, 219, ${opacity})`,
   },
   globals: {
     contentContainerSpacing: "55px",

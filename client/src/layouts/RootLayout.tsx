@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const PageWrapper = styled.div`
   position: relative;
-  max-width: ${({ theme }) => theme.globals.contentContainerMaxWidth};
+  max-width: ${(props) => props.theme.globals.contentContainerMaxWidth};
   margin: auto;
 `;
 

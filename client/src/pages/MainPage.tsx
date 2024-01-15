@@ -15,10 +15,10 @@ const Header = styled.header`
 const ContentWrapper = styled.div`
   position: relative;
   z-index: 5;
-  background-color: rgb(${({ theme }) => theme.colors.backgroundRGB});
+  background-color: ${(props) => props.theme.colors.background};
 
   @media ${media.screens.md} {
-    padding: 0 ${({ theme }) => theme.globals.contentContainerSpacing}; // TODO: remove top scacing, its just for test
+    padding: 0 ${(props) => props.theme.globals.contentContainerSpacing};
   }
 `;
 
