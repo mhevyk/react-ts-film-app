@@ -10,6 +10,7 @@ import "./FadeAnimation.css";
 
 const ANIMATION_DURATION = 400; // TODO: bind animation duration to styles
 const ANIMATION_CLASSNAME = "fade";
+const LOCK_SCROLL_CLASSNAME = "lock-scroll";
 
 const CloseIcon = styled.img`
   position: absolute;
@@ -46,6 +47,18 @@ export const Sidebar = () => {
   useEffect(() => {
     setIsSidebarOpen(isLargeScreen);
   }, [isLargeScreen, setIsSidebarOpen]);
+
+  useEffect(() => {
+    if (!isLargeScreen && isSidebarOpen) {
+      document.body.classList.add(LOCK_SCROLL_CLASSNAME);
+    } else {
+      document.body.classList.remove(LOCK_SCROLL_CLASSNAME);
+    }
+
+    return () => {
+      document.body.classList.remove(LOCK_SCROLL_CLASSNAME);
+    };
+  }, [isLargeScreen, isSidebarOpen]);
 
   return (
     <CSSTransition
