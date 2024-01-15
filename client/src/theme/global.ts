@@ -3,18 +3,14 @@ import theme from "./theme";
 import { media } from "./mediaQueries";
 
 export const GlobalStyles = createGlobalStyle`
-  :root {
-    --color-primary: ${theme.colors.primary};
-    --color-secondary: ${theme.colors.secondary};
-    --color-accent: ${theme.colors.accent};
-    --color-background: rgb(${theme.colors.backgroundWithOpacity(1)});
+  html,
+  body {
+    background-color: ${theme.colors.background};
   }
 
   @media ${media.screens.lg} {
       .backdrop-slider .navigation-button-prev {
-        left: calc(${theme.globals.sliderSpacing} + ${
-  theme.globals.contentContainerSpacing
-});
+        left: calc(${theme.globals.sliderSpacing} + ${theme.globals.contentContainerSpacing});
       }
     }
 `;

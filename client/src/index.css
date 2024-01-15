@@ -5,9 +5,8 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  background-color: var(--color-background);
   font-family: roboto;
-  scrollbar-gutter: stable; /* avoid content shift when scrollbar is hidden */
+  scrollbar-gutter: stable; /* avoid contentshift when scrollbar is hidden */
 }
 
 body.lock-scroll {
