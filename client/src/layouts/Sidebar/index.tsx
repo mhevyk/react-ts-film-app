@@ -2,15 +2,11 @@ import { useMediaQuery } from "@hooks/useMediaQuery";
 import { useSidebarStore } from "@store/sidebarStore";
 import { media } from "@theme/mediaQueries";
 import closeIcon from "@icons/close.svg";
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import { SidebarMenu } from "./SidebarMenu";
 import { useEffect, useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import "./FadeAnimation.css";
-
-const ANIMATION_DURATION = 400; // TODO: bind animation duration to styles
-const ANIMATION_CLASSNAME = "fade";
-const LOCK_SCROLL_CLASSNAME = "lock-scroll";
 
 const CloseIcon = styled.img`
   position: absolute;
@@ -22,6 +18,8 @@ const CloseIcon = styled.img`
 `;
 
 const SidebarContainer = styled.aside<{ $isLargeScreen: boolean }>`
+  --duration: ${(props) => props.theme.animations.fade.duration}ms;
+
   position: fixed;
   top: 0;
   height: 100vh;
@@ -36,36 +34,45 @@ const SidebarContainer = styled.aside<{ $isLargeScreen: boolean }>`
   }
 `;
 
+function useLockPageScroll(
+  condition: boolean,
+  className: string = "lock-scroll"
+) {
+  useEffect(() => {
+    if (condition) {
+      document.body.classList.add(className);
+    } else {
+      document.body.classList.remove(className);
+    }
+
+    return () => {
+      document.body.classList.remove(className);
+    };
+  }, [condition, className]);
+}
+
 export const Sidebar = () => {
   const sidebarContainerRef = useRef<HTMLDivElement | null>(null);
   const isLargeScreen = useMediaQuery(media.screens.lg);
   const isSidebarOpen = useSidebarStore((store) => store.isOpen);
   const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
+  const { animations } = useTheme();
 
+  // this makes sure sidebar is always open on large devices and closed by default on small devices
   useEffect(() => {
     setIsSidebarOpen(isLargeScreen);
   }, [isLargeScreen, setIsSidebarOpen]);
 
-  useEffect(() => {
-    if (!isLargeScreen && isSidebarOpen) {
-      document.body.classList.add(LOCK_SCROLL_CLASSNAME);
-    } else {
-      document.body.classList.remove(LOCK_SCROLL_CLASSNAME);
-    }
-
-    return () => {
-      document.body.classList.remove(LOCK_SCROLL_CLASSNAME);
-    };
-  }, [isLargeScreen, isSidebarOpen]);
+  useLockPageScroll(!isLargeScreen && isSidebarOpen);
 
   return (
     <CSSTransition
       in={isSidebarOpen}
-      timeout={ANIMATION_DURATION}
+      timeout={animations.fade.duration}
       mountOnEnter
       unmountOnExit
       nodeRef={sidebarContainerRef}
-      classNames={ANIMATION_CLASSNAME}
+      classNames={animations.fade.name}
     >
       <SidebarContainer
         ref={sidebarContainerRef}
