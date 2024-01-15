@@ -14,18 +14,21 @@ const ANIMATION_CLASSNAME = "fade";
 const CloseIcon = styled.img`
   position: absolute;
   top: 20px;
-  right: ${({ theme }) => theme.globals.contentContainerSpacing};
+  right: 5%;
   width: 40px;
   height: 40px;
   cursor: pointer;
 `;
 
-const SidebarContainer = styled.aside`
+const SidebarContainer = styled.aside<{ $isLargeScreen: boolean }>`
   position: fixed;
   top: 0;
   height: 100vh;
   z-index: 100;
-  background-color: rgba(${({ theme }) => theme.colors.backgroundRGB}, 0.8);
+  background-color: rgba(
+    ${({ theme }) => theme.colors.backgroundRGB},
+    ${(props) => (props.$isLargeScreen ? 0.8 : 1)}
+  );
   width: 100%;
 
   @media ${media.screens.lg} {
@@ -42,7 +45,7 @@ export const Sidebar = () => {
 
   useEffect(() => {
     setIsSidebarOpen(isLargeScreen);
-  }, [isLargeScreen]);
+  }, [isLargeScreen, setIsSidebarOpen]);
 
   return (
     <CSSTransition
@@ -53,7 +56,10 @@ export const Sidebar = () => {
       nodeRef={sidebarContainerRef}
       classNames={ANIMATION_CLASSNAME}
     >
-      <SidebarContainer ref={sidebarContainerRef}>
+      <SidebarContainer
+        ref={sidebarContainerRef}
+        $isLargeScreen={isLargeScreen}
+      >
         {!isLargeScreen && (
           <CloseIcon src={closeIcon} onClick={() => setIsSidebarOpen(false)} />
         )}

@@ -1,10 +1,12 @@
-import { Menu } from "@layouts/components/Menu";
 import { navbarMenuItems } from "./navbarMenuItems";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { media } from "@theme/mediaQueries";
 import { useMediaQuery } from "@hooks/useMediaQuery";
 import { Logo } from "@components/ui/Logo";
 import { useSidebarStore } from "@store/sidebarStore";
+import { Menu } from "@components/ui/Menu";
+import { HoverableIcon } from "@components/ui/HoverableIcon";
+import { cloneElement } from "react";
 
 const MenuWrapper = styled.nav`
   display: flex;
@@ -25,7 +27,18 @@ export function NavbarMenu() {
   return (
     <MenuWrapper>
       {!matches && <Logo onClick={() => setIsSidebarOpen(true)} />}
-      <Menu items={navbarMenuItems} gap={30} iconSize={24} />
+      <Menu
+        items={navbarMenuItems}
+        renderItem={(item) => (
+          <HoverableIcon
+            icon={cloneElement(item.icon, { loading: "lazy" })}
+            size={24}
+          />
+        )}
+        wrapperStyles={css`
+          gap: 30px;
+        `}
+      />
     </MenuWrapper>
   );
 }

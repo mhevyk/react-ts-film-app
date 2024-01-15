@@ -1,8 +1,13 @@
+import { MenuItemBase } from "@components/ui/Menu";
 import accountIcon from "@icons/account.svg";
 import setingsIcon from "@icons/settings.svg";
-import { MenuItem } from "@layouts/components/Menu";
+import { ReactElement } from "react";
 
-export const navbarMenuItems: MenuItem[] = [
+type NavbarMenuItem = MenuItemBase & {
+  icon: ReactElement;
+};
+
+export const navbarMenuItems: NavbarMenuItem[] = [
   {
     path: "/account",
     icon: <img src={accountIcon} alt="User icon" />,

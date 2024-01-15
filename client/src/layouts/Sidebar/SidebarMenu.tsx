@@ -1,7 +1,9 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { sidebarMenuItems } from "./sidebarMenuItems";
-import { Menu } from "@layouts/components/Menu";
 import { Logo } from "../../components/ui/Logo";
+import { Menu } from "@components/ui/Menu";
+import { HoverableIcon } from "@components/ui/HoverableIcon";
+import { cloneElement } from "react";
 
 const MenuWrapper = styled.nav`
   display: flex;
@@ -9,6 +11,17 @@ const MenuWrapper = styled.nav`
   align-items: center;
   gap: 64px;
   margin-top: 40px;
+`;
+
+const MenuItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  span {
+    color: white;
+  }
 `;
 
 type SidebarMenuProps = {
@@ -19,10 +32,22 @@ export function SidebarMenu({ isLargeScreen }: SidebarMenuProps) {
   return (
     <MenuWrapper>
       {isLargeScreen && <Logo />}
-      {isLargeScreen && (
-        <Menu items={sidebarMenuItems} direction="column" gap={80} />
-      )}{" "}
-      {/* TODO: handle styling of menus */}
+      <Menu
+        items={sidebarMenuItems}
+        renderItem={(item) => (
+          <MenuItem>
+            <HoverableIcon
+              icon={cloneElement(item.icon, { loading: "lazy" })}
+              size={19.2}
+            />
+            {!isLargeScreen && <span>{item.label}</span>}
+          </MenuItem>
+        )}
+        direction="column"
+        wrapperStyles={css`
+          gap: ${isLargeScreen ? 80 : 35}px;
+        `}
+      />
     </MenuWrapper>
   );
 }
