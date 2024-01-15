@@ -5,12 +5,10 @@ const BadgeStyled = styled.div`
     `rgba(${theme.colors.backgroundRGB}, 0.6)`};
   color: ${({ theme }) => theme.colors.accent};
   font-size: 14px;
-  line-height: 16px;
   padding: 4px 8px;
   border-radius: 0 8px;
-  text-align: center;
-  width: fit-content;
   cursor: default;
+  width: fit-content; // used to prevent stretching elements to full width
 
   &:hover {
     text-decoration: underline;
