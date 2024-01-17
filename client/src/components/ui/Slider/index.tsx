@@ -21,7 +21,11 @@ import { ComponentPropsWithoutRef, ReactNode, useId, useRef } from "react";
 import { HoverableIcon } from "../HoverableIcon";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
-const SliderWrapper = styled.div<{ $wrapperStyles?: RuleSet }>`
+type ExtraStyledCSS = {
+  $css?: RuleSet;
+};
+
+const SliderWrapper = styled.div<ExtraStyledCSS>`
   --swiper-pagination-color: ${(props) => props.theme.colors.white};
   --swiper-pagination-bottom: 24px;
   --swiper-pagination-bullet-inactive-color: ${(props) =>
@@ -30,15 +34,14 @@ const SliderWrapper = styled.div<{ $wrapperStyles?: RuleSet }>`
   --slider-padding: ${(props) => props.theme.globals.sliderSpacing};
   position: relative;
 
-  ${(props) => props.$wrapperStyles}
+  ${(props) => props.$css}
 `;
 
-const SwiperStyled = styled(Swiper)<{ $sliderStyles?: RuleSet }>`
-  ${(props) => props.$sliderStyles}
+const SwiperStyled = styled(Swiper)<ExtraStyledCSS>`
+  ${(props) => props.$css}
 `;
 
-type SlideStyledProps = {
-  $slideStyles?: RuleSet;
+type SlideStyledProps = ExtraStyledCSS & {
   $variant: SliderVariant;
 };
 
@@ -63,24 +66,24 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
     `;
   }};
 
-  ${(props) => props.$slideStyles}
+  ${(props) => props.$css}
 `;
 
 export type SliderVariant = "full-screen" | "small" | "medium";
 
-type SliderProps<T> = {
-  slides: T[];
-  renderSlide: (slide: T) => ReactNode;
+type SliderProps<TSlide> = {
+  slides: TSlide[];
+  renderSlide: (slide: TSlide) => ReactNode;
   variant?: SliderVariant;
   autoplay?: boolean;
   pagination?: boolean;
   navigationControls?: boolean;
   wrapperStyles?: RuleSet;
   sliderStyles?: RuleSet;
-  slideStyles?: (slide: T) => RuleSet;
+  slideStyles?: RuleSet | ((slide: TSlide) => RuleSet);
 } & ComponentPropsWithoutRef<"div">;
 
-export function Slider<T>({
+export function Slider<TSlide>({
   slides,
   renderSlide,
   pagination = false,
@@ -91,7 +94,7 @@ export function Slider<T>({
   sliderStyles,
   slideStyles,
   ...rest
-}: SliderProps<T>) {
+}: SliderProps<TSlide>) {
   const id = useId();
   const swiperRef = useRef<SwiperRef | null>(null);
   const { slidesPerView, spaceBetween } = useSliderVariantConfig(
@@ -100,7 +103,7 @@ export function Slider<T>({
   );
 
   return (
-    <SliderWrapper data-id={id} $wrapperStyles={wrapperStyles} {...rest}>
+    <SliderWrapper data-id={id} $css={wrapperStyles} {...rest}>
       {/* used data-id in order to not to sanitize id and use it directly without
 manipulations */}
       {navigationControls && (
@@ -143,12 +146,16 @@ manipulations */}
         noSwipingClass="swiper-slide"
         fadeEffect={variant === "full-screen" ? { crossFade: true } : undefined}
         pagination={pagination ? { clickable: false } : undefined}
-        $sliderStyles={sliderStyles}
+        $css={sliderStyles}
       >
         {slides.map((slide, index) => (
           <SlideStyled
             key={index}
-            $slideStyles={slideStyles?.(slide)}
+            $css={
+              typeof slideStyles === "function"
+                ? slideStyles(slide)
+                : slideStyles
+            }
             $variant={variant}
           >
             {renderSlide(slide)}
