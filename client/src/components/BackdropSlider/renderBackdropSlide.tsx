@@ -1,4 +1,3 @@
-import { Badge } from "@components/ui/Badge";
 import styled from "styled-components";
 import { slidesMock } from ".";
 import { StarRating } from "@components/ui/StarRating";
@@ -6,6 +5,7 @@ import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { media } from "@theme/mediaQueries";
 import { LazyImage } from "@components/ui/LazyImage";
+import { Genres } from "@components/common/Genres";
 
 const Film = styled.article`
   display: flex;
@@ -20,18 +20,6 @@ const Film = styled.article`
   @media ${media.screens.md} {
     padding: 0
       calc(${(props) => props.theme.globals.contentContainerSpacing} + 10%);
-  }
-`;
-
-const FilmGenres = styled.div`
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-
-  @media ${media.screens.sm} {
-    gap: 16px;
-    width: auto;
-    overflow-x: hidden;
   }
 `;
 
@@ -85,15 +73,15 @@ export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
   return (
     <>
       <Film>
-        <FilmGenres>
-          {slide.genres.map((genre) => (
-            <Badge label={genre.name} key={genre.id} />
-          ))}
-        </FilmGenres>
+        <Genres
+          genreLikeList={slide.genres}
+          getGenre={(genre) => genre.name}
+          getKey={(genre) => genre.id}
+        />
         <StarRating rating={slide.vote_average * 0.5} />
         <FilmTitle>{slide.title}</FilmTitle>
         <FilmDescription>{slide.overview}</FilmDescription>
-        <Button variant="gradient" outlined as={Link} to="/">
+        <Button as={Link} to="/" variant="gradient" outlined>
           {" "}
           {/* TODO: change link */}
           Watch now
