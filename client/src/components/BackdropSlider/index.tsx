@@ -3,6 +3,7 @@ import { Slider } from "@components/ui/Slider";
 import { renderBackdropSlide } from "./renderBackdropSlide";
 import { media } from "@theme/mediaQueries";
 
+// TODO: replace mock with actual server data
 export const slidesMock = [
   {
     adult: false,
@@ -240,23 +241,23 @@ export const slidesMock = [
   },
 ];
 
-function composeSlideCSS() {
-  return css`
-    display: flex; // TODO: remove it, it is just for testing
-    align-items: center;
+const slideCSS = css`
+  display: flex;
+  align-items: center;
 
-    min-height: 90vh;
+  height: 75vh;
 
-    @media ${media.screens.md} {
-      min-height: 70vh;
-    }
+  @media ${media.screens.md} {
+    min-height: 600px;
+    max-height: 648px;
+    padding: 30px 0 60px;
+    height: auto;
+  }
 
-    @media ${media.screens.lg} {
-      min-height: unset;
-      max-height: 648px;
-    }
-  `;
-}
+  @media ${media.screens.lg} {
+    padding: 0;
+  }
+`;
 
 export function BackdropSlider() {
   return (
@@ -264,7 +265,7 @@ export function BackdropSlider() {
       variant="full-screen"
       slides={slidesMock}
       renderSlide={renderBackdropSlide}
-      slideStyles={() => composeSlideCSS()}
+      slideStyles={slideCSS}
       className="backdrop-slider"
       pagination
       navigationControls

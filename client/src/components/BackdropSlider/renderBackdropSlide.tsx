@@ -11,7 +11,7 @@ const Film = styled.article`
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 0 20vw;
+  padding: 0 20px;
 
   @media ${media.screens.xs} {
     padding: 0 12vw;
@@ -25,11 +25,13 @@ const Film = styled.article`
 
 const FilmGenres = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 8px;
+  flex-wrap: wrap;
 
   @media ${media.screens.sm} {
-    flex-direction: row;
+    gap: 16px;
+    width: auto;
+    overflow-x: hidden;
   }
 `;
 
@@ -37,7 +39,7 @@ const FilmTitle = styled.h2`
   font-size: 30px;
   line-height: 35px;
   font-weight: 500;
-  color: white;
+  color: ${(props) => props.theme.colors.white};
   margin: 0;
 
   @media ${media.screens.lg} {
@@ -47,20 +49,20 @@ const FilmTitle = styled.h2`
 `;
 
 const FilmDescription = styled.p`
-  color: white;
+  color: ${(props) => props.theme.colors.white};
   font-weight: 400;
   font-size: 14px;
   line-height: 24px;
   text-align: justify;
-  max-height: 10em;
-  overflow-y: scroll;
+  max-height: 5em;
+  overflow-y: auto;
+  scrollbar-gutter: stable;
   padding-right: 16px;
 
   @media ${media.screens.sm} {
     font-size: 16px;
     line-height: 32px;
-    overflow-y: unset;
-    max-height: unset;
+    max-height: 10em;
   }
 
   @media ${media.screens.lg} {
@@ -81,24 +83,27 @@ const Poster = styled(LazyImage)`
 
 export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
   return (
-    <Film>
-      <FilmGenres>
-        {slide.genres.map((genre) => (
-          <Badge label={genre.name} key={genre.id} />
-        ))}
-      </FilmGenres>
-      <StarRating rating={slide.vote_average * 0.5} />
-      <FilmTitle>{slide.title}</FilmTitle>
-      <FilmDescription>{slide.overview}</FilmDescription>
-      <Button variant="gradient" outlined as={Link} to="/">
-        {" "}
-        {/* TODO: change link */}
-        Watch now
-      </Button>
+    <>
+      <Film>
+        <FilmGenres>
+          {slide.genres.map((genre) => (
+            <Badge label={genre.name} key={genre.id} />
+          ))}
+        </FilmGenres>
+        <StarRating rating={slide.vote_average * 0.5} />
+        <FilmTitle>{slide.title}</FilmTitle>
+        <FilmDescription>{slide.overview}</FilmDescription>
+        <Button variant="gradient" outlined as={Link} to="/">
+          {" "}
+          {/* TODO: change link */}
+          Watch now
+        </Button>
+
+        {/* TODO: add src set to improve performance */}
+      </Film>
       <Poster
         src={`https://image.tmdb.org/t/p/original${slide.backdrop_path}`}
-      />{" "}
-      {/* TODO: add src set to improve performance */}
-    </Film>
+      />
+    </>
   );
 }

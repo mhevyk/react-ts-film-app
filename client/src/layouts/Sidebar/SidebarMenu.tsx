@@ -20,7 +20,7 @@ const MenuItem = styled.div`
   gap: 10px;
 
   span {
-    color: white;
+    color: ${(props) => props.theme.colors.white};
   }
 `;
 

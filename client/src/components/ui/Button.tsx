@@ -24,7 +24,7 @@ const baseButtonStyles = css`
   max-width: 200px;
   font-size: 1.15em;
   line-height: 24px;
-  color: white;
+  color: ${(props) => props.theme.colors.white};
   transition: var(--hover-transition);
 `;
 

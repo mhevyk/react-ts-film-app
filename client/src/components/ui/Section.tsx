@@ -11,7 +11,7 @@ const TitleWrapperLink = styled(Link)`
 
 const Title = styled.h5`
   margin: 0;
-  color: white;
+  color: ${(props) => props.theme.colors.white};
   font-size: 16px;
   font-weight: 500;
   line-height: 24px;
