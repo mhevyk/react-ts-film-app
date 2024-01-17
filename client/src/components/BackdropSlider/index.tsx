@@ -266,7 +266,7 @@ export function BackdropSlider() {
       slides={slidesMock}
       renderSlide={renderBackdropSlide}
       slideStyles={slideCSS}
-      className="backdrop-slider"
+      className="backdrop-slider" // used to apply extra padding to one of navigation arrow because of sidebar
       pagination
       navigationControls
       autoplay

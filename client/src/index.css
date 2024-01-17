@@ -6,7 +6,7 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: roboto;
-  scrollbar-gutter: stable; /* avoid contentshift when scrollbar is hidden */
+  scrollbar-gutter: stable; /* avoid content shift when scrollbar is hidden */
 }
 
 body.lock-scroll {
@@ -26,6 +26,15 @@ ul {
 
 a {
   text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
 
 .d-none {
