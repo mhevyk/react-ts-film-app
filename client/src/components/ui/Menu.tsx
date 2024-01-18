@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { PrefixWith$ } from "src/types/helpers";
+import { StyledPick } from "src/types/helpers";
 import styled, { RuleSet } from "styled-components";
 
-type ListProps = PrefixWith$<StyledMenuProps>;
+type ListProps = StyledPick<StyledMenuProps, "direction" | "wrapperStyles">;
 
 const List = styled.ul<ListProps>`
   display: flex;

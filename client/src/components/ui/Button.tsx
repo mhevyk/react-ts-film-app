@@ -1,18 +1,9 @@
-import { PrefixWith$ } from "../../types/helpers";
-import {
-  ComponentPropsWithoutRef,
-  ElementType,
-  PropsWithChildren,
-  useId,
-} from "react";
+import { AsProps, StyledPick } from "../../types/helpers";
+import { ElementType, PropsWithChildren, useId } from "react";
 import styled, { css } from "styled-components";
 
 const BORDER_RADIUS = "26px";
 const DEFAULT_TYPE: ElementType = "button";
-
-type ButtonStyledProps = PrefixWith$<
-  Pick<SharedButtonProps, "variant" | "outlined">
->;
 
 const baseButtonStyles = css`
   --hover-transition: all 500ms;
@@ -28,7 +19,9 @@ const baseButtonStyles = css`
   transition: var(--hover-transition);
 `;
 
-const gradientButtonStyles = css<Pick<ButtonStyledProps, "$outlined">>`
+type GradientButtonStylesProps = StyledPick<SharedButtonProps, "outlined">;
+
+const gradientButtonStyles = css<GradientButtonStylesProps>`
   border: none;
   background-color: transparent;
   z-index: 21;
@@ -53,6 +46,8 @@ const gradientButtonStyles = css<Pick<ButtonStyledProps, "$outlined">>`
     }
   }
 `;
+
+type ButtonStyledProps = StyledPick<SharedButtonProps, "variant" | "outlined">;
 
 const ButtonStyled = styled(DEFAULT_TYPE)<ButtonStyledProps>`
   ${baseButtonStyles}
@@ -84,21 +79,17 @@ type SharedButtonProps = {
   outlined?: boolean;
 };
 
-type AsProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
-
-type ButtonProps<T extends ElementType> = PropsWithChildren &
+type ButtonProps<TElement extends ElementType> = PropsWithChildren &
   SharedButtonProps &
-  AsProps<T>;
+  AsProps<TElement>;
 
-export function Button<T extends ElementType = typeof DEFAULT_TYPE>({
+export function Button<TElement extends ElementType = typeof DEFAULT_TYPE>({
   variant,
   outlined,
   as,
   children,
   ...props
-}: ButtonProps<T>) {
+}: ButtonProps<TElement>) {
   return (
     <ButtonStyled as={as} $variant={variant} $outlined={outlined} {...props}>
       {variant === "gradient" && <ButtonGradient />}
