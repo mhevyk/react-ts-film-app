@@ -1,6 +1,6 @@
 import { Section } from "@components/ui/Section";
 import { Slider } from "@components/ui/Slider";
-import { LazyImage } from "./ui/LazyImage";
+import { LazyImageContainer } from "./ui/LazyImageContainer";
 import styled, { css } from "styled-components";
 import { StarRating } from "./ui/StarRating";
 import { Link } from "react-router-dom";
@@ -200,12 +200,6 @@ const Card = styled.article`
   height: 100%;
 `;
 
-const PosterWrapper = styled.div`
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-`;
-
 const CardTitle = styled.h5`
   font-size: 24px;
   line-height: 32px;
@@ -218,13 +212,6 @@ const CardTitle = styled.h5`
   -webkit-line-clamp: var(--shown-lines-count);
   line-clamp: var(--shown-lines-count);
   overflow: hidden;
-`;
-
-const Poster = styled(LazyImage)`
-  transition: scale 400ms;
-  height: 100%;
-  filter: brightness(40%);
-  object-fit: cover;
 `;
 
 const WatchNowContainer = styled(Link)`
@@ -279,11 +266,18 @@ function renderSlide(slide: (typeof newReleasesMockResponse)["results"][0]) {
           <ShevronRightIcon src={shevronRightIcon} alt="Shevron Right icon" />
         </WatchNowContainer>
       </Card>
-      <PosterWrapper>
-        <Poster
-          src={`https://image.tmdb.org/t/p/original${slide.poster_path}`}
-        />
-      </PosterWrapper>
+      <LazyImageContainer
+        src={`https://image.tmdb.org/t/p/original${slide.poster_path}`}
+        imageWrapperStyles={css`
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+        `}
+        imageLoadedStyles={css`
+          transition: scale 400ms;
+          filter: brightness(40%);
+        `}
+      />
     </>
   );
 }

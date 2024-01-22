@@ -1,10 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { slidesMock } from ".";
 import { StarRating } from "@components/ui/StarRating";
 import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { media } from "@theme/mediaQueries";
-import { LazyImage } from "@components/ui/LazyImage";
+import { LazyImageContainer } from "@components/ui/LazyImageContainer";
 import { Genres } from "@components/common/Genres";
 
 const Film = styled.article`
@@ -59,16 +59,6 @@ const FilmDescription = styled.p`
   }
 `;
 
-const Poster = styled(LazyImage)`
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  filter: brightness(40%);
-  object-fit: cover;
-  z-index: -1;
-`;
-
 export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
   return (
     <>
@@ -89,8 +79,16 @@ export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
 
         {/* TODO: add src set to improve performance */}
       </Film>
-      <Poster
+      <LazyImageContainer
         src={`https://image.tmdb.org/t/p/original${slide.backdrop_path}`}
+        imageWrapperStyles={css`
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+        `}
+        imageLoadedStyles={css`
+          filter: brightness(40%);
+        `}
       />
     </>
   );
