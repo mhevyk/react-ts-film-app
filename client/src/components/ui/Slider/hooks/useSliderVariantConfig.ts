@@ -14,6 +14,7 @@ const sliderConfig: Record<SliderVariant, SliderVariantConfigProps> = {
   },
   small: {
     slideWidth: 504,
+    spaceBetween: 1,
   },
   medium: {
     slideWidth: 292,

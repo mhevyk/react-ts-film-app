@@ -1,11 +1,8 @@
 import { Section } from "@components/ui/Section";
-import { Slider } from "@components/ui/Slider";
-import { LazyImageContainer } from "./ui/LazyImageContainer";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { StarRating } from "./ui/StarRating";
-import { Link } from "react-router-dom";
 import { Genres } from "./common/Genres";
-import shevronRightIcon from "@icons/chevron-right.svg";
+import { PosterSlider } from "./common/PosterSlider";
 
 // TODO: Replace mock response with actual server data
 const newReleasesMockResponse = {
@@ -187,19 +184,6 @@ const newReleasesMockResponse = {
   total_results: 3040,
 };
 
-const ANIMATED_CONTAINER_CLASSNAME = "animated";
-const WATCH_NOW_CONTAINER_CLASSNAME = "watch-now";
-
-const Card = styled.article`
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 24px 24px;
-  height: 100%;
-`;
-
 const CardTitle = styled.h5`
   font-size: 24px;
   line-height: 32px;
@@ -214,100 +198,32 @@ const CardTitle = styled.h5`
   overflow: hidden;
 `;
 
-const WatchNowContainer = styled(Link)`
-  display: flex;
-  width: fit-content;
-  opacity: 0;
-  transition: opacity 500ms;
-`;
-
-const WatchNowText = styled.span`
-  line-height: 24px;
-  color: ${(props) => props.theme.colors.white};
-`;
-
-const ShevronRightIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const CardContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  transform: translateY(25px);
-  margin-bottom: 0;
-  transition: all 500ms;
-`;
-
 // TODO: replace dummy function with actual implementation
 function getGenreById(genreId: number) {
   return `Genre ${genreId}`;
 }
 
-function renderSlide(slide: (typeof newReleasesMockResponse)["results"][0]) {
-  return (
-    <>
-      <Card>
-        <CardContentContainer className={ANIMATED_CONTAINER_CLASSNAME}>
-          <Genres
-            genreLikeList={slide.genre_ids}
-            getGenre={(genre) => getGenreById(genre)}
-            getKey={(genre) => genre}
-          />
-          <StarRating rating={slide.vote_average * 0.5} />
-          <CardTitle>{slide.title}</CardTitle>
-        </CardContentContainer>
-        <WatchNowContainer
-          to="/watch"
-          className={WATCH_NOW_CONTAINER_CLASSNAME}
-        >
-          <WatchNowText>Watch Now</WatchNowText>
-          <ShevronRightIcon src={shevronRightIcon} alt="Shevron Right icon" />
-        </WatchNowContainer>
-      </Card>
-      <LazyImageContainer
-        src={`https://image.tmdb.org/t/p/original${slide.poster_path}`}
-        imageWrapperStyles={css`
-          position: absolute;
-          inset: 0;
-          overflow: hidden;
-        `}
-        imageLoadedStyles={css`
-          transition: scale 400ms;
-          filter: brightness(40%);
-        `}
-      />
-    </>
-  );
-}
-
-const slideStyles = css`
-  &:hover {
-    img {
-      scale: 1.06;
-    }
-
-    .${WATCH_NOW_CONTAINER_CLASSNAME} {
-      opacity: 1;
-    }
-
-    .${ANIMATED_CONTAINER_CLASSNAME} {
-      transform: translateY(0);
-      margin-bottom: 16px;
-    }
-  }
-`;
-
 export function NewReleasesSection() {
   return (
     <Section title="New releases" navigatesTo="/new-releases">
-      <Slider
+      <PosterSlider
         variant="medium"
         slides={newReleasesMockResponse.results}
-        renderSlide={renderSlide}
-        navigationControls
-        slideStyles={slideStyles}
+        renderSlide={(slide) => (
+          <>
+            <Genres
+              genreLikeList={slide.genre_ids}
+              getGenre={(genre) => getGenreById(genre)}
+              getKey={(genre) => genre}
+            />
+            <StarRating rating={slide.vote_average * 0.5} />
+            <CardTitle>{slide.title}</CardTitle>
+          </>
+        )}
+        getImagePath={(slide) =>
+          `https://image.tmdb.org/t/p/original${slide.poster_path}`
+        }
+        getWatchNowPath={(slide) => `watch/${slide.id}`}
       />
     </Section>
   );
