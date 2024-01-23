@@ -1,13 +1,15 @@
-import { Link } from "react-router-dom";
 import logoImage from "@icons/logo.svg";
-import { ComponentProps } from "react";
+import { ComponentPropsWithoutRef } from "react";
+import styled from "styled-components";
 
-type LogoProps = Omit<ComponentProps<typeof Link>, "to">;
+const Image = styled.img`
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+`;
+
+type LogoProps = ComponentPropsWithoutRef<"img">;
 
 export function Logo(props: LogoProps) {
-  return (
-    <Link to="/" {...props}>
-      <img src={logoImage} alt="Logo" loading="lazy" />
-    </Link>
-  );
+  return <Image src={logoImage} alt="Logo" {...props} />;
 }

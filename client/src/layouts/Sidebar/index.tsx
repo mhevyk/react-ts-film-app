@@ -2,15 +2,8 @@ import { useMediaQuery } from "@hooks/useMediaQuery";
 import { useSidebarStore } from "@store/sidebarStore";
 import { media } from "@theme/mediaQueries";
 import { useEffect } from "react";
-
-// TODO: implement screens
-function LargeScreenSidebar() {
-  return <div>Large sidebar</div>;
-}
-
-function SmallScreenSidebar() {
-  return <div>Large sidebar</div>;
-}
+import { LargeScreenSidebar } from "./LargeScreenSidebar";
+import { SmallScreenSidebar } from "./SmallScreenSidebar";
 
 export const Sidebar = () => {
   const isLargeScreen = useMediaQuery(media.screens.lg);
