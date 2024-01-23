@@ -10,6 +10,10 @@ import { GlobalStyles } from "./theme/global";
 const rootElement = document.getElementById("root")!;
 const root = ReactDOM.createRoot(rootElement);
 
+const modalContainer = document.createElement("div");
+modalContainer.id = "modal-container";
+document.body.append(modalContainer);
+
 root.render(
   <StrictMode>
     <ThemeProvider theme={theme}>

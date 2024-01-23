@@ -41,9 +41,17 @@ export const GlobalStyles = createGlobalStyle`
     background-color: ${theme.colors.background};
   }
 
+  #root {
+    position: relative;
+    max-width: ${(props) => props.theme.globals.contentContainerMaxWidth};
+    margin: auto;
+  }
+
   @media ${media.screens.lg} {
     .backdrop-slider .navigation-button-prev {
-      left: calc(${theme.globals.sliderSpacing} + ${theme.globals.contentContainerSpacing});
+      left: calc(${theme.globals.sliderSpacing} + ${
+  theme.globals.contentContainerSpacing
+});
     }
   }
 

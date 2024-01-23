@@ -1,16 +1,11 @@
 import { Outlet } from "react-router-dom";
-import styled from "styled-components";
-
-const PageWrapper = styled.div`
-  position: relative;
-  max-width: ${(props) => props.theme.globals.contentContainerMaxWidth};
-  margin: auto;
-`;
+import { Sidebar } from "./Sidebar";
 
 export function RootLayout() {
   return (
-    <PageWrapper>
+    <>
+      <Sidebar />
       <Outlet />
-    </PageWrapper>
+    </>
   );
 }
