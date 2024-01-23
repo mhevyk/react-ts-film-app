@@ -2,11 +2,11 @@ import { navbarMenuItems } from "./navbarMenuItems";
 import styled, { css } from "styled-components";
 import { media } from "@theme/mediaQueries";
 import { useMediaQuery } from "@hooks/useMediaQuery";
-import { Logo } from "@components/ui/Logo";
 import { useSidebarStore } from "@store/sidebarStore";
 import { Menu } from "@components/ui/Menu";
-import { HoverableIcon } from "@components/ui/HoverableIcon";
+import { IconButton } from "@components/ui/IconButton";
 import { cloneElement } from "react";
+import burgerMenuIcon from "@icons/menu.svg";
 
 const MenuWrapper = styled.nav`
   display: flex;
@@ -26,11 +26,16 @@ export function NavbarMenu() {
 
   return (
     <MenuWrapper>
-      {!matches && <Logo onClick={() => setIsSidebarOpen(true)} />}
+      {!matches && (
+        <IconButton
+          icon={<img src={burgerMenuIcon} alt="Burger menu icon" />}
+          onClick={() => setIsSidebarOpen(true)}
+        />
+      )}
       <Menu
         items={navbarMenuItems}
         renderItem={(item) => (
-          <HoverableIcon
+          <IconButton
             icon={cloneElement(item.icon, { loading: "lazy" })}
             size={24}
           />

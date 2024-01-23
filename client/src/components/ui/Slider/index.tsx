@@ -18,7 +18,7 @@ import chevronRightIcon from "@icons/chevron-right.svg";
 import chevronLeftIcon from "@icons/chevron-left.svg";
 import styled, { RuleSet, css } from "styled-components";
 import { ComponentPropsWithoutRef, ReactNode, useId, useRef } from "react";
-import { HoverableIcon } from "../HoverableIcon";
+import { IconButton } from "../IconButton";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
 type ExtraStyledCSS = {
@@ -107,12 +107,12 @@ export function Slider<TSlide>({
 manipulations */}
       {navigationControls && (
         <>
-          <HoverableIcon
+          <IconButton
             className="navigation-button navigation-button-next"
             icon={<img src={chevronRightIcon} alt="Go to next slide" />}
             size={22}
           />
-          <HoverableIcon
+          <IconButton
             className="navigation-button navigation-button-prev"
             icon={<img src={chevronLeftIcon} alt="Go to previous slide" />}
             size={22}

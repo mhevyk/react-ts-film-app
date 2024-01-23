@@ -2,7 +2,6 @@ import { BackdropSlider } from "@components/BackdropSlider";
 import { FeaturedTvSection } from "@components/FeaturedTvSection";
 import { NewReleasesSection } from "@components/NewReleasesSection";
 import { Navbar } from "@layouts/Navbar";
-import { Sidebar } from "@layouts/Sidebar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
 
@@ -23,11 +22,11 @@ const ContentWrapper = styled.div`
 `;
 
 export function MainPage() {
+  // TODO: uncomment Navbar
   return (
     <>
-      <Sidebar />
       <Header>
-        <Navbar />
+        {/* <Navbar /> */}
         <BackdropSlider />
       </Header>
       <ContentWrapper>
