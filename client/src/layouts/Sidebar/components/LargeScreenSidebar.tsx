@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Menu } from "@components/ui/Menu";
 import { Logo } from "@components/ui/Logo";
-import { sidebarMenuItems } from "./sidebarMenuItems";
+import { sidebarMenuItems } from "../data/sidebarMenuItems";
 import { IconButton } from "@components/ui/IconButton";
 
 const SidebarContainer = styled.aside`

@@ -17,12 +17,6 @@ const theme = {
     light: "rgb(226, 219, 219)",
     lightWithOpacity: (opacity: number) => `rgba(226, 219, 219, ${opacity})`,
   },
-  animations: {
-    fade: {
-      name: "fade",
-      duration: 400, // in milliseconds
-    },
-  },
   globals: {
     contentContainerSpacing: "55px",
     contentContainerMaxWidth: "1700px",

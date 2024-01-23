@@ -1,11 +1,10 @@
-import { navbarMenuItems } from "./navbarMenuItems";
+import { navbarMenuItems } from "../data/navbarMenuItems";
 import styled, { css } from "styled-components";
 import { media } from "@theme/mediaQueries";
 import { useMediaQuery } from "@hooks/useMediaQuery";
 import { useSidebarStore } from "@store/sidebarStore";
 import { Menu } from "@components/ui/Menu";
 import { IconButton } from "@components/ui/IconButton";
-import { cloneElement } from "react";
 import burgerMenuIcon from "@icons/menu.svg";
 
 const MenuWrapper = styled.nav`
@@ -34,12 +33,7 @@ export function NavbarMenu() {
       )}
       <Menu
         items={navbarMenuItems}
-        renderItem={(item) => (
-          <IconButton
-            icon={cloneElement(item.icon, { loading: "lazy" })}
-            size={24}
-          />
-        )}
+        renderItem={(item) => <IconButton icon={item.icon} size={24} />}
         wrapperStyles={css`
           gap: 30px;
         `}

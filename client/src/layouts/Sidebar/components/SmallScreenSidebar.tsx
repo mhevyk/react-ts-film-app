@@ -4,7 +4,7 @@ import closeIcon from "@icons/close.svg";
 import { useSidebarStore } from "@store/sidebarStore";
 import { Modal } from "@components/ui/Modal";
 import { Menu } from "@components/ui/Menu";
-import { sidebarMenuItems } from "./sidebarMenuItems";
+import { sidebarMenuItems } from "../data/sidebarMenuItems";
 import { IconButton } from "@components/ui/IconButton";
 
 const ModalTopToolbar = styled.div`
