@@ -1,5 +1,5 @@
 import { AsProps, StyledPick } from "../../types/helpers";
-import { ElementType, PropsWithChildren, useId } from "react";
+import { ElementType, useId } from "react";
 import styled, { css } from "styled-components";
 
 const BORDER_RADIUS = "26px";
@@ -79,8 +79,7 @@ type SharedButtonProps = {
   outlined?: boolean;
 };
 
-type ButtonProps<TElement extends ElementType> = PropsWithChildren &
-  SharedButtonProps &
+type ButtonProps<TElement extends ElementType> = SharedButtonProps &
   AsProps<TElement>;
 
 export function Button<TElement extends ElementType = typeof DEFAULT_TYPE>({
