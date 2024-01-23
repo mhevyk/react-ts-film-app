@@ -1,17 +1,34 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { NavbarMenu } from "./NavbarMenu";
+import { StyledPick } from "src/types/helpers";
 
-const NavbarContainer = styled.div`
-  position: absolute;
+type NavbarContainerProps = StyledPick<NavbarProps, "variant">;
+
+const NavbarContainer = styled.div<NavbarContainerProps>`
+  position: ${(props) => props.$variant};
   top: 0;
   right: 0;
-  z-index: 100;
+  z-index: 15;
   width: 100%;
+
+  ${(props) => {
+    if (props.$variant === "sticky") {
+      return css`
+        background-color: ${props.theme.colors.background};
+      `;
+    }
+  }}
 `;
 
-export function Navbar() {
+type NavbarVariant = "sticky" | "absolute";
+
+type NavbarProps = {
+  variant?: NavbarVariant;
+};
+
+export function Navbar({ variant = "sticky" }: NavbarProps) {
   return (
-    <NavbarContainer>
+    <NavbarContainer $variant={variant}>
       <NavbarMenu />
     </NavbarContainer>
   );

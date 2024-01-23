@@ -22,11 +22,10 @@ const ContentWrapper = styled.div`
 `;
 
 export function MainPage() {
-  // TODO: uncomment Navbar
   return (
     <>
       <Header>
-        {/* <Navbar /> */}
+        <Navbar variant="absolute" />
         <BackdropSlider />
       </Header>
       <ContentWrapper>
