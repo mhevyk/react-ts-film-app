@@ -103,7 +103,7 @@ export function Modal({
   children,
 }: ModalProps) {
   const dialogRef = useRef<HTMLDialogElement | null>(null);
-  const [shouldUnmount, setShouldUnmount] = useState(false);
+  const [shouldUnmount, setShouldUnmount] = useState(true);
 
   // overriding cancel event (when Esc is pressed) to close modal with animation
   const onDialogCancel = useCallback(
@@ -147,8 +147,7 @@ export function Modal({
     setShouldUnmount(false);
   }, [isOpen, setShouldUnmount]);
 
-  // lock page scroll if modal is open or animation is performing
-  useLockPageScroll(isOpen || !shouldUnmount);
+  useLockPageScroll(isOpen);
 
   if (!isOpen && shouldUnmount) {
     return null;
