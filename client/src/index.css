@@ -1,10 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
+* {
+  box-sizing: border-box;
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
   font-family: roboto;
   scrollbar-gutter: stable; /* avoid content shift when scrollbar is hidden */
 }
@@ -28,6 +31,7 @@ a {
   text-decoration: none;
 }
 
+p,
 h1,
 h2,
 h3,
