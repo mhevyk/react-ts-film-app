@@ -31,7 +31,7 @@ const SliderWrapper = styled.div<ExtraStyledCSS>`
   --swiper-pagination-bullet-inactive-color: ${(props) =>
     props.theme.colors.light};
   --swiper-pagination-bullet-horizontal-gap: 8px;
-  --slider-padding: ${(props) => props.theme.globals.sliderSpacing};
+  --slider-padding: ${(props) => props.theme.globals.sliderSpacing}px;
   position: relative;
 
   ${(props) => props.$css}

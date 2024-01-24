@@ -1,10 +1,18 @@
+type ColorWithOpacity = (opacity: number) => string;
+
+type ThemeConstraints = {
+  breakpoints: Record<string, number>;
+  colors: Record<string, string | ColorWithOpacity>;
+  globals: Record<string, number>;
+};
+
 const theme = {
   breakpoints: {
-    xs: "480px",
-    sm: "640px",
-    md: "768px",
-    lg: "1024px",
-    xl: "1280px",
+    xs: 480,
+    sm: 640,
+    md: 768,
+    lg: 1024,
+    xl: 1280,
   },
   colors: {
     primary: "#E10856",
@@ -18,11 +26,11 @@ const theme = {
     lightWithOpacity: (opacity: number) => `rgba(226, 219, 219, ${opacity})`,
   },
   globals: {
-    contentContainerSpacing: "55px",
-    contentContainerMaxWidth: "1700px",
-    sliderSpacing: "24px",
+    contentContainerSpacing: 55,
+    contentContainerMaxWidth: 1700,
+    sliderSpacing: 24,
   },
-} as const;
+} as const satisfies ThemeConstraints;
 
 export default theme;
 

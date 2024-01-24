@@ -44,15 +44,15 @@ export const GlobalStyles = createGlobalStyle`
 
   #root {
     position: relative;
-    max-width: ${(props) => props.theme.globals.contentContainerMaxWidth};
+    max-width: ${(props) => props.theme.globals.contentContainerMaxWidth}px;
     margin: auto;
   }
 
   @media ${media.screens.lg} {
     .backdrop-slider .navigation-button-prev {
-      left: calc(${theme.globals.sliderSpacing} + ${
-  theme.globals.contentContainerSpacing
-});
+      left: ${(props) =>
+        props.theme.globals.contentContainerSpacing +
+        props.theme.globals.sliderSpacing}px;
     }
   }
 

@@ -17,7 +17,7 @@ const ContentWrapper = styled.div`
   background-color: ${(props) => props.theme.colors.background};
 
   @media ${media.screens.md} {
-    padding: 0 ${(props) => props.theme.globals.contentContainerSpacing};
+    padding: 0 ${(props) => props.theme.globals.contentContainerSpacing}px;
   }
 `;
 
