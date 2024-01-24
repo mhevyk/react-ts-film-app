@@ -20,12 +20,12 @@ const MenuWrapper = styled.nav`
 `;
 
 export function NavbarMenu() {
-  const matches = useMediaQuery(media.screens.lg);
+  const isLargeScreen = useMediaQuery((media) => media.screens.lg);
   const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
 
   return (
     <MenuWrapper>
-      {!matches && (
+      {!isLargeScreen && (
         <IconButton
           icon={<img src={burgerMenuIcon} alt="Burger menu icon" />}
           onClick={() => setIsSidebarOpen(true)}
