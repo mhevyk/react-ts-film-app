@@ -8,6 +8,7 @@ const currentBrowser = getBrowserName();
 const scrollbarStyles = css`
   ::-webkit-scrollbar {
     width: 0.6em;
+    height: 0.6em;
   }
 
   ::-webkit-scrollbar-track,
