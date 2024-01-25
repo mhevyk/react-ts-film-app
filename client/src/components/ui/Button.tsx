@@ -2,7 +2,7 @@ import { AsProps, StyledPick } from "../../types/helpers";
 import { ElementType, useId } from "react";
 import styled, { css } from "styled-components";
 
-const BORDER_RADIUS = "26px";
+const BORDER_RADIUS = 26;
 const DEFAULT_TYPE: ElementType = "button";
 
 const baseButtonStyles = css`
@@ -21,6 +21,10 @@ const baseButtonStyles = css`
 
 type GradientButtonStylesProps = StyledPick<SharedButtonProps, "outlined">;
 
+/*
+  Watch also following solution, but i can`t animate background-clip property
+  https://stackoverflow.com/questions/64427322/gradient-border-with-border-radius-and-gradient-text
+*/
 const gradientButtonStyles = css<GradientButtonStylesProps>`
   border: none;
   background-color: transparent;
@@ -60,7 +64,7 @@ const ButtonStyled = styled(DEFAULT_TYPE)<ButtonStyledProps>`
     const buttonColor = theme.colors[$variant];
 
     return css`
-      border-radius: ${BORDER_RADIUS};
+      border-radius: ${BORDER_RADIUS}px;
       background-color: ${$outlined ? "transparent" : buttonColor};
       border: 1px solid ${$outlined ? buttonColor : "transparent"};
 
@@ -98,7 +102,7 @@ export function Button<TElement extends ElementType = typeof DEFAULT_TYPE>({
 }
 
 function ButtonGradient() {
-  const BORDER_WIDTH = "1px";
+  const BORDER_WIDTH = 1;
   const id = useId();
 
   return (
