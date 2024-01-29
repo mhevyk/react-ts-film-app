@@ -1,0 +1,10 @@
+dist/
+node_modules/
+.DS_Store
+
+# Environment files
+.env
+*.env
+*.env.development
+*.env.staging
+*.env.production
