@@ -4,7 +4,7 @@ import { NotFoundPage } from "@pages/NotFoundPage";
 import { MainPage } from "@pages/MainPage";
 import { RootLayout } from "@layouts/RootLayout";
 
-export const router = createBrowserRouter([
+export default createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
