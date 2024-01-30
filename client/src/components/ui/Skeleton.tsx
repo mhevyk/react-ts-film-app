@@ -65,8 +65,8 @@ type ParagraphProps = {
 function Paragraph({ lines = 3 }: ParagraphProps) {
   return (
     <SkeletonParagraphContainer>
-      {Array.from({ length: lines }, () => (
-        <SkeletonParagraph />
+      {Array.from({ length: lines }, (_, index) => (
+        <SkeletonParagraph key={index} />
       ))}
     </SkeletonParagraphContainer>
   );
