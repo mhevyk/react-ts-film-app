@@ -33,9 +33,10 @@
       "@theme/*": ["src/theme/*"],
       "@lib/*": ["src/lib/*"],
       "@services/*": ["src/services/*"],
-      "@store/*": ["src/store/*"]
+      "@store/*": ["src/store/*"],
+      "@schemas/*": ["src/schemas/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "src/schemas"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

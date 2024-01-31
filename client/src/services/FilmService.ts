@@ -1,10 +1,10 @@
 import { API } from "@lib/api";
+import FilmSchema from "@schemas/filmSchema";
 
 class FilmService {
-  async getFilm(id: string) {
-    // TODO: add generic type
-    const response = await API.get<any>(`/movie/${id}`);
-    return response.data;
+  async getFilmById(id: number) {
+    const response = await API.get(`/movie/${id}`);
+    return FilmSchema.parse(response.data);
   }
 }
 

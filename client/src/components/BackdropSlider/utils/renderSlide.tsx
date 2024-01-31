@@ -1,27 +1,11 @@
 import styled, { css } from "styled-components";
-import { slidesMock } from ".";
 import { StarRating } from "@components/ui/StarRating";
 import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { media } from "@theme/mediaQueries";
 import { LazyImageContainer } from "@components/ui/LazyImageContainer";
 import { Genres } from "@components/common/Genres";
-
-const Film = styled.article`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0 20px;
-
-  @media ${media.screens.xs} {
-    padding: 0 12vw;
-  }
-
-  @media ${media.screens.md} {
-    padding: 0
-      calc(${(props) => props.theme.globals.contentContainerSpacing}px + 10%);
-  }
-`;
+import { Film } from "@schemas/filmSchema";
 
 const FilmTitle = styled.h2`
   font-size: 30px;
@@ -59,28 +43,24 @@ const FilmDescription = styled.p`
   }
 `;
 
-export function renderBackdropSlide(slide: (typeof slidesMock)[0]) {
+export function renderSlide(film: Film) {
   return (
     <>
-      <Film>
-        <Genres
-          genreLikeList={slide.genres}
-          getGenre={(genre) => genre.name}
-          getKey={(genre) => genre.id}
-        />
-        <StarRating rating={slide.vote_average * 0.5} />
-        <FilmTitle>{slide.title}</FilmTitle>
-        <FilmDescription>{slide.overview}</FilmDescription>
-        <Button as={Link} to="/" variant="gradient" outlined>
-          {" "}
-          {/* TODO: change link */}
-          Watch now
-        </Button>
+      <Genres
+        genreLikeList={film.genres}
+        getGenre={(genre) => genre.name}
+        getKey={(genre) => genre.id}
+      />
+      <StarRating rating={film.vote_average * 0.5} />
+      <FilmTitle>{film.title}</FilmTitle>
+      <FilmDescription>{film.overview}</FilmDescription>
+      <Button as={Link} to={`/films/${film.id}`} variant="gradient" outlined>
+        Watch now
+      </Button>
 
-        {/* TODO: add src set to improve performance */}
-      </Film>
+      {/* TODO: add src set to improve performance */}
       <LazyImageContainer
-        src={`https://image.tmdb.org/t/p/original${slide.backdrop_path}`}
+        src={`https://image.tmdb.org/t/p/original${film.backdrop_path}`}
         imageWrapperStyles={css`
           position: absolute;
           inset: 0;

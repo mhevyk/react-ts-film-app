@@ -21,6 +21,7 @@ export default defineConfig({
       "@lib": resolveSource("lib"),
       "@services": resolveSource("services"),
       "@store": resolveSource("store"),
+      "@schemas": resolveSource("schemas"),
     },
   },
   plugins: [react()],
