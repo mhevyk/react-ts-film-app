@@ -1,21 +1,40 @@
+import { Logo } from "@components/ui/Logo";
+import { Menu } from "@components/ui/Menu";
 import { useMediaQuery } from "@hooks/useMediaQuery";
-import { useSidebarStore } from "@store/sidebarStore";
-import { useEffect } from "react";
-import { LargeScreenSidebar } from "./components/LargeScreenSidebar";
-import { SmallScreenSidebar } from "./components/SmallScreenSidebar";
+import styled, { css } from "styled-components";
+import { sidebarMenuItems } from "./data/sidebarMenuItems";
+import { IconButton } from "@components/ui/IconButton";
+
+const SidebarContainer = styled.aside`
+  position: fixed;
+  height: 100vh;
+  z-index: 100;
+  background-color: ${(props) => props.theme.colors.backgroundWithOpacity(0.8)};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  padding-top: 40px;
+`;
 
 export const Sidebar = () => {
   const isLargeScreen = useMediaQuery((media) => media.screens.lg);
-  const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
 
-  // this makes sure sidebar is always open on large devices and closed by default on small devices
-  useEffect(() => {
-    setIsSidebarOpen(isLargeScreen);
-  }, [isLargeScreen, setIsSidebarOpen]);
-
-  if (isLargeScreen) {
-    return <LargeScreenSidebar />;
+  if (!isLargeScreen) {
+    return null;
   }
 
-  return <SmallScreenSidebar />;
+  return (
+    <SidebarContainer>
+      <Logo />
+      <Menu
+        items={sidebarMenuItems}
+        renderItem={(item) => <IconButton icon={item.icon} size={19.2} />}
+        direction="column"
+        wrapperStyles={css`
+          gap: 80px;
+        `}
+      />
+    </SidebarContainer>
+  );
 };
