@@ -34,7 +34,8 @@
       "@lib/*": ["src/lib/*"],
       "@services/*": ["src/services/*"],
       "@store/*": ["src/store/*"],
-      "@schemas/*": ["src/schemas/*"]
+      "@schemas/*": ["src/schemas/*"],
+      "@data/*": ["src/data/*"]
     }
   },
   "include": ["src", "src/schemas"],

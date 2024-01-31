@@ -22,6 +22,7 @@ export default defineConfig({
       "@services": resolveSource("services"),
       "@store": resolveSource("store"),
       "@schemas": resolveSource("schemas"),
+      "@data": resolveSource("data"),
     },
   },
   plugins: [react()],
