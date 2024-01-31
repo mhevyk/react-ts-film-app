@@ -1,10 +1,9 @@
 import { Logo } from "@components/ui/Logo";
 import styled, { css } from "styled-components";
 import closeIcon from "@icons/close.svg";
-import { useSidebarStore } from "@store/sidebarStore";
 import { Modal } from "@components/ui/Modal";
 import { Menu } from "@components/ui/Menu";
-import { sidebarMenuItems } from "../data/sidebarMenuItems";
+import { sidebarMenuItems } from "../../Sidebar/data/sidebarMenuItems";
 import { IconButton } from "@components/ui/IconButton";
 
 const ModalTopToolbar = styled.div`
@@ -38,19 +37,20 @@ const additionalMenuStyles = css`
   gap: 35px;
 `;
 
-export function SmallScreenSidebar() {
-  const isSidebarOpen = useSidebarStore((store) => store.isOpen);
-  const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
+type SmallScreenSidebarProps = {
+  isOpen: boolean;
+  handleClose: () => void;
+};
 
-  function closeSidebar() {
-    setIsSidebarOpen(false);
-  }
-
+export function SmallScreenSidebar({
+  isOpen,
+  handleClose,
+}: SmallScreenSidebarProps) {
   return (
-    <Modal isOpen={isSidebarOpen} onClose={closeSidebar} fullscreen locked>
+    <Modal isOpen={isOpen} onClose={handleClose} fullscreen locked>
       <ModalTopToolbar>
         <Logo />
-        <CloseIcon src={closeIcon} alt="Close icon" onClick={closeSidebar} />
+        <CloseIcon src={closeIcon} alt="Close icon" onClick={handleClose} />
       </ModalTopToolbar>
       <Menu
         items={sidebarMenuItems}

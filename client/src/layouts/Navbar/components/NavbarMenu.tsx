@@ -2,10 +2,11 @@ import { navbarMenuItems } from "../data/navbarMenuItems";
 import styled, { css } from "styled-components";
 import { media } from "@theme/mediaQueries";
 import { useMediaQuery } from "@hooks/useMediaQuery";
-import { useSidebarStore } from "@store/sidebarStore";
 import { Menu } from "@components/ui/Menu";
 import { IconButton } from "@components/ui/IconButton";
 import burgerMenuIcon from "@icons/menu.svg";
+import { useState } from "react";
+import { SmallScreenSidebar } from "@layouts/Navbar/components/SmallScreenSidebar";
 
 const MenuWrapper = styled.nav`
   display: flex;
@@ -21,14 +22,14 @@ const MenuWrapper = styled.nav`
 
 export function NavbarMenu() {
   const isLargeScreen = useMediaQuery((media) => media.screens.lg);
-  const setIsSidebarOpen = useSidebarStore((store) => store.setIsOpen);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
 
   return (
     <MenuWrapper>
       {!isLargeScreen && (
         <IconButton
           icon={<img src={burgerMenuIcon} alt="Burger menu icon" />}
-          onClick={() => setIsSidebarOpen(true)}
+          onClick={() => setIsMobileSidebarOpen(true)}
         />
       )}
       <Menu
@@ -37,6 +38,10 @@ export function NavbarMenu() {
         wrapperStyles={css`
           gap: 30px;
         `}
+      />
+      <SmallScreenSidebar
+        isOpen={isMobileSidebarOpen}
+        handleClose={() => setIsMobileSidebarOpen(false)}
       />
     </MenuWrapper>
   );
