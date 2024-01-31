@@ -1,10 +1,10 @@
-import { createBrowserRouter } from "react-router-dom";
+import { RouteObject } from "react-router-dom";
 import { ErrorPage } from "@pages/ErrorPage";
 import { NotFoundPage } from "@pages/NotFoundPage";
 import { MainPage } from "@pages/MainPage";
 import { RootLayout } from "@layouts/RootLayout";
 
-export default createBrowserRouter([
+const router: RouteObject[] = [
   {
     path: "/",
     element: <RootLayout />,
@@ -21,4 +21,6 @@ export default createBrowserRouter([
     ],
   },
   { path: "*", element: <NotFoundPage /> },
-]);
+];
+
+export default router;

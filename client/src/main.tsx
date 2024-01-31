@@ -4,8 +4,8 @@ import "./index.css";
 import { ThemeProvider } from "styled-components";
 import theme from "@theme/theme";
 import { GlobalStyles } from "./theme/global";
-import { RouterProvider } from "react-router-dom";
-import router from "./routes";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import router from "./router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const rootElement = document.getElementById("root")!;
@@ -22,7 +22,7 @@ root.render(
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
+        <RouterProvider router={createBrowserRouter(router)} />
       </QueryClientProvider>
     </ThemeProvider>
   </StrictMode>
