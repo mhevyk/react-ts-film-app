@@ -1,7 +1,7 @@
 import { Section } from "@components/ui/Section";
-import { PosterSlider } from "../../../components/common/PosterSlider";
-import { Genres } from "../../../components/common/Genres";
-import { StarRating } from "../../../components/ui/StarRating";
+import { PosterSlider } from "@components/common/PosterSlider";
+import { Genres } from "@components/common/Genres";
+import { StarRating } from "@components/ui/StarRating";
 import styled from "styled-components";
 
 const mockResponse = {
