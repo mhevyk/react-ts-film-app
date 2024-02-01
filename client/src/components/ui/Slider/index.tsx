@@ -25,12 +25,12 @@ type ExtraStyledCSS = {
 };
 
 const SliderWrapper = styled.div<ExtraStyledCSS>`
+  // css variables for internal use of swiper
   --swiper-pagination-color: ${(props) => props.theme.colors.white};
   --swiper-pagination-bottom: 24px;
   --swiper-pagination-bullet-inactive-color: ${(props) =>
     props.theme.colors.light};
   --swiper-pagination-bullet-horizontal-gap: 8px;
-  --slider-padding: ${(props) => props.theme.globals.sliderSpacing}px;
   position: relative;
 
   ${(props) => props.$css}
@@ -75,11 +75,11 @@ const NavigationArrow = styled(IconButton)`
 `;
 
 const NavigationPrevArrow = styled(NavigationArrow)`
-  left: var(--slider-padding);
+  left: ${(props) => props.theme.globals.sliderSpacing}px;
 `;
 
 const NavigationNextArrow = styled(NavigationArrow)`
-  right: var(--slider-padding);
+  right: ${(props) => props.theme.globals.sliderSpacing}px;
 `;
 
 export type SliderVariant = "full-screen" | "small" | "medium";
