@@ -1,6 +1,5 @@
 import { createGlobalStyle, css } from "styled-components";
 import theme from "./theme";
-import { media } from "./mediaQueries";
 import { getBrowserName } from "@utils/getBrowserName";
 
 const currentBrowser = getBrowserName();
@@ -46,14 +45,6 @@ export const GlobalStyles = createGlobalStyle`
     position: relative;
     max-width: ${(props) => props.theme.globals.contentContainerMaxWidth}px;
     margin: auto;
-  }
-
-  @media ${media.screens.lg} {
-    .backdrop-slider .navigation-button-prev {
-      left: ${(props) =>
-        props.theme.globals.contentContainerSpacing +
-        props.theme.globals.sliderSpacing}px;
-    }
   }
 
   ${scrollbarStyles};

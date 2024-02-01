@@ -71,7 +71,16 @@ export function BackdropSlider() {
       slides={slides}
       renderSlide={(slide) => <FilmWrapper>{renderResult(slide)}</FilmWrapper>}
       slideStyles={(slide) => createSlideCSS(slide.isLoading, slide.isError)}
-      className="backdrop-slider" // used to apply extra padding to one of navigation arrow because of sidebar
+      wrapperStyles={css`
+        // Adding shift for prev arrow to avoid layering with sidebar
+        @media ${media.screens.lg} {
+          & > :first-child {
+            left: ${(props) =>
+              props.theme.globals.contentContainerSpacing +
+              props.theme.globals.sliderSpacing}px;
+          }
+        }
+      `}
       pagination
       navigationControls
       autoplay

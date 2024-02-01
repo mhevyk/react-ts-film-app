@@ -1,4 +1,9 @@
-import { ComponentPropsWithoutRef, ReactNode } from "react";
+import {
+  ComponentPropsWithoutRef,
+  ElementRef,
+  ReactNode,
+  forwardRef,
+} from "react";
 import styled from "styled-components";
 
 type IconButtonStyledProps = {
@@ -32,10 +37,13 @@ type HoverableIconProps = {
   size?: number;
 } & ComponentPropsWithoutRef<"button">;
 
-export function IconButton({ icon, size = 24, ...props }: HoverableIconProps) {
+export const IconButton = forwardRef<
+  ElementRef<typeof IconButtonStyled>,
+  HoverableIconProps
+>(({ icon, size = 24, ...props }, ref) => {
   return (
-    <IconButtonStyled $iconSize={size} {...props}>
+    <IconButtonStyled $iconSize={size} ref={ref} {...props}>
       {icon}
     </IconButtonStyled>
   );
-}
+});

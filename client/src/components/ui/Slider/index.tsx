@@ -12,12 +12,11 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
-import "./Slider.css";
 
 import chevronRightIcon from "@icons/chevron-right.svg";
 import chevronLeftIcon from "@icons/chevron-left.svg";
 import styled, { RuleSet, css } from "styled-components";
-import { ComponentPropsWithoutRef, ReactNode, useId, useRef } from "react";
+import { ComponentPropsWithoutRef, ElementRef, ReactNode, useRef } from "react";
 import { IconButton } from "../IconButton";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 
@@ -68,6 +67,21 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
   ${(props) => props.$css}
 `;
 
+const NavigationArrow = styled(IconButton)`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
+`;
+
+const NavigationPrevArrow = styled(NavigationArrow)`
+  left: var(--slider-padding);
+`;
+
+const NavigationNextArrow = styled(NavigationArrow)`
+  right: var(--slider-padding);
+`;
+
 export type SliderVariant = "full-screen" | "small" | "medium";
 
 type SliderProps<TSlide> = {
@@ -80,7 +94,10 @@ type SliderProps<TSlide> = {
   wrapperStyles?: RuleSet;
   sliderStyles?: RuleSet;
   slideStyles?: RuleSet | ((slide: TSlide) => RuleSet);
-} & ComponentPropsWithoutRef<"div">;
+} & ComponentPropsWithoutRef<typeof Swiper>;
+
+type NavigationPrevArrowRef = ElementRef<typeof NavigationPrevArrow>;
+type NavigationNextArrowRef = ElementRef<typeof NavigationNextArrow>;
 
 export function Slider<TSlide>({
   slides,
@@ -94,7 +111,8 @@ export function Slider<TSlide>({
   slideStyles,
   ...rest
 }: SliderProps<TSlide>) {
-  const id = useId();
+  const navigationPrevArrowRef = useRef<NavigationPrevArrowRef | null>(null);
+  const navigationNextArrowRef = useRef<NavigationNextArrowRef | null>(null);
   const swiperRef = useRef<SwiperRef | null>(null);
   const { slidesPerView, spaceBetween } = useSliderVariantConfig(
     swiperRef,
@@ -102,20 +120,18 @@ export function Slider<TSlide>({
   );
 
   return (
-    <SliderWrapper data-id={id} $css={wrapperStyles} {...rest}>
-      {/* used data-id in order to not to sanitize id and use it directly without
-manipulations */}
+    <SliderWrapper $css={wrapperStyles}>
       {navigationControls && (
         <>
-          <IconButton
-            className="navigation-button navigation-button-next"
-            icon={<img src={chevronRightIcon} alt="Go to next slide" />}
-            size={22}
-          />
-          <IconButton
-            className="navigation-button navigation-button-prev"
+          <NavigationPrevArrow
             icon={<img src={chevronLeftIcon} alt="Go to previous slide" />}
             size={22}
+            ref={navigationPrevArrowRef}
+          />
+          <NavigationNextArrow
+            icon={<img src={chevronRightIcon} alt="Go to next slide" />}
+            size={22}
+            ref={navigationNextArrowRef}
           />
         </>
       )}
@@ -129,8 +145,8 @@ manipulations */}
         navigation={
           navigationControls
             ? {
-                nextEl: `[data-id="${id}"] .navigation-button-next`,
-                prevEl: `[data-id="${id}"] .navigation-button-prev`,
+                nextEl: navigationNextArrowRef.current,
+                prevEl: navigationPrevArrowRef.current,
                 disabledClass: "d-none",
               }
             : undefined
@@ -146,6 +162,7 @@ manipulations */}
         fadeEffect={variant === "full-screen" ? { crossFade: true } : undefined}
         pagination={pagination ? { clickable: false } : undefined}
         $css={sliderStyles}
+        {...rest}
       >
         {slides.map((slide, index) => (
           <SlideStyled
