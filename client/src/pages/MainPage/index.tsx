@@ -1,6 +1,6 @@
-import { BackdropSlider } from "@components/BackdropSlider";
-import { FeaturedTvSection } from "@components/FeaturedTvSection";
-import { NewReleasesSection } from "@components/NewReleasesSection";
+import { BackdropSlider } from "./components/BackdropSlider";
+import { FeaturedTvSection } from "./components/FeaturedTvSection";
+import { NewReleasesSection } from "./components/NewReleasesSection";
 import { Navbar } from "@layouts/Navbar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";

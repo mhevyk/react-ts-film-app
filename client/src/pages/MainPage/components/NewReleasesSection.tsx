@@ -1,8 +1,8 @@
 import { Section } from "@components/ui/Section";
 import styled from "styled-components";
-import { StarRating } from "./ui/StarRating";
-import { Genres } from "./common/Genres";
-import { PosterSlider } from "./common/PosterSlider";
+import { StarRating } from "../../../components/ui/StarRating";
+import { Genres } from "../../../components/common/Genres";
+import { PosterSlider } from "../../../components/common/PosterSlider";
 
 // TODO: Replace mock response with actual server data
 const newReleasesMockResponse = {
