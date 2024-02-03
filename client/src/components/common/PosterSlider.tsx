@@ -1,9 +1,8 @@
-import { Slider, SliderVariant } from "@components/ui/Slider";
+import { Slider, SliderProps } from "@components/ui/Slider";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import shevronRightIcon from "@icons/chevron-right.svg";
 import { LazyImageContainer } from "@components/ui/LazyImageContainer";
-import { ReactNode } from "react";
 
 const ANIMATED_CONTAINER_CLASSNAME = "animated";
 const WATCH_NOW_CONTAINER_CLASSNAME = "watch-now";
@@ -61,10 +60,7 @@ const slideStyles = css`
   }
 `;
 
-type PosterSliderProps<TSlide> = {
-  variant: SliderVariant;
-  slides: TSlide[];
-  renderSlide: (slide: TSlide) => ReactNode;
+type PosterSliderProps<TSlide> = SliderProps<TSlide> & {
   getImagePath: (slide: TSlide) => string;
   getWatchNowPath: (slide: TSlide) => string;
 };
@@ -75,6 +71,8 @@ export function PosterSlider<TSlide>({
   renderSlide,
   getImagePath,
   getWatchNowPath,
+  onReachEnd,
+  ...rest
 }: PosterSliderProps<TSlide>) {
   return (
     <Slider
@@ -113,6 +111,8 @@ export function PosterSlider<TSlide>({
       )}
       navigationControls
       slideStyles={slideStyles}
+      onReachEnd={onReachEnd}
+      {...rest}
     />
   );
 }

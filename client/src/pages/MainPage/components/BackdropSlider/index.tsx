@@ -2,12 +2,11 @@ import styled, { css } from "styled-components";
 import { Slider } from "@components/ui/Slider";
 import { media } from "@theme/mediaQueries";
 import { useFilms } from "./hooks/useFilms";
-import { UseQueryResult } from "@tanstack/react-query";
 import { renderSkeleton } from "./utils/renderSkeleton";
 import { renderSlide } from "./utils/renderSlide";
-import { Film } from "@schemas/filmSchema";
+import { renderError } from "./utils/renderError";
 
-const createSlideCSS = (isLoading: boolean, isError: boolean) => css`
+const createSlideCSS = (isError: boolean) => css`
   display: flex;
   align-items: center;
 
@@ -24,16 +23,28 @@ const createSlideCSS = (isLoading: boolean, isError: boolean) => css`
     padding: 0;
   }
 
-  ${(props) => {
-    if (isLoading || isError) {
+  ${() => {
+    if (isError) {
       return css`
-        background-color: ${props.theme.colors.lightWithOpacity(0.1)};
+        background-color: ${(props) =>
+          props.theme.colors.lightWithOpacity(0.1)};
       `;
     }
   }}
 `;
 
-const FilmWrapper = styled.article`
+// Adding shift for prev arrow to avoid layering with sidebar
+const wrapperStyles = css`
+  @media ${media.screens.lg} {
+    & > :first-child {
+      left: ${(props) =>
+        props.theme.globals.contentContainerSpacing +
+        props.theme.globals.sliderSpacing}px;
+    }
+  }
+`;
+
+const SlideContentWrapper = styled.article`
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -50,37 +61,26 @@ const FilmWrapper = styled.article`
   }
 `;
 
-function renderResult(slide: UseQueryResult<Film>) {
-  if (slide.isLoading) {
-    return renderSkeleton();
-  }
-
-  if (slide.isError) {
-    return <p style={{ textAlign: "center" }}>Error: {slide.error.message}</p>;
-  }
-
-  return renderSlide(slide.data!);
-}
-
 export function BackdropSlider() {
   const slides = useFilms([399566, 297762, 791373]);
+
+  const isLoading = slides.some((slide) => slide.isLoading);
 
   return (
     <Slider
       variant="full-screen"
       slides={slides}
-      renderSlide={(slide) => <FilmWrapper>{renderResult(slide)}</FilmWrapper>}
-      slideStyles={(slide) => createSlideCSS(slide.isLoading, slide.isError)}
-      wrapperStyles={css`
-        // Adding shift for prev arrow to avoid layering with sidebar
-        @media ${media.screens.lg} {
-          & > :first-child {
-            left: ${(props) =>
-              props.theme.globals.contentContainerSpacing +
-              props.theme.globals.sliderSpacing}px;
-          }
-        }
-      `}
+      renderSlide={(slide) => (
+        <SlideContentWrapper>
+          {slide.isError ? renderError(slide.error) : renderSlide(slide.data!)}
+        </SlideContentWrapper>
+      )}
+      showSkeleton={isLoading}
+      renderSkeletonSlide={() => (
+        <SlideContentWrapper>{renderSkeleton()}</SlideContentWrapper>
+      )}
+      slideStyles={(slide) => createSlideCSS(slide.isError)}
+      wrapperStyles={wrapperStyles}
       pagination
       navigationControls
       autoplay
