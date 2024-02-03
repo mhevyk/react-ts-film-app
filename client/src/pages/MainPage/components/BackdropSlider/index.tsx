@@ -63,7 +63,7 @@ function renderResult(slide: UseQueryResult<Film>) {
 }
 
 export function BackdropSlider() {
-  const slides = useFilms([399566, 297762, 791373, -1]);
+  const slides = useFilms([399566, 297762, 791373]);
 
   return (
     <Slider
