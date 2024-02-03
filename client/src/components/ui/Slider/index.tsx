@@ -1,4 +1,4 @@
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperClass, SwiperRef, SwiperSlide } from "swiper/react";
 import {
   EffectFade,
   A11y,
@@ -13,12 +13,13 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
-import chevronRightIcon from "@icons/chevron-right.svg";
-import chevronLeftIcon from "@icons/chevron-left.svg";
 import styled, { RuleSet, css } from "styled-components";
-import { ComponentPropsWithoutRef, ElementRef, ReactNode, useRef } from "react";
-import { IconButton } from "../IconButton";
+import { ComponentPropsWithoutRef, ReactNode, useRef } from "react";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
+import {
+  SliderNavigation,
+  SliderNavigationControlsRef,
+} from "./components/SliderNavigation";
 
 type ExtraStyledCSS = {
   $css?: RuleSet;
@@ -42,6 +43,7 @@ const SwiperStyled = styled(Swiper)<ExtraStyledCSS>`
 
 type SlideStyledProps = ExtraStyledCSS & {
   $variant: SliderVariant;
+  $showSkeleton: boolean;
 };
 
 const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
@@ -64,27 +66,25 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
     `;
   }};
 
+  ${(props) => {
+    if (props.$showSkeleton) {
+      return css`
+        background-color: ${props.theme.colors.lightWithOpacity(0.1)};
+      `;
+    }
+  }}
+
   ${(props) => props.$css}
 `;
 
-const NavigationArrow = styled(IconButton)`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-`;
-
-const NavigationPrevArrow = styled(NavigationArrow)`
-  left: ${(props) => props.theme.globals.sliderSpacing}px;
-`;
-
-const NavigationNextArrow = styled(NavigationArrow)`
-  right: ${(props) => props.theme.globals.sliderSpacing}px;
-`;
+type SliderSkeletonProps<TSlide> = {
+  showSkeleton?: boolean;
+  renderSkeletonSlide?: (slide: TSlide) => ReactNode;
+};
 
 export type SliderVariant = "full-screen" | "small" | "medium";
 
-type SliderProps<TSlide> = {
+export type SliderProps<TSlide> = {
   slides: TSlide[];
   renderSlide: (slide: TSlide) => ReactNode;
   variant?: SliderVariant;
@@ -94,14 +94,14 @@ type SliderProps<TSlide> = {
   wrapperStyles?: RuleSet;
   sliderStyles?: RuleSet;
   slideStyles?: RuleSet | ((slide: TSlide) => RuleSet);
-} & ComponentPropsWithoutRef<typeof Swiper>;
-
-type NavigationPrevArrowRef = ElementRef<typeof NavigationPrevArrow>;
-type NavigationNextArrowRef = ElementRef<typeof NavigationNextArrow>;
+} & ComponentPropsWithoutRef<typeof Swiper> &
+  SliderSkeletonProps<TSlide>;
 
 export function Slider<TSlide>({
   slides,
   renderSlide,
+  showSkeleton = false,
+  renderSkeletonSlide,
   pagination = false,
   navigationControls = false,
   variant = "full-screen",
@@ -109,32 +109,40 @@ export function Slider<TSlide>({
   wrapperStyles,
   sliderStyles,
   slideStyles,
+  onReachEnd,
   ...rest
 }: SliderProps<TSlide>) {
-  const navigationPrevArrowRef = useRef<NavigationPrevArrowRef | null>(null);
-  const navigationNextArrowRef = useRef<NavigationNextArrowRef | null>(null);
   const swiperRef = useRef<SwiperRef | null>(null);
   const { slidesPerView, spaceBetween } = useSliderVariantConfig(
     swiperRef,
     variant
   );
 
+  // use default values for controls, because otherwise it won`t work
+  const navigationControlsRef = useRef<SliderNavigationControlsRef>({
+    prevArrow: null,
+    nextArrow: null,
+  });
+
+  const renderSlideContent = (slide: TSlide) => {
+    if (showSkeleton && renderSkeletonSlide) {
+      return renderSkeletonSlide(slide);
+    }
+
+    return renderSlide(slide);
+  };
+
+  const handleReachEnd = (swiper: SwiperClass) => {
+    if (swiper.progress >= 0.7 && onReachEnd) {
+      onReachEnd(swiper);
+    }
+  };
+
+  const { prevArrow, nextArrow } = navigationControlsRef.current;
+
   return (
     <SliderWrapper $css={wrapperStyles}>
-      {navigationControls && (
-        <>
-          <NavigationPrevArrow
-            icon={<img src={chevronLeftIcon} alt="Go to previous slide" />}
-            size={22}
-            ref={navigationPrevArrowRef}
-          />
-          <NavigationNextArrow
-            icon={<img src={chevronRightIcon} alt="Go to next slide" />}
-            size={22}
-            ref={navigationNextArrowRef}
-          />
-        </>
-      )}
+      {navigationControls && <SliderNavigation ref={navigationControlsRef} />}
 
       <SwiperStyled
         ref={swiperRef}
@@ -143,13 +151,11 @@ export function Slider<TSlide>({
         slidesPerView={slidesPerView}
         spaceBetween={spaceBetween}
         navigation={
-          navigationControls
-            ? {
-                nextEl: navigationNextArrowRef.current,
-                prevEl: navigationPrevArrowRef.current,
-                disabledClass: "d-none",
-              }
-            : undefined
+          navigationControls && {
+            nextEl: nextArrow,
+            prevEl: prevArrow,
+            disabledClass: "d-none",
+          }
         }
         autoplay={
           autoplay && {
@@ -160,7 +166,8 @@ export function Slider<TSlide>({
         noSwiping={variant === "full-screen"}
         noSwipingClass="swiper-slide"
         fadeEffect={variant === "full-screen" ? { crossFade: true } : undefined}
-        pagination={pagination ? { clickable: false } : undefined}
+        pagination={pagination && { clickable: false }}
+        onReachEnd={handleReachEnd}
         $css={sliderStyles}
         {...rest}
       >
@@ -173,8 +180,9 @@ export function Slider<TSlide>({
                 : slideStyles
             }
             $variant={variant}
+            $showSkeleton={showSkeleton}
           >
-            {renderSlide(slide)}
+            {renderSlideContent(slide)}
           </SlideStyled>
         ))}
       </SwiperStyled>
