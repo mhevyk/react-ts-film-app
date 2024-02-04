@@ -4,7 +4,7 @@ import shevronRightIcon from "@icons/chevron-right.svg";
 import { Link } from "react-router-dom";
 
 const TitleWrapperLink = styled(Link)`
-  display: flex;
+  display: inline-flex;
   gap: 8px;
   padding: 24px 0 24px 32px;
 `;
