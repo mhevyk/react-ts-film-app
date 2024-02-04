@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { StyledPick } from "src/types/helpers";
+import { StyledPick } from "@type-helpers";
 import styled, { RuleSet } from "styled-components";
 
 type ListProps = StyledPick<StyledMenuProps, "direction" | "wrapperStyles">;

@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { NavbarMenu } from "./components/NavbarMenu";
-import { StyledPick } from "src/types/helpers";
+import { StyledPick } from "@type-helpers";
 
 type NavbarContainerProps = StyledPick<NavbarProps, "variant">;
 

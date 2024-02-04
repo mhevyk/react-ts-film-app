@@ -35,9 +35,10 @@
       "@services/*": ["src/services/*"],
       "@store/*": ["src/store/*"],
       "@schemas/*": ["src/schemas/*"],
-      "@data/*": ["src/data/*"]
+      "@data/*": ["src/data/*"],
+      "@type-helpers": ["src/types/helpers.ts"]
     }
   },
-  "include": ["src", "src/schemas"],
+  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,7 +1,7 @@
 import { ComponentProps, useEffect, useState } from "react";
 import styled, { RuleSet, css } from "styled-components";
 import imagePlaceholderSource from "@icons/placeholder-image.svg";
-import { StyledPick } from "src/types/helpers";
+import { StyledPick } from "@type-helpers";
 
 type ImageWrapperProps = StyledPick<
   LazyImageContainerProps,

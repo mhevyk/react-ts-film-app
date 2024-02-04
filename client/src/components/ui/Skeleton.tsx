@@ -1,5 +1,5 @@
 import styled, { css, keyframes } from "styled-components";
-import { StyledPick } from "src/types/helpers";
+import { StyledPick } from "@type-helpers";
 
 const skeletonAnimation = keyframes`
   from {

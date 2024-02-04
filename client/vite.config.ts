@@ -23,6 +23,7 @@ export default defineConfig({
       "@store": resolveSource("store"),
       "@schemas": resolveSource("schemas"),
       "@data": resolveSource("data"),
+      "@type-helpers": resolveSource("type-helpers"),
     },
   },
   plugins: [react()],

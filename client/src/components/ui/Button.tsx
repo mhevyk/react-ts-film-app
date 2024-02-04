@@ -1,4 +1,4 @@
-import { AsProps, StyledPick } from "../../types/helpers";
+import { AsProps, PrefixWith$, StyledPick } from "@type-helpers";
 import { ElementType, useId } from "react";
 import styled, { css } from "styled-components";
 
@@ -51,7 +51,7 @@ const gradientButtonStyles = css<GradientButtonStylesProps>`
   }
 `;
 
-type ButtonStyledProps = StyledPick<SharedButtonProps, "variant" | "outlined">;
+type ButtonStyledProps = PrefixWith$<SharedButtonProps>;
 
 const ButtonStyled = styled(DEFAULT_TYPE)<ButtonStyledProps>`
   ${baseButtonStyles}
