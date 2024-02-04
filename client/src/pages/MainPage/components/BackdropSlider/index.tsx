@@ -76,11 +76,10 @@ export function BackdropSlider() {
         </SlideContentWrapper>
       )}
       skeleton={{
-        display: isLoading,
+        show: isLoading,
         renderSkeleton: () => (
           <SlideContentWrapper>{renderSkeleton()}</SlideContentWrapper>
         ),
-        skeletonVariant: "append-slides",
       }}
       slideStyles={(slide) => createSlideCSS(slide.isError)}
       wrapperStyles={wrapperStyles}
