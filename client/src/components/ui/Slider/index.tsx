@@ -81,7 +81,7 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
 export function Slider<TSlide>({
   slides,
   renderSlide,
-  skeleton: { show: showSkeleton = false, renderSkeleton },
+  skeleton: { show: showSkeleton = false, renderSkeleton } = {},
   pagination = false,
   navigationControls = false,
   variant = "full-screen",

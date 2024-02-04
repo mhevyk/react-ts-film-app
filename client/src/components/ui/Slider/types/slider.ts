@@ -25,7 +25,7 @@ export type SliderProps<TSlide> = {
   slides: TSlide[];
   renderSlide: (slide: TSlide) => ReactNode;
   variant?: SliderVariant;
-  skeleton: SliderSkeletonProps;
+  skeleton?: SliderSkeletonProps;
 } & SliderModuleProps &
   SliderStylingProps<TSlide> &
   ComponentPropsWithoutRef<typeof Swiper>;
