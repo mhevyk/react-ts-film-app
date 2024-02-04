@@ -75,10 +75,13 @@ export function BackdropSlider() {
           {slide.isError ? renderError(slide.error) : renderSlide(slide.data!)}
         </SlideContentWrapper>
       )}
-      showSkeleton={isLoading}
-      renderSkeletonSlide={() => (
-        <SlideContentWrapper>{renderSkeleton()}</SlideContentWrapper>
-      )}
+      skeleton={{
+        display: isLoading,
+        renderSkeleton: () => (
+          <SlideContentWrapper>{renderSkeleton()}</SlideContentWrapper>
+        ),
+        skeletonVariant: "append-slides",
+      }}
       slideStyles={(slide) => createSlideCSS(slide.isError)}
       wrapperStyles={wrapperStyles}
       pagination

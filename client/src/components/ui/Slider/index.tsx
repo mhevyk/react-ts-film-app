@@ -14,12 +14,13 @@ import "swiper/css/pagination";
 import "swiper/css/autoplay";
 
 import styled, { RuleSet, css } from "styled-components";
-import { ComponentPropsWithoutRef, ReactNode, useRef } from "react";
+import { useRef } from "react";
 import { useSliderVariantConfig } from "./hooks/useSliderVariantConfig";
 import {
   SliderNavigation,
   SliderNavigationControlsRef,
 } from "./components/SliderNavigation";
+import { SliderProps, SliderVariant } from "./types/slider";
 
 type ExtraStyledCSS = {
   $css?: RuleSet;
@@ -77,31 +78,10 @@ const SlideStyled = styled(SwiperSlide)<SlideStyledProps>`
   ${(props) => props.$css}
 `;
 
-type SliderSkeletonProps<TSlide> = {
-  showSkeleton?: boolean;
-  renderSkeletonSlide?: (slide: TSlide) => ReactNode;
-};
-
-export type SliderVariant = "full-screen" | "small" | "medium";
-
-export type SliderProps<TSlide> = {
-  slides: TSlide[];
-  renderSlide: (slide: TSlide) => ReactNode;
-  variant?: SliderVariant;
-  autoplay?: boolean;
-  pagination?: boolean;
-  navigationControls?: boolean;
-  wrapperStyles?: RuleSet;
-  sliderStyles?: RuleSet;
-  slideStyles?: RuleSet | ((slide: TSlide) => RuleSet);
-} & ComponentPropsWithoutRef<typeof Swiper> &
-  SliderSkeletonProps<TSlide>;
-
 export function Slider<TSlide>({
   slides,
   renderSlide,
-  showSkeleton = false,
-  renderSkeletonSlide,
+  skeleton: { show: showSkeleton = false, renderSkeleton },
   pagination = false,
   navigationControls = false,
   variant = "full-screen",
@@ -124,9 +104,11 @@ export function Slider<TSlide>({
     nextArrow: null,
   });
 
+  const shouldRenderSkeleton = showSkeleton && renderSkeleton;
+
   const renderSlideContent = (slide: TSlide) => {
-    if (showSkeleton && renderSkeletonSlide) {
-      return renderSkeletonSlide(slide);
+    if (shouldRenderSkeleton) {
+      return renderSkeleton();
     }
 
     return renderSlide(slide);
@@ -174,13 +156,13 @@ export function Slider<TSlide>({
         {slides.map((slide, index) => (
           <SlideStyled
             key={index}
+            $variant={variant}
+            $showSkeleton={showSkeleton}
             $css={
               typeof slideStyles === "function"
                 ? slideStyles(slide)
                 : slideStyles
             }
-            $variant={variant}
-            $showSkeleton={showSkeleton}
           >
             {renderSlideContent(slide)}
           </SlideStyled>
