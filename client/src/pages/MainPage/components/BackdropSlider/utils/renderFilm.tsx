@@ -4,7 +4,7 @@ import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { media } from "@theme/mediaQueries";
 import { LazyImageContainer } from "@components/ui/LazyImageContainer";
-import { Film } from "@schemas/filmSchema";
+import { SimpleFilm } from "@schemas/filmSchema";
 import { BadgeGroup } from "@components/styled/BadgeGroup";
 import { Badge } from "@components/ui/Badge";
 
@@ -44,7 +44,7 @@ const FilmDescription = styled.p`
   }
 `;
 
-export function renderFilm(film: Film) {
+export function renderFilm(film: SimpleFilm) {
   return (
     <>
       <BadgeGroup>
