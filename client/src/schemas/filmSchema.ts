@@ -30,34 +30,30 @@ const LanguageSchema = z.object({
   name: z.string(),
 });
 
-const FilmSchema = z.object({
+const BaseFilmSchema = z.object({
   adult: z.boolean(),
-  backdrop_path: z.string(),
-  belongs_to_collection: CollectionSchema.nullable(),
-  budget: z.number(),
-  genres: z.array(GenreSchema),
-  homepage: z.string(),
+  backdrop_path: z.string().nullable(),
   id: z.number(),
-  imdb_id: z.string(),
   original_language: z.string(),
   original_title: z.string(),
   overview: z.string(),
   popularity: z.number(),
-  poster_path: z.string(),
-  production_companies: z.array(ProductionCompanySchema),
-  production_countries: z.array(ProductionCountrySchema),
+  poster_path: z.string().nullable(),
   release_date: z.string(),
-  revenue: z.number(),
-  runtime: z.number(),
-  spoken_languages: z.array(LanguageSchema),
-  status: z.string(),
-  tagline: z.string(),
   title: z.string(),
   video: z.boolean(),
   vote_average: z.number(),
   vote_count: z.number(),
 });
 
-export default FilmSchema;
+export const SimpleFilmSchema = BaseFilmSchema.extend({
+  belongs_to_collection: CollectionSchema.nullable(),
+  budget: z.number(),
+  genres: z.array(GenreSchema),
+  homepage: z.string(),
+  production_companies: z.array(ProductionCompanySchema),
+  production_countries: z.array(ProductionCountrySchema),
+  spoken_languages: z.array(LanguageSchema),
+});
 
-export type Film = z.infer<typeof FilmSchema>;
+export type SimpleFilm = z.infer<typeof SimpleFilmSchema>;
