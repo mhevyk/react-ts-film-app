@@ -60,7 +60,7 @@ export function Slider({
   wrapperStyles,
   sliderStyles,
   onReachEnd,
-  slidesPerView = 1,
+  slidesPerView = "auto",
   noSwiping = false,
   ...rest
 }: SliderProps) {
