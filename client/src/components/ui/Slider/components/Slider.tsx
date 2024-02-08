@@ -41,7 +41,6 @@ export type SliderProps = {
   autoplay?: boolean;
   pagination?: boolean;
   navigationControls?: boolean;
-  allowSwiping?: boolean;
   wrapperStyles?: RuleSet;
   sliderStyles?: RuleSet;
 } & Omit<
@@ -52,7 +51,6 @@ export type SliderProps = {
   | "modules"
   | "fadeEffect"
   | "pagination"
-  | "noSwiping"
 >;
 
 export function Slider({
@@ -63,6 +61,7 @@ export function Slider({
   sliderStyles,
   onReachEnd,
   slidesPerView = 1,
+  noSwiping = false,
   ...rest
 }: SliderProps) {
   const sliderControlsRef = useSliderNavigation();
@@ -79,6 +78,7 @@ export function Slider({
       <SwiperStyled
         modules={[A11y, EffectFade, Pagination, Navigation, Autoplay]}
         fadeEffect={{ crossFade: true }}
+        noSwiping={noSwiping}
         noSwipingClass="swiper-slide"
         slidesPerView={slidesPerView}
         navigation={{

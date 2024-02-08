@@ -68,6 +68,7 @@ export function BackdropSlider() {
       navigationControls
       loop
       autoplay
+      noSwiping
     >
       {slides.map((slide, index) => (
         <BackdropSlide key={index} tag="article">
