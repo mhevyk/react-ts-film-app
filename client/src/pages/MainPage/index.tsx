@@ -1,9 +1,10 @@
 import { BackdropSlider } from "./components/BackdropSlider";
-import { FeaturedTvSection } from "./components/FeaturedTvSection";
-import { NewReleasesSection } from "./components/NewReleasesSection";
 import { Navbar } from "@layouts/Navbar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
+import { Section } from "@components/ui/Section";
+import { NewReleasesSlider } from "./components/NewReleasesSlider";
+import { FeaturedTvSlider } from "./components/FeaturedTvSlider";
 
 const Header = styled.header`
   position: sticky;
@@ -28,10 +29,14 @@ export function MainPage() {
         <Navbar variant="absolute" />
         <BackdropSlider />
       </Header>
-      {/* <ContentWrapper>
-        <NewReleasesSection />
-        <FeaturedTvSection />
-      </ContentWrapper> */}
+      <ContentWrapper>
+        <Section title="New Releases" navigatesTo="/new-releases">
+          <NewReleasesSlider />
+        </Section>
+        <Section title="Featured TV shows" navigatesTo="/featured-tv">
+          <FeaturedTvSlider />
+        </Section>
+      </ContentWrapper>
     </>
   );
 }
