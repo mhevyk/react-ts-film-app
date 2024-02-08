@@ -43,7 +43,7 @@ const FilmDescription = styled.p`
   }
 `;
 
-export function renderSlide(film: Film) {
+export function renderFilm(film: Film) {
   return (
     <>
       <Genres

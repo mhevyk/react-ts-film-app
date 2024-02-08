@@ -28,10 +28,10 @@ export function MainPage() {
         <Navbar variant="absolute" />
         <BackdropSlider />
       </Header>
-      <ContentWrapper>
+      {/* <ContentWrapper>
         <NewReleasesSection />
         <FeaturedTvSection />
-      </ContentWrapper>
+      </ContentWrapper> */}
     </>
   );
 }

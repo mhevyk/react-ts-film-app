@@ -1,36 +1,37 @@
 import styled, { css } from "styled-components";
-import { Slider } from "@components/ui/Slider";
+import { Slider, Slide } from "@components/ui/Slider";
 import { media } from "@theme/mediaQueries";
 import { useFilms } from "./hooks/useFilms";
 import { renderSkeleton } from "./utils/renderSkeleton";
-import { renderSlide } from "./utils/renderSlide";
+import { renderFilm } from "./utils/renderFilm";
 import { renderError } from "./utils/renderError";
+import { UseQueryResult } from "@tanstack/react-query";
+import { Film } from "@schemas/filmSchema";
 
-const createSlideCSS = (isError: boolean) => css`
+const BackdropSlide = styled(Slide)`
+  --padding-x: 20px;
   display: flex;
-  align-items: center;
-
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
   height: 75vh;
+  padding: 0 var(--padding-x);
+
+  @media ${media.screens.xs} {
+    --padding-x: 12vw;
+  }
 
   @media ${media.screens.md} {
     min-height: 600px;
     max-height: 648px;
-    padding: 30px 0 60px;
     height: auto;
   }
 
   @media ${media.screens.lg} {
-    padding: 0;
+    --padding-x: calc(
+      ${(props) => props.theme.globals.contentContainerSpacing}px + 10%
+    );
   }
-
-  ${() => {
-    if (isError) {
-      return css`
-        background-color: ${(props) =>
-          props.theme.colors.lightWithOpacity(0.1)};
-      `;
-    }
-  }}
 `;
 
 // Adding shift for prev arrow to avoid layering with sidebar
@@ -44,48 +45,35 @@ const wrapperStyles = css`
   }
 `;
 
-const SlideContentWrapper = styled.article`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 0 20px;
-  width: 100%;
-
-  @media ${media.screens.xs} {
-    padding: 0 12vw;
+function renderSlideContent(slide: UseQueryResult<Film>) {
+  if (slide.isLoading) {
+    return renderSkeleton();
   }
 
-  @media ${media.screens.md} {
-    padding: 0
-      calc(${(props) => props.theme.globals.contentContainerSpacing}px + 10%);
+  if (slide.isError) {
+    return renderError(slide.error);
   }
-`;
+
+  return renderFilm(slide.data);
+}
 
 export function BackdropSlider() {
   const slides = useFilms([399566, 297762, 791373]);
 
-  const isLoading = slides.some((slide) => slide.isLoading);
-
   return (
     <Slider
-      variant="full-screen"
-      slides={slides}
-      renderSlide={(slide) => (
-        <SlideContentWrapper>
-          {slide.isError ? renderError(slide.error) : renderSlide(slide.data!)}
-        </SlideContentWrapper>
-      )}
-      skeleton={{
-        show: isLoading,
-        renderSkeleton: () => (
-          <SlideContentWrapper>{renderSkeleton()}</SlideContentWrapper>
-        ),
-      }}
-      slideStyles={(slide) => createSlideCSS(slide.isError)}
+      effect="fade"
       wrapperStyles={wrapperStyles}
       pagination
       navigationControls
+      loop
       autoplay
-    />
+    >
+      {slides.map((slide, index) => (
+        <BackdropSlide key={index} tag="article">
+          {renderSlideContent(slide)}
+        </BackdropSlide>
+      ))}
+    </Slider>
   );
 }
