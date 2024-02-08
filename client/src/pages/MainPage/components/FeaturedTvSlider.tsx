@@ -1,18 +1,19 @@
 import styled from "styled-components";
-import { Slide, Slider } from "@components/ui/Slider";
+import { Slider } from "@components/ui/Slider";
+import { WatchNowSlide } from "./WatchNowSlide";
 
-const FeaturedTVSlide = styled(Slide)`
+const FeaturedTVSlide = styled(WatchNowSlide)`
   width: 504px;
   height: 736px;
-  // TODO: fix styles
-  background-color: red;
 `;
 
 export function FeaturedTvSlider() {
   return (
-    <Slider slidesPerView="auto" spaceBetween={1} navigationControls>
+    <Slider spaceBetween={16} navigationControls>
       {Array.from({ length: 10 }, (_, index) => (
-        <FeaturedTVSlide key={index}>Slide {index + 1}</FeaturedTVSlide>
+        <FeaturedTVSlide key={index} filmId={index}>
+          Slide {index + 1}
+        </FeaturedTVSlide>
       ))}
     </Slider>
   );

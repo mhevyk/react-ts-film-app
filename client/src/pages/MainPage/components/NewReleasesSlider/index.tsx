@@ -1,18 +1,19 @@
-import { Slide, Slider } from "@components/ui/Slider";
+import { Slider } from "@components/ui/Slider";
+import { WatchNowSlide } from "../WatchNowSlide";
 import styled from "styled-components";
 
-const NewReleaseSlide = styled(Slide)`
+const NewReleasesSlide = styled(WatchNowSlide)`
   width: 292px;
   height: 440px;
-  // TODO: fix styles
-  background-color: red;
 `;
 
 export function NewReleasesSlider() {
   return (
-    <Slider slidesPerView="auto" spaceBetween={1} navigationControls>
+    <Slider spaceBetween={1} navigationControls>
       {Array.from({ length: 10 }, (_, index) => (
-        <NewReleaseSlide key={index}>Slide {index + 1}</NewReleaseSlide>
+        <NewReleasesSlide key={index} filmId={index}>
+          Slide {index + 1}
+        </NewReleasesSlide>
       ))}
     </Slider>
   );
