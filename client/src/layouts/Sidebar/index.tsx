@@ -20,6 +20,7 @@ const SidebarContainer = styled.aside`
 export const Sidebar = () => {
   const isLargeScreen = useMediaQuery((media) => media.screens.lg);
 
+  // NOTE: on mobile screens mobile sidebar modal is rendered inside Navbar component
   if (!isLargeScreen) {
     return null;
   }

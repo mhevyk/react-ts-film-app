@@ -6,7 +6,7 @@ import { Menu } from "@components/ui/Menu";
 import { IconButton } from "@components/ui/IconButton";
 import burgerMenuIcon from "@icons/menu.svg";
 import { useState } from "react";
-import { SmallScreenSidebar } from "@layouts/Navbar/components/SmallScreenSidebar";
+import { SmallScreenSidebar } from "./SmallScreenSidebar";
 
 const MenuWrapper = styled.nav`
   display: flex;
