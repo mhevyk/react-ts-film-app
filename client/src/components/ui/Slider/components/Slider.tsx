@@ -64,7 +64,7 @@ export function Slider({
   noSwiping = false,
   ...rest
 }: SliderProps) {
-  const sliderControlsRef = useSliderNavigation();
+  const [navigationControlsRef, handleNavigationInit] = useSliderNavigation();
 
   const handleReachEnd = (swiper: SwiperClass) => {
     if (swiper.progress >= 0.7 && onReachEnd) {
@@ -74,19 +74,15 @@ export function Slider({
 
   return (
     <SliderWrapper $css={wrapperStyles}>
-      {navigationControls && <SliderNavigation ref={sliderControlsRef} />}
+      {navigationControls && <SliderNavigation ref={navigationControlsRef} />}
       <SwiperStyled
+        // used manual init of navigation, because it is not working with refs correctly (github issue), but i don`t want to use selectors instead
+        onBeforeInit={navigationControls ? handleNavigationInit : undefined}
         modules={[A11y, EffectFade, Pagination, Navigation, Autoplay]}
         fadeEffect={{ crossFade: true }}
         noSwiping={noSwiping}
         noSwipingClass="swiper-slide"
         slidesPerView={slidesPerView}
-        navigation={{
-          enabled: navigationControls,
-          nextEl: sliderControlsRef.current.nextArrow,
-          prevEl: sliderControlsRef.current.prevArrow,
-          disabledClass: "d-none",
-        }}
         autoplay={
           autoplay && {
             delay: 5000,

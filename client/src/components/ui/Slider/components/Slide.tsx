@@ -1,6 +1,8 @@
 import { SwiperSlide, SwiperSlideProps } from "swiper/react";
 
-export function Slide({ ...props }: SwiperSlideProps) {
+export type SlideProps = SwiperSlideProps;
+
+export function Slide(props: SlideProps) {
   return <SwiperSlide {...props} />;
 }
 
