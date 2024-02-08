@@ -1,10 +1,5 @@
+import { BadgeGroup } from "@components/styled/BadgeGroup";
 import { Skeleton } from "@components/ui/Skeleton";
-import styled from "styled-components";
-
-const BadgeGroup = styled.div`
-  display: flex;
-  gap: 20px;
-`;
 
 export function renderSkeleton() {
   return (
