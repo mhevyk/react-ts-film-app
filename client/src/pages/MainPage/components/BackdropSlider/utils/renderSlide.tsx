@@ -4,8 +4,9 @@ import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { media } from "@theme/mediaQueries";
 import { LazyImageContainer } from "@components/ui/LazyImageContainer";
-import { Genres } from "@components/common/Genres";
 import { Film } from "@schemas/filmSchema";
+import { BadgeGroup } from "@components/styled/BadgeGroup";
+import { Badge } from "@components/ui/Badge";
 
 const FilmTitle = styled.h2`
   font-size: 30px;
@@ -46,11 +47,11 @@ const FilmDescription = styled.p`
 export function renderSlide(film: Film) {
   return (
     <>
-      <Genres
-        genreLikeList={film.genres}
-        getGenre={(genre) => genre.name}
-        getKey={(genre) => genre.id}
-      />
+      <BadgeGroup>
+        {film.genres.map((genre) => (
+          <Badge key={genre.id} label={genre.name} />
+        ))}
+      </BadgeGroup>
       <StarRating rating={film.vote_average * 0.5} />
       <FilmTitle>{film.title}</FilmTitle>
       <FilmDescription>{film.overview}</FilmDescription>
