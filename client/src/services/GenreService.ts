@@ -1,10 +1,10 @@
 import { API } from "@lib/api";
-import { FilmGenresSchema } from "@schemas/genreSchema";
+import { FilmGenreResponseSchema } from "@schemas/responseSchema";
 
 class GenreService {
   async getFilmGenres() {
     const response = await API.get(`genre/movie/list`);
-    return FilmGenresSchema.parse(response.data).genres;
+    return FilmGenreResponseSchema.parse(response.data).genres;
   }
 }
 
