@@ -4,7 +4,6 @@ import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
 import { Section } from "@components/ui/Section";
 import { UpcomingFilmsSlider } from "./components/UpcomingFilmsSlider";
-import { FeaturedTvSlider } from "./components/FeaturedTvSlider";
 import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
