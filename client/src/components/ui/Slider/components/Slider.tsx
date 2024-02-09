@@ -76,7 +76,7 @@ export function Slider({
     <SliderWrapper $css={wrapperStyles}>
       {navigationControls && <SliderNavigation ref={navigationControlsRef} />}
       <SwiperStyled
-        // used manual init of navigation, because it is not working with refs correctly (github issue), but i don`t want to use selectors instead
+        // used manual init of navigation, because it is not working with refs correctly (github issue), but i don`t want to use selectors instead like prevEl and nextEl in navigation options
         onBeforeInit={navigationControls ? handleNavigationInit : undefined}
         modules={[A11y, EffectFade, Pagination, Navigation, Autoplay]}
         fadeEffect={{ crossFade: true }}
@@ -90,7 +90,8 @@ export function Slider({
             disableOnInteraction: true,
           }
         }
-        pagination={{ enabled: pagination, clickable: false }}
+        // NOTE: passing object conditionally to avoid rendering empty div for pagination if pagination flag is false
+        pagination={pagination && { clickable: false }}
         onReachEnd={handleReachEnd}
         $css={sliderStyles}
         {...rest}
