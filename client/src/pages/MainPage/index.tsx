@@ -30,6 +30,11 @@ const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   margin-top: 20px;
+  padding-right: 20px;
+
+  @media ${media.screens.md} {
+    padding-right: 0;
+  }
 `;
 
 export function MainPage() {
