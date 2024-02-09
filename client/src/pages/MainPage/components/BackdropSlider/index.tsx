@@ -32,6 +32,8 @@ const BackdropSlide = styled(Slide)`
       ${(props) => props.theme.globals.contentContainerSpacing}px + 10%
     );
   }
+
+  background-color: ${(props) => props.theme.colors.lightWithOpacity(0.15)};
 `;
 
 // Adding shift for prev arrow to avoid layering with sidebar
@@ -54,7 +56,7 @@ function renderSlideContent(slide: UseQueryResult<SimpleFilm>) {
     return renderError(slide.error);
   }
 
-  return renderFilm(slide.data);
+  return renderFilm(slide.data!);
 }
 
 export function BackdropSlider() {
