@@ -3,9 +3,13 @@ import { SimpleFilm } from "@schemas/filmSchema";
 import {
   FilmDetailsResponseSchema,
   UpcomingFilmResponseSchema,
+  PopularFilmResponseSchema,
 } from "@schemas/responseSchema";
 
 class FilmService {
+  constructor() {
+    this.getPopular(1);
+  }
   async getFilmById(id: SimpleFilm["id"]) {
     const response = await API.get(`/movie/${id}`);
     return FilmDetailsResponseSchema.parse(response.data);
@@ -14,6 +18,11 @@ class FilmService {
   async getUpcoming(page: number) {
     const response = await API.get("/movie/upcoming", { params: { page } });
     return UpcomingFilmResponseSchema.parse(response.data);
+  }
+
+  async getPopular(page: number) {
+    const response = await API.get("/movie/popular", { params: { page } });
+    return PopularFilmResponseSchema.parse(response.data);
   }
 }
 

@@ -60,5 +60,7 @@ export const UpcomingFilmSchema = BaseFilmSchema.extend({
   genre_ids: z.array(z.number()),
 });
 
+export const PopularFilmSchema = UpcomingFilmSchema;
+
 export type SimpleFilm = z.infer<typeof SimpleFilmSchema>;
 export type UpcomingFilm = z.infer<typeof UpcomingFilmSchema>;

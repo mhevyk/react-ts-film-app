@@ -7,6 +7,7 @@ import { UpcomingFilmsSlider } from "./components/UpcomingFilmsSlider";
 import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
+import { PopularFilmsSlider } from "./components/PopularFilmsSlider";
 
 const Header = styled.header`
   position: sticky;
@@ -18,6 +19,7 @@ const ContentWrapper = styled.div`
   position: relative;
   z-index: 5;
   background-color: ${(props) => props.theme.colors.background};
+  margin-bottom: 10px;
 
   @media ${media.screens.md} {
     padding: 0 ${(props) => props.theme.globals.contentContainerSpacing}px;
@@ -47,7 +49,15 @@ export function MainPage() {
             </Button>
           </ButtonContainer>
         </Section>
-        <Section title="Featured TV shows" navigatesTo="/featured-tv"></Section>
+        <Section title="Popular Films" navigatesTo="/popular">
+          <PopularFilmsSlider />
+          <ButtonContainer>
+            <Button variant="primary" outlined as={Link} to="/popular">
+              View All...
+              <ChevronRightIcon size={20} />
+            </Button>
+          </ButtonContainer>
+        </Section>
       </ContentWrapper>
     </>
   );
