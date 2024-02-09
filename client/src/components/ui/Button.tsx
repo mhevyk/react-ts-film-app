@@ -7,9 +7,12 @@ const DEFAULT_TYPE: ElementType = "button";
 
 const baseButtonStyles = css`
   --hover-transition: all 500ms;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
   position: relative;
   z-index: 20;
-  text-align: center;
   padding: 16px;
   cursor: pointer;
   max-width: 200px;

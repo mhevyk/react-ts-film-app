@@ -2,7 +2,7 @@ import { API } from "@lib/api";
 import { SimpleFilm } from "@schemas/filmSchema";
 import {
   FilmDetailsResponseSchema,
-  NewReleasesResponseSchema,
+  UpcomingFilmResponseSchema,
 } from "@schemas/responseSchema";
 
 class FilmService {
@@ -11,9 +11,9 @@ class FilmService {
     return FilmDetailsResponseSchema.parse(response.data);
   }
 
-  async getNewReleases(page: number) {
-    const response = await API.get("/movie/now_playing", { params: { page } });
-    return NewReleasesResponseSchema.parse(response.data);
+  async getUpcoming(page: number) {
+    const response = await API.get("/movie/upcoming", { params: { page } });
+    return UpcomingFilmResponseSchema.parse(response.data);
   }
 }
 

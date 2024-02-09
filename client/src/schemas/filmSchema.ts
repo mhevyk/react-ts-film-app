@@ -56,9 +56,9 @@ export const SimpleFilmSchema = BaseFilmSchema.extend({
   spoken_languages: z.array(LanguageSchema),
 });
 
-export const NewReleaseFilmSchema = BaseFilmSchema.extend({
+export const UpcomingFilmSchema = BaseFilmSchema.extend({
   genre_ids: z.array(z.number()),
 });
 
 export type SimpleFilm = z.infer<typeof SimpleFilmSchema>;
-export type NewReleaseFilm = z.infer<typeof NewReleaseFilmSchema>;
+export type UpcomingFilm = z.infer<typeof UpcomingFilmSchema>;

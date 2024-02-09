@@ -3,13 +3,13 @@ import { Badge } from "@components/ui/Badge";
 import { Skeleton } from "@components/ui/Skeleton";
 import { StarRating } from "@components/ui/StarRating";
 import { useFilmGenres } from "@hooks/useFilmGenres";
-import { NewReleaseFilm } from "@schemas/filmSchema";
+import { UpcomingFilm } from "@schemas/filmSchema";
 import { repeatComponent } from "@utils/repeatComponent";
 import { ReactNode } from "react";
 import styled, { css } from "styled-components";
-import chevronRightIcon from "@icons/chevron-right.svg";
 import { Link } from "react-router-dom";
 import { LazyImageContainer } from "@components/ui/LazyImageContainer";
+import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 
 const ANIMATED_CONTAINER_CLASSNAME = "animated";
 const WATCH_NOW_CONTAINER_CLASSNAME = "watch-now";
@@ -24,11 +24,6 @@ const WatchNowContainer = styled(Link)`
 const WatchNowText = styled.span`
   line-height: 24px;
   color: ${(props) => props.theme.colors.white};
-`;
-
-const ShevronRightIcon = styled.img`
-  width: 24px;
-  height: 24px;
 `;
 
 const ContentContainer = styled.div`
@@ -104,7 +99,7 @@ const AnimationWrapper = styled.div`
   }
 `;
 
-export function renderSlide(slide: NewReleaseFilm) {
+export function renderSlide(slide: UpcomingFilm) {
   return (
     <AnimationWrapper>
       <ContentContainer className={ANIMATED_CONTAINER_CLASSNAME}>
@@ -117,7 +112,7 @@ export function renderSlide(slide: NewReleaseFilm) {
         className={WATCH_NOW_CONTAINER_CLASSNAME}
       >
         <WatchNowText>Watch Now</WatchNowText>
-        <ShevronRightIcon src={chevronRightIcon} alt="Chevron Right icon" />
+        <ChevronRightIcon size={22} />
       </WatchNowContainer>
       <LazyImageContainer
         src={`https://image.tmdb.org/t/p/original${slide.poster_path}`}

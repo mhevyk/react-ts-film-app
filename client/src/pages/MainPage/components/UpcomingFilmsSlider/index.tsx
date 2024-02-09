@@ -1,19 +1,19 @@
 import { Slide, Slider } from "@components/ui/Slider";
 import styled, { css } from "styled-components";
-import { useNewReleasesInfiniteQuery } from "./hooks/useNewReleasesInfiniteQuery";
 import { renderSlide } from "./utils/renderSlide";
 import { repeatComponent } from "@utils/repeatComponent";
 import { renderSkeleton } from "./utils/renderSkeleton";
 import { renderError } from "./utils/renderError";
-import { UseInfiniteQueryResult } from "@tanstack/react-query";
-import { NewReleaseFilm } from "@schemas/filmSchema";
+import { UseQueryResult } from "@tanstack/react-query";
+import { UpcomingFilm } from "@schemas/filmSchema";
+import { useUpcomingFilms } from "./hooks/useUpcomingFilms";
 
-type NewReleaseSlideProps = {
+type UpcomingFilmSlideProps = {
   $isLoading?: boolean;
   $isError?: boolean;
 };
 
-const NewReleaseSlide = styled(Slide)<NewReleaseSlideProps>`
+const UpcomingFilmSlide = styled(Slide)<UpcomingFilmSlideProps>`
   padding: 0 24px 24px;
   width: 292px;
   height: 440px;
@@ -48,38 +48,39 @@ function renderSlides({
   isError,
   error,
   refetch,
-}: UseInfiniteQueryResult<NewReleaseFilm[]>) {
+}: UseQueryResult<UpcomingFilm[]>) {
   const isInitialLoading = isLoading && slides.length === 0;
 
   if (isInitialLoading) {
     return repeatComponent(
-      <NewReleaseSlide $isLoading>{renderSkeleton()}</NewReleaseSlide>,
+      <UpcomingFilmSlide $isLoading>{renderSkeleton()}</UpcomingFilmSlide>,
       8
     );
   }
 
   if (isError) {
     return (
-      <NewReleaseSlide $isError>{renderError(error, refetch)}</NewReleaseSlide>
+      <UpcomingFilmSlide $isError>
+        {renderError(error, refetch)}
+      </UpcomingFilmSlide>
     );
   }
 
   return slides.map((slide, index) => (
-    <NewReleaseSlide key={`${index}-${slide.id}`}>
+    <UpcomingFilmSlide key={`${index}-${slide.id}`}>
       {renderSlide(slide)}
-    </NewReleaseSlide>
+    </UpcomingFilmSlide>
   ));
 }
 
-export function NewReleasesSlider() {
-  const query = useNewReleasesInfiniteQuery();
+export function UpcomingFilmsSlider() {
+  const query = useUpcomingFilms();
 
   return (
     <Slider
       spaceBetween={1}
       slidesPerView={query.isError ? 1 : "auto"}
       navigationControls
-      onReachEnd={() => query.fetchNextPage()}
     >
       {renderSlides(query)}
     </Slider>

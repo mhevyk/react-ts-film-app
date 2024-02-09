@@ -3,8 +3,11 @@ import { Navbar } from "@layouts/Navbar";
 import { media } from "@theme/mediaQueries";
 import styled from "styled-components";
 import { Section } from "@components/ui/Section";
-import { NewReleasesSlider } from "./components/NewReleasesSlider";
+import { UpcomingFilmsSlider } from "./components/UpcomingFilmsSlider";
 import { FeaturedTvSlider } from "./components/FeaturedTvSlider";
+import { Button } from "@components/ui/Button";
+import { Link } from "react-router-dom";
+import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 
 const Header = styled.header`
   position: sticky;
@@ -22,6 +25,12 @@ const ContentWrapper = styled.div`
   }
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+`;
+
 export function MainPage() {
   return (
     <>
@@ -30,12 +39,16 @@ export function MainPage() {
         <BackdropSlider />
       </Header>
       <ContentWrapper>
-        <Section title="New Releases" navigatesTo="/new-releases">
-          <NewReleasesSlider />
+        <Section title="Upcoming Films" navigatesTo="/upcoming">
+          <UpcomingFilmsSlider />
+          <ButtonContainer>
+            <Button variant="primary" outlined as={Link} to="/upcoming">
+              View All...
+              <ChevronRightIcon size={20} />
+            </Button>
+          </ButtonContainer>
         </Section>
-        <Section title="Featured TV shows" navigatesTo="/featured-tv">
-          {/* <FeaturedTvSlider /> */}
-        </Section>
+        <Section title="Featured TV shows" navigatesTo="/featured-tv"></Section>
       </ContentWrapper>
     </>
   );
