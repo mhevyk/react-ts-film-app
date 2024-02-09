@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import styled from "styled-components";
-import shevronRightIcon from "@icons/chevron-right.svg";
 import { Link } from "react-router-dom";
+import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 
 const TitleWrapperLink = styled(Link)`
   display: inline-flex;
@@ -17,11 +17,6 @@ const Title = styled.h5`
   line-height: 24px;
 `;
 
-const ShevronRightIcon = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
 type SectionProps = PropsWithChildren & {
   title: string;
   navigatesTo: string;
@@ -32,7 +27,7 @@ export function Section({ title, navigatesTo, children }: SectionProps) {
     <section>
       <TitleWrapperLink to={navigatesTo}>
         <Title>{title}</Title>
-        <ShevronRightIcon src={shevronRightIcon} alt="Shevron Right icon" />
+        <ChevronRightIcon size={24} />
       </TitleWrapperLink>
       {children}
     </section>

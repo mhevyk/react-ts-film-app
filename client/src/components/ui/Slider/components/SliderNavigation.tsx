@@ -1,8 +1,8 @@
-import chevronRightIcon from "@icons/chevron-right.svg";
 import chevronLeftIcon from "@icons/chevron-left.svg";
 import { IconButton } from "@components/ui/IconButton";
 import styled from "styled-components";
 import { ElementRef, forwardRef, useImperativeHandle, useRef } from "react";
+import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 
 const NavigationArrow = styled(IconButton)`
   position: absolute;
@@ -45,11 +45,7 @@ export const SliderNavigation = forwardRef<SliderNavigationControlsRef>(
           size={22}
           ref={prevArrowRef}
         />
-        <NextArrow
-          icon={<img src={chevronRightIcon} alt="Go to next slide" />}
-          size={22}
-          ref={nextArrowLeft}
-        />
+        <NextArrow icon={<ChevronRightIcon />} size={22} ref={nextArrowLeft} />
       </>
     );
   }
