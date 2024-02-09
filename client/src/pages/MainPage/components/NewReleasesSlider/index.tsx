@@ -50,20 +50,17 @@ function renderSlides({
   refetch,
 }: UseInfiniteQueryResult<NewReleaseFilm[]>) {
   const isInitialLoading = isLoading && slides.length === 0;
+
   if (isInitialLoading) {
     return repeatComponent(
-      <NewReleaseSlide $isLoading={isInitialLoading}>
-        {renderSkeleton()}
-      </NewReleaseSlide>,
+      <NewReleaseSlide $isLoading>{renderSkeleton()}</NewReleaseSlide>,
       8
     );
   }
 
   if (isError) {
     return (
-      <NewReleaseSlide $isError={true}>
-        {renderError(error, refetch)}
-      </NewReleaseSlide>
+      <NewReleaseSlide $isError>{renderError(error, refetch)}</NewReleaseSlide>
     );
   }
 
