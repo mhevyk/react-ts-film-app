@@ -34,7 +34,7 @@ export function MainPage() {
           <NewReleasesSlider />
         </Section>
         <Section title="Featured TV shows" navigatesTo="/featured-tv">
-          <FeaturedTvSlider />
+          {/* <FeaturedTvSlider /> */}
         </Section>
       </ContentWrapper>
     </>
