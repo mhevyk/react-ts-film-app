@@ -54,6 +54,10 @@ export const SimpleFilmSchema = BaseFilmSchema.extend({
   production_companies: z.array(ProductionCompanySchema),
   production_countries: z.array(ProductionCountrySchema),
   spoken_languages: z.array(LanguageSchema),
+  revenue: z.number(),
+  status: z.string(),
+  runtime: z.number(),
+  tagline: z.string(),
 });
 
 export const UpcomingFilmSchema = BaseFilmSchema.extend({

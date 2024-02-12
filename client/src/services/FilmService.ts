@@ -7,9 +7,6 @@ import {
 } from "@schemas/responseSchema";
 
 class FilmService {
-  constructor() {
-    this.getPopular(1);
-  }
   async getFilmById(id: SimpleFilm["id"]) {
     const response = await API.get(`/movie/${id}`);
     return FilmDetailsResponseSchema.parse(response.data);

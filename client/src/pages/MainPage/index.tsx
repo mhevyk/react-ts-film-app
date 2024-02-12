@@ -8,22 +8,12 @@ import { Button } from "@components/ui/Button";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 import { PopularFilmsSlider } from "./components/PopularFilmsSlider";
+import { PageContentWrapper } from "@components/styled/PageContentWrapper";
 
 const Header = styled.header`
   position: sticky;
   z-index: 1;
   top: 0;
-`;
-
-const ContentWrapper = styled.div`
-  position: relative;
-  z-index: 5;
-  background-color: ${(props) => props.theme.colors.background};
-  margin-bottom: 10px;
-
-  @media ${media.screens.md} {
-    padding: 0 ${(props) => props.theme.globals.contentContainerSpacing}px;
-  }
 `;
 
 const ButtonContainer = styled.div`
@@ -44,7 +34,7 @@ export function MainPage() {
         <Navbar variant="absolute" />
         <BackdropSlider />
       </Header>
-      <ContentWrapper>
+      <PageContentWrapper>
         <Section title="Upcoming Films" navigatesTo="/upcoming">
           <UpcomingFilmsSlider />
           <ButtonContainer>
@@ -63,7 +53,7 @@ export function MainPage() {
             </Button>
           </ButtonContainer>
         </Section>
-      </ContentWrapper>
+      </PageContentWrapper>
     </>
   );
 }
