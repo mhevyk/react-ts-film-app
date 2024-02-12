@@ -9,14 +9,14 @@ export default async function (
   try {
     const requestURL = new URL(req.url, `http://${req.headers.host}`);
 
-    const query = new URLSearchParams(requestURL.searchParams);
-    query.set("api_key", process.env.FILM_API_KEY);
-    query.set("language", process.env.FILM_API_LOCALE);
+    const searchParams = new URLSearchParams(requestURL.searchParams);
+    searchParams.set("api_key", process.env.FILM_API_KEY);
+    searchParams.set("language", process.env.FILM_API_LOCALE);
 
     const response = await axios({
       method: req.method,
       data: req.body,
-      params: query,
+      params: searchParams,
       url: requestURL.pathname,
       baseURL: process.env.FILM_API_URL,
     });
