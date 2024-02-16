@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 import { PopularFilmsSlider } from "./components/PopularFilmsSlider";
 import { PageContentWrapper } from "@components/styled/PageContentWrapper";
+import { Footer } from "@layouts/Footer";
 
 const Header = styled.header`
   position: sticky;
@@ -53,6 +54,8 @@ export function MainPage() {
             </Button>
           </ButtonContainer>
         </Section>
+        {/* TODO: add footer to global layout */}
+        <Footer />
       </PageContentWrapper>
     </>
   );
