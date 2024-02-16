@@ -10,7 +10,6 @@ declare global {
       readonly FILM_API_KEY: string;
       readonly FILM_API_URL: string;
       readonly FILM_API_LOCALE: string;
-      readonly CLIENT_URL: string;
     }
   }
 }
