@@ -1,13 +1,11 @@
 import { z } from "zod";
-import {
-  UpcomingFilmSchema,
-  SimpleFilmSchema,
-  PopularFilmSchema,
-} from "./filmSchema";
 import { FilmGenreSchema } from "./genreSchema";
+import { FilmSchema, FilmWithDetailsSchema } from "./filmSchema";
 
-export const FilmDetailsResponseSchema = SimpleFilmSchema;
-export type FilmDetailsResponse = z.infer<typeof FilmDetailsResponseSchema>;
+export const FilmWithDetailsResponseSchema = FilmWithDetailsSchema;
+export type FilmWithDetailsResponse = z.infer<
+  typeof FilmWithDetailsResponseSchema
+>;
 
 export const UpcomingFilmResponseSchema = z.object({
   dates: z.object({
@@ -15,7 +13,7 @@ export const UpcomingFilmResponseSchema = z.object({
     minimum: z.string(),
   }),
   page: z.number(),
-  results: z.array(UpcomingFilmSchema),
+  results: z.array(FilmSchema),
   total_pages: z.number(),
   total_results: z.number(),
 });
@@ -26,11 +24,11 @@ export const FilmGenreResponseSchema = z.object({
   genres: z.array(FilmGenreSchema),
 });
 
-export type FilmGenreResponse = z.infer<typeof FilmDetailsResponseSchema>;
+export type FilmGenreResponse = z.infer<typeof FilmGenreResponseSchema>;
 
 export const PopularFilmResponseSchema = z.object({
   page: z.number(),
-  results: z.array(PopularFilmSchema),
+  results: z.array(FilmSchema),
   total_pages: z.number(),
   total_results: z.number(),
 });

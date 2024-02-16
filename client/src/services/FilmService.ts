@@ -1,15 +1,15 @@
 import { API } from "@lib/api";
-import { SimpleFilm } from "@schemas/filmSchema";
+import { FilmWithDetails } from "@schemas/filmSchema";
 import {
-  FilmDetailsResponseSchema,
+  FilmWithDetailsResponseSchema,
   UpcomingFilmResponseSchema,
   PopularFilmResponseSchema,
 } from "@schemas/responseSchema";
 
 class FilmService {
-  async getFilmById(id: SimpleFilm["id"]) {
+  async getFilmById(id: FilmWithDetails["id"]) {
     const response = await API.get(`/movie/${id}`);
-    return FilmDetailsResponseSchema.parse(response.data);
+    return FilmWithDetailsResponseSchema.parse(response.data);
   }
 
   async getUpcoming(page: number) {

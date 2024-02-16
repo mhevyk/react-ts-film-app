@@ -1,5 +1,5 @@
 import { StarRating } from "@components/ui/StarRating";
-import { UpcomingFilm } from "@schemas/filmSchema";
+import { Film } from "@schemas/filmSchema";
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
@@ -95,7 +95,7 @@ const AnimationWrapper = styled(Wrapper)`
 `;
 
 type FilmPosterProps = {
-  film: UpcomingFilm;
+  film: Film;
   width: number;
   height: number;
 } & ComponentPropsWithoutRef<typeof AnimationWrapper>;

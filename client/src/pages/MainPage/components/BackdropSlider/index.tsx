@@ -6,7 +6,7 @@ import { renderSkeleton } from "./utils/renderSkeleton";
 import { renderFilm } from "./utils/renderFilm";
 import { renderError } from "./utils/renderError";
 import { UseQueryResult } from "@tanstack/react-query";
-import { SimpleFilm } from "@schemas/filmSchema";
+import { FilmWithDetails } from "@schemas/filmSchema";
 
 const BackdropSlide = styled(Slide)`
   --padding-x: 20px;
@@ -47,7 +47,7 @@ const wrapperStyles = css`
   }
 `;
 
-function renderSlideContent(slide: UseQueryResult<SimpleFilm>) {
+function renderSlideContent(slide: UseQueryResult<FilmWithDetails>) {
   if (slide.isLoading) {
     return renderSkeleton();
   }

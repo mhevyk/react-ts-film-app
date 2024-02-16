@@ -4,10 +4,10 @@ import { UseQueryResult } from "@tanstack/react-query";
 import { FilmPosterSlide, SkeletonPosterSlide } from "./FilmPosterSlide";
 import styled from "styled-components";
 import { Button } from "@components/ui/Button";
-import { UpcomingFilm } from "@schemas/filmSchema";
+import { Film } from "@schemas/filmSchema";
 
 type PosterSliderProps = {
-  query: UseQueryResult<UpcomingFilm[]>;
+  query: UseQueryResult<Film[]>;
   slideSize: {
     width: number;
     height: number;

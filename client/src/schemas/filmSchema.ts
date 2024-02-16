@@ -46,7 +46,11 @@ const BaseFilmSchema = z.object({
   vote_count: z.number(),
 });
 
-export const SimpleFilmSchema = BaseFilmSchema.extend({
+export const FilmSchema = BaseFilmSchema.extend({
+  genre_ids: z.array(z.number()),
+});
+
+export const FilmWithDetailsSchema = BaseFilmSchema.extend({
   belongs_to_collection: CollectionSchema.nullable(),
   budget: z.number(),
   genres: z.array(GenreSchema),
@@ -60,11 +64,5 @@ export const SimpleFilmSchema = BaseFilmSchema.extend({
   tagline: z.string(),
 });
 
-export const UpcomingFilmSchema = BaseFilmSchema.extend({
-  genre_ids: z.array(z.number()),
-});
-
-export const PopularFilmSchema = UpcomingFilmSchema;
-
-export type SimpleFilm = z.infer<typeof SimpleFilmSchema>;
-export type UpcomingFilm = z.infer<typeof UpcomingFilmSchema>;
+export type Film = z.infer<typeof FilmSchema>;
+export type FilmWithDetails = z.infer<typeof FilmWithDetailsSchema>;
