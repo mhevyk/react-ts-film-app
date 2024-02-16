@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import { StyledPick } from "@type-helpers";
+import { Fragment, ReactElement } from "react";
 
 const skeletonAnimation = keyframes`
   from {
@@ -80,8 +81,20 @@ export function Skeleton({ width }: SkeletonProps) {
   return <SkeletonStyled $width={width} />;
 }
 
+type SkeletonListProps = {
+  amount: number;
+  children: ReactElement;
+};
+
+function SkeletonList({ amount, children }: SkeletonListProps) {
+  return Array.from({ length: amount }, (_, index) => (
+    <Fragment key={index}>{children}</Fragment>
+  ));
+}
+
 Skeleton.Button = SkeletonButton;
 Skeleton.Input = SkeletonInput;
 Skeleton.Badge = SkeletonBadge;
 Skeleton.Paragraph = Paragraph;
 Skeleton.Heading = SkeletonHeading;
+Skeleton.List = SkeletonList;

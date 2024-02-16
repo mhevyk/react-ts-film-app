@@ -49,26 +49,34 @@ const CardTitle = styled.h5`
   overflow: hidden;
 `;
 
-function Genres({ genresIds }: { genresIds: number[] }) {
+type GenresProps = {
+  genreIds: number[];
+};
+
+function Genres({ genreIds }: GenresProps) {
   const { data: genres = [], isLoading: areGenresLoading } = useFilmGenres();
 
-  let content: ReactNode;
-
   if (areGenresLoading) {
-    content = repeatComponent(<Skeleton.Badge />, 3);
-  } else if (genres) {
-    content = genresIds.map((genreId) => {
-      const genre = genres.find((genre) => genre.id === genreId);
-
-      if (!genre) {
-        return null;
-      }
-
-      return <Badge key={genre.id} label={genre.name} />;
-    });
+    return (
+      <Skeleton.List amount={3}>
+        <Skeleton.Badge />
+      </Skeleton.List>
+    );
   }
 
-  return <BadgeGroup>{content}</BadgeGroup>;
+  return (
+    <BadgeGroup>
+      {genreIds.map((genreId) => {
+        const genre = genres.find((genre) => genre.id === genreId);
+
+        if (!genre) {
+          return null;
+        }
+
+        return <Badge key={genre.id} label={genre.name} />;
+      })}
+    </BadgeGroup>
+  );
 }
 
 const AnimationWrapper = styled.div`
