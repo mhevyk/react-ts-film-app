@@ -14,14 +14,14 @@ import { ChevronRightIcon } from "@components/styled/ChevronRightIcon";
 const ANIMATED_CONTAINER_CLASSNAME = "animated";
 const WATCH_NOW_CONTAINER_CLASSNAME = "watch-now";
 
-const WatchNowContainer = styled(Link)`
+const ViewDetailsContainer = styled(Link)`
   display: flex;
   width: fit-content;
   opacity: 0;
   transition: opacity 500ms;
 `;
 
-const WatchNowText = styled.span`
+const ViewDetailsText = styled.span`
   line-height: 24px;
   color: ${(props) => props.theme.colors.white};
 `;
@@ -107,13 +107,13 @@ export function renderSlide(slide: UpcomingFilm) {
         <StarRating rating={slide.vote_average * 0.5} />
         <CardTitle>{slide.title}</CardTitle>
       </ContentContainer>
-      <WatchNowContainer
+      <ViewDetailsContainer
         to={`/films/${slide.id}`}
         className={WATCH_NOW_CONTAINER_CLASSNAME}
       >
-        <WatchNowText>Watch Now</WatchNowText>
+        <ViewDetailsText>View Details</ViewDetailsText>
         <ChevronRightIcon size={22} />
-      </WatchNowContainer>
+      </ViewDetailsContainer>
       <LazyImageContainer
         src={`https://image.tmdb.org/t/p/original${slide.poster_path}`}
         imageWrapperStyles={css`

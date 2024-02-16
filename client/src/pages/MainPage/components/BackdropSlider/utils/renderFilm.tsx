@@ -56,7 +56,7 @@ export function renderFilm(film: SimpleFilm) {
       <FilmTitle>{film.title}</FilmTitle>
       <FilmDescription>{film.overview}</FilmDescription>
       <Button as={Link} to={`/films/${film.id}`} variant="gradient" outlined>
-        Watch now
+        View Details
       </Button>
 
       {/* TODO: add src set to improve performance */}
