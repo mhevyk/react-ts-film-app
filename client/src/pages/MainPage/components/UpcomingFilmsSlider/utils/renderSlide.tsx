@@ -53,14 +53,16 @@ type GenresProps = {
   genreIds: number[];
 };
 
-function Genres({ genreIds }: GenresProps) {
+function Genres({ genreIds = [] }: GenresProps) {
   const { data: genres = [], isLoading: areGenresLoading } = useFilmGenres();
 
   if (areGenresLoading) {
     return (
-      <Skeleton.List amount={3}>
-        <Skeleton.Badge />
-      </Skeleton.List>
+      <BadgeGroup>
+        <Skeleton.List amount={3}>
+          <Skeleton.Badge />
+        </Skeleton.List>
+      </BadgeGroup>
     );
   }
 
