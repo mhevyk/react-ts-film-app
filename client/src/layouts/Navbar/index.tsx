@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
-import { NavbarMenu } from "./components/NavbarMenu";
 import { StyledPick } from "@type-helpers";
+import { SearchInput } from "./components/SearchInput";
+import { BurgerMenuToggler } from "./components/BurgerMenuToggler";
 
 type NavbarContainerProps = StyledPick<NavbarProps, "variant">;
 
@@ -10,6 +11,10 @@ const NavbarContainer = styled.div<NavbarContainerProps>`
   right: 0;
   z-index: 15;
   width: 100%;
+
+  display: flex;
+  gap: 20px;
+  padding: 20px;
 
   ${(props) => {
     if (props.$variant === "sticky") {
@@ -29,7 +34,8 @@ type NavbarProps = {
 export function Navbar({ variant = "sticky" }: NavbarProps) {
   return (
     <NavbarContainer $variant={variant}>
-      <NavbarMenu />
+      <BurgerMenuToggler />
+      <SearchInput />
     </NavbarContainer>
   );
 }
