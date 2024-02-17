@@ -2,12 +2,18 @@ import { ComponentPropsWithoutRef } from "react";
 import styled from "styled-components";
 
 const InputStyled = styled.input`
-  padding: 10px 16px;
-  border: 1px solid ${(props) => props.theme.colors.primary};
+  padding: 12px 16px;
+  border: 1px solid ${(props) => props.theme.colors.lightWithOpacity(0.2)};
   outline: none;
-  background-color: initial;
-  border-radius: 26px 0 0 26px;
+  background-color: ${(props) => props.theme.colors.backgroundWithOpacity(0.5)};
+  border-radius: 15px;
+  min-width: 230px;
   color: ${(props) => props.theme.colors.white};
+  letter-spacing: 1px;
+
+  &::placeholder {
+    font-family: inherit;
+  }
 `;
 
 type TextInputProps = ComponentPropsWithoutRef<"input">;
