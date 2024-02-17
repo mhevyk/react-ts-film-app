@@ -13,12 +13,15 @@ const baseButtonStyles = css`
   gap: 8px;
   position: relative;
   z-index: 20;
-  padding: 16px;
+  padding: 0;
   cursor: pointer;
   max-width: 200px;
   font-size: 1.15em;
   line-height: 24px;
   color: ${(props) => props.theme.colors.white};
+  background-color: initial;
+  border: 0;
+  outline: none;
   transition: var(--hover-transition);
 `;
 
@@ -58,8 +61,17 @@ type ButtonStyledProps = PrefixWith$<SharedButtonProps>;
 
 const ButtonStyled = styled(DEFAULT_TYPE)<ButtonStyledProps>`
   ${baseButtonStyles}
+  ${(props) =>
+    props.$variant &&
+    css`
+      padding: 16px;
+    `}
 
   ${({ $variant, $outlined, theme }) => {
+    if (!$variant) {
+      return;
+    }
+
     if ($variant === "gradient") {
       return gradientButtonStyles;
     }
@@ -82,7 +94,7 @@ const ButtonStyled = styled(DEFAULT_TYPE)<ButtonStyledProps>`
 type ButtonVariant = "primary" | "secondary" | "gradient";
 
 type SharedButtonProps = {
-  variant: ButtonVariant;
+  variant?: ButtonVariant;
   outlined?: boolean;
 };
 

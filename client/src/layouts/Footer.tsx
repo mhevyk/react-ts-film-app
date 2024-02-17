@@ -8,6 +8,8 @@ const FooterContainer = styled.footer`
   padding: 20px;
   border-top: 1px solid ${(props) => props.theme.colors.lightWithOpacity(0.4)};
   margin-top: 40px;
+  position: relative;
+  z-index: 200;
   line-height: 2;
   text-align: center;
 

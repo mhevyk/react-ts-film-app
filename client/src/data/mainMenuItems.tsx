@@ -2,15 +2,15 @@ import homeIcon from "@icons/home.svg";
 import movieIcon from "@icons/movie.svg";
 import tvIcon from "@icons/tv.svg";
 import startStrokeIcon from "@icons/star-stroke.svg";
-import { MenuItemBase } from "@components/ui/Menu";
 import { ReactElement } from "react";
 
-type SidebarMenuItem = MenuItemBase & {
+type MainMenuItem = {
+  path: string;
   icon: ReactElement;
   label: string;
 };
 
-export const sidebarMenuItems: SidebarMenuItem[] = [
+export const mainMenuItems: MainMenuItem[] = [
   {
     path: "/",
     icon: <img src={homeIcon} alt="Home icon" />,

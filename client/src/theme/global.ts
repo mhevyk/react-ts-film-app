@@ -42,9 +42,7 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   #root {
-    position: relative;
     max-width: ${(props) => props.theme.globals.contentContainerMaxWidth}px;
-    margin: auto;
   }
 
   ${scrollbarStyles};

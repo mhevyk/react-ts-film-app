@@ -1,43 +1,52 @@
-import { ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { StyledPick } from "@type-helpers";
-import styled, { RuleSet } from "styled-components";
+import { Key, ReactNode } from "react";
+import styled, { css } from "styled-components";
 
-type ListProps = StyledPick<StyledMenuProps, "direction" | "wrapperStyles">;
-
-const List = styled.ul<ListProps>`
+const List = styled.ul<StyledPick<ListStyleProps, "direction" | "gap">>`
   display: flex;
   flex-direction: ${(props) => props.$direction};
-  ${(props) => props.$wrapperStyles};
+
+  ${(props) => {
+    if (props.$gap) {
+      return css`
+        gap: ${props.$gap}px;
+      `;
+    }
+  }}
 `;
 
-export type MenuItemBase = {
-  path: string;
+type ListStyleProps = {
+  direction: "row" | "column";
+  gap: number;
 };
 
-type StyledMenuProps = {
-  direction?: "row" | "column";
-  wrapperStyles?: RuleSet;
-};
-
-type MenuProps<TItem extends MenuItemBase> = {
+type MenuProps<TItem> = {
   items: TItem[];
   renderItem: (item: TItem) => ReactNode;
-} & StyledMenuProps;
+  getKey?: (item: TItem) => Key;
+  listStyle?: Partial<ListStyleProps>;
+};
 
-export function Menu<TItem extends MenuItemBase>({
+const DEFAULT_LIST_STYLE: ListStyleProps = {
+  direction: "row",
+  gap: 20,
+};
+
+export function Menu<TItem>({
   items,
   renderItem,
-  direction = "row",
-  wrapperStyles,
+  getKey,
+  listStyle = {},
 }: MenuProps<TItem>) {
+  const { direction, gap } = { ...DEFAULT_LIST_STYLE, ...listStyle };
+
   return (
-    <List $direction={direction} $wrapperStyles={wrapperStyles}>
-      {items.map((item, index) => (
-        <li key={index}>
-          <Link to={item.path}>{renderItem(item)}</Link>
-        </li>
-      ))}
-    </List>
+    <nav>
+      <List $direction={direction} $gap={gap}>
+        {items.map((item, index) => (
+          <li key={getKey?.(item) ?? index}>{renderItem(item)}</li>
+        ))}
+      </List>
+    </nav>
   );
 }

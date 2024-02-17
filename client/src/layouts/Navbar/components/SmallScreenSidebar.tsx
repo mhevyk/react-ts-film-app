@@ -1,10 +1,10 @@
 import { Logo } from "@components/ui/Logo";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import closeIcon from "@icons/close.svg";
 import { Modal } from "@components/ui/Modal";
-import { Menu } from "@components/ui/Menu";
-import { sidebarMenuItems } from "../../Sidebar/data/sidebarMenuItems";
+import { mainMenuItems } from "../../../data/mainMenuItems";
 import { IconButton } from "@components/ui/IconButton";
+import { Menu } from "@components/ui/Menu";
 
 const ModalTopToolbar = styled.div`
   display: flex;
@@ -32,11 +32,6 @@ const MenuItemLabel = styled.span`
   text-decoration: none;
 `;
 
-const additionalMenuStyles = css`
-  margin: auto;
-  gap: 35px;
-`;
-
 type SmallScreenSidebarProps = {
   isOpen: boolean;
   handleClose: () => void;
@@ -53,15 +48,15 @@ export function SmallScreenSidebar({
         <CloseIcon src={closeIcon} alt="Close icon" onClick={handleClose} />
       </ModalTopToolbar>
       <Menu
-        items={sidebarMenuItems}
+        items={mainMenuItems}
         renderItem={(item) => (
           <MenuItem>
             <IconButton icon={item.icon} size={19.2} />
             <MenuItemLabel>{item.label}</MenuItemLabel>
           </MenuItem>
         )}
-        direction="column"
-        wrapperStyles={additionalMenuStyles}
+        getKey={(item) => item.label}
+        listStyle={{ direction: "column", gap: 35 }}
       />
     </Modal>
   );
