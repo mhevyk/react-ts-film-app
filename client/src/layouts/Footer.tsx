@@ -4,17 +4,17 @@ import styled from "styled-components";
 
 const FooterContainer = styled.footer`
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  text-align: center;
   padding: 20px;
   border-top: 1px solid ${(props) => props.theme.colors.lightWithOpacity(0.4)};
   margin-top: 40px;
   position: relative;
   z-index: 200;
   line-height: 2;
-  text-align: center;
 
   @media ${media.screens.md} {
-    text-align: right;
+    justify-content: flex-end;
   }
 `;
 
