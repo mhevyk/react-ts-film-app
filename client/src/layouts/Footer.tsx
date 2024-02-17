@@ -1,4 +1,3 @@
-import { media } from "@theme/mediaQueries";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -8,11 +7,8 @@ const FooterContainer = styled.footer`
   padding: 20px;
   border-top: 1px solid ${(props) => props.theme.colors.lightWithOpacity(0.4)};
   margin-top: 40px;
-
-  @media ${media.screens.md} {
-    margin-left: ${(props) => props.theme.globals.contentContainerSpacing}px;
-    margin-right: ${(props) => props.theme.globals.contentContainerSpacing}px;
-  }
+  position: relative;
+  z-index: 200;
 `;
 
 const Copyright = styled.p`

@@ -7,7 +7,6 @@ const InputStyled = styled.input`
   outline: none;
   background-color: ${(props) => props.theme.colors.backgroundWithOpacity(0.5)};
   border-radius: 15px;
-  min-width: 230px;
   color: ${(props) => props.theme.colors.white};
   letter-spacing: 1px;
 

@@ -20,6 +20,7 @@ const theme = {
     accent: "#0FEFFD",
     white: "white",
     whiteWithOpacity: (opacity: number) => `rgba(255, 255, 255, ${opacity})`,
+    dark: "#140f0f",
     background: "rgb(29, 29, 29)",
     backgroundWithOpacity: (opacity: number) => `rgba(29, 29, 29, ${opacity})`,
     light: "rgb(226, 219, 219)",

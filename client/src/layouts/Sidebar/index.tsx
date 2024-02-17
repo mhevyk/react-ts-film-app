@@ -1,9 +1,11 @@
 import { Logo } from "@components/ui/Logo";
-import { Menu } from "@components/ui/Menu";
 import { useMediaQuery } from "@hooks/useMediaQuery";
-import styled, { css } from "styled-components";
-import { sidebarMenuItems } from "./data/sidebarMenuItems";
+import styled from "styled-components";
+import { mainMenuItems } from "../../data/mainMenuItems";
 import { IconButton } from "@components/ui/IconButton";
+import { Menu } from "@components/ui/Menu";
+import { Link } from "react-router-dom";
+import { NavLink } from "@components/styled/NavLink";
 
 const SidebarContainer = styled.aside`
   position: fixed;
@@ -27,14 +29,18 @@ export const Sidebar = () => {
 
   return (
     <SidebarContainer>
-      <Logo />
+      <Link to="/">
+        <Logo />
+      </Link>
       <Menu
-        items={sidebarMenuItems}
-        renderItem={(item) => <IconButton icon={item.icon} size={19.2} />}
-        direction="column"
-        wrapperStyles={css`
-          gap: 80px;
-        `}
+        items={mainMenuItems}
+        renderItem={(item) => (
+          <NavLink to={item.path}>
+            <IconButton icon={item.icon} size={19.2} />
+          </NavLink>
+        )}
+        getKey={(item) => item.label}
+        listStyle={{ direction: "column", gap: 80 }}
       />
     </SidebarContainer>
   );

@@ -8,7 +8,7 @@ html,
 body {
   margin: 0;
   padding: 0;
-  font-family: roboto;
+  font-family: roboto, arial;
   scrollbar-gutter: stable; /* avoid content shift when scrollbar is hidden */
 }
 
@@ -46,6 +46,14 @@ input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
 input[type="search"]::-webkit-search-results-decoration {
   display: none;
+}
+
+#root {
+  position: relative;
+  margin: auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .d-none {

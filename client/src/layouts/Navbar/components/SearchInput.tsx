@@ -1,7 +1,6 @@
 import { Button } from "@components/ui/Button";
 import { TextInput } from "@components/ui/TextInput";
 import { Icon } from "@iconify/react";
-import { media } from "@theme/mediaQueries";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -9,12 +8,6 @@ import styled from "styled-components";
 const InputGroup = styled.form`
   display: flex;
   position: relative;
-  width: 100%;
-
-  @media ${media.screens.sm} {
-    width: auto;
-    margin-left: auto;
-  }
 `;
 
 const SearchInputStyled = styled(TextInput)`
@@ -102,7 +95,11 @@ export function SearchInput() {
         onChange={(event) => setSearchValue(event.target.value)}
         autoFocus
       />
-      <ClearButton className="clear-button" aria-label="Clear search value">
+      <ClearButton
+        className="clear-button"
+        aria-label="Clear search value"
+        type="button"
+      >
         <ClearIcon
           icon="la:times-circle-solid"
           fontSize={20}
