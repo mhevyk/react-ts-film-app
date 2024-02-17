@@ -4,6 +4,7 @@ import { MainPage } from "@pages/MainPage";
 import { RootLayout } from "@layouts/RootLayout";
 import { Suspense } from "react";
 import { lazyImport } from "@utils/lazyImport";
+import { SearchPage } from "@pages/SearchPage";
 
 const NotFoundPage = lazyImport(
   () => import("@pages/NotFoundPage"),
@@ -21,6 +22,10 @@ const router: RouteObject[] = [
           {
             index: true,
             element: <MainPage />,
+          },
+          {
+            path: "search",
+            element: <SearchPage />,
           },
         ],
       },

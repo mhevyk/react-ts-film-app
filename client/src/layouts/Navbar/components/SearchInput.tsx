@@ -2,10 +2,11 @@ import { Button } from "@components/ui/Button";
 import { TextInput } from "@components/ui/TextInput";
 import { Icon } from "@iconify/react";
 import { media } from "@theme/mediaQueries";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const InputGroup = styled.div`
+const InputGroup = styled.form`
   display: flex;
   position: relative;
   width: 100%;
@@ -35,9 +36,14 @@ const SearchInputStyled = styled(TextInput)`
 
 const ClearButton = styled(Button)`
   position: absolute;
+
   right: 50px;
   top: 50%;
   transform: translateY(-50%);
+
+  &:focus-within svg {
+    color: ${(props) => props.theme.colors.lightWithOpacity(0.6)};
+  }
 `;
 
 const ClearIcon = styled(Icon)`
@@ -46,7 +52,7 @@ const ClearIcon = styled(Icon)`
   cursor: pointer;
 
   &:hover {
-    color: ${(props) => props.theme.colors.lightWithOpacity(0.6)};
+    color: ${(props) => props.theme.colors.whiteWithOpacity(0.6)};
   }
 `;
 
@@ -61,6 +67,8 @@ const SearchButtonContainer = styled.div`
 
 const SearchButton = styled(Button)`
   margin: 6px;
+  display: flex;
+  align-items: center;
 
   &:hover svg,
   &:focus svg {
@@ -75,9 +83,18 @@ const SearchIcon = styled(Icon)`
 
 export function SearchInput() {
   const [searchValue, setSearchValue] = useState("");
+  const navigate = useNavigate();
+
+  function handleSubmit(event: FormEvent) {
+    event.preventDefault();
+    navigate({
+      pathname: "search",
+      search: `?query=${searchValue}`,
+    });
+  }
 
   return (
-    <InputGroup>
+    <InputGroup onSubmit={handleSubmit}>
       <SearchInputStyled
         type="search"
         placeholder="Search any film..."
@@ -93,7 +110,7 @@ export function SearchInput() {
         />
       </ClearButton>
       <SearchButtonContainer className="search-button-wrapper">
-        <SearchButton aria-label="Search">
+        <SearchButton aria-label="Search" type="submit">
           <SearchIcon icon="material-symbols:search" width={20} />
         </SearchButton>
       </SearchButtonContainer>
