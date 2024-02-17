@@ -5,8 +5,10 @@ export function checkMediaQueryMatches(query: string) {
   return window.matchMedia(query).matches;
 }
 
-export function useMediaQuery(selector: (state: typeof media) => string) {
-  const query = selector(media);
+type UseMediaQuerySelector = ((state: typeof media) => string) | string;
+
+export function useMediaQuery(selector: UseMediaQuerySelector) {
+  const query = typeof selector === "function" ? selector(media) : selector;
   const [matches, setMatches] = useState(checkMediaQueryMatches(query));
 
   function handleChange() {

@@ -1,67 +1,38 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { PageContentWrapper } from "@components/styled/PageContentWrapper";
 import styled from "styled-components";
-import { Logo } from "@components/ui/Logo";
-import { NavLink } from "@components/styled/NavLink";
-import { BurgerMenuToggler } from "./Navbar/components/BurgerMenuToggler";
 import { useMediaQuery } from "@hooks/useMediaQuery";
-import { mainMenuItems } from "@data/mainMenuItems";
-import { SearchInput } from "./Navbar/components/SearchInput";
+import { Navbar } from "./Navbar";
 import { media } from "@theme/mediaQueries";
-import { Menu } from "@components/ui/Menu";
-import { SearchContainer } from "@components/ui/SearchContainer";
+import theme from "@theme/theme";
 
 const Header = styled.header`
   position: sticky;
   top: 0;
   z-index: 15;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  gap: 20px;
-  padding: 12px;
+  width: 100%;
   background-color: ${(props) => props.theme.colors.dark};
 
   @media ${media.screens.lg} {
-    justify-content: flex-end;
+    padding-left: ${(props) => props.theme.globals.contentContainerSpacing}px;
   }
 `;
 
-const Search = styled(SearchContainer)`
-  width: 100%;
-
-  @media ${media.screens.sm} {
-    width: auto;
-  }
+const NavbarStyled = styled(Navbar)`
+  justify-content: space-around;
 `;
 
 export function StickyNavbarLayout() {
-  const navigate = useNavigate();
-  const isLargeScreen = useMediaQuery((media) => media.screens.lg);
-  const isSmallScreen = useMediaQuery((media) => media.screens.sm);
+  const query = `(min-width: ${theme.breakpoints.md}px) and (max-width: ${theme.breakpoints.lg}px)`;
+  const isBetweenMediumAndLargeScreen = useMediaQuery(query);
 
   return (
     <>
       <Header>
-        {isSmallScreen && !isLargeScreen ? (
-          <>
-            <Logo size={45} onClick={() => navigate("/")} />
-            <Menu
-              items={mainMenuItems}
-              renderItem={(item) => (
-                <NavLink to={item.path}>{item.label}</NavLink>
-              )}
-              getKey={(item) => item.label}
-              listStyle={{ gap: 40 }}
-            />
-          </>
-        ) : (
-          <BurgerMenuToggler />
-        )}
-
-        <Search>
-          <SearchInput />
-        </Search>
+        <NavbarStyled
+          shouldRenderLinks
+          shouldRenderLogo={isBetweenMediumAndLargeScreen}
+        />
       </Header>
       <PageContentWrapper>
         <Outlet />
