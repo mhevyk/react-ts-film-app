@@ -2,8 +2,7 @@ import { API } from "@lib/api";
 import { FilmWithDetails } from "@schemas/filmSchema";
 import {
   FilmWithDetailsResponseSchema,
-  UpcomingFilmResponseSchema,
-  PopularFilmResponseSchema,
+  PaginatedResponseSchema,
 } from "@schemas/responseSchema";
 
 class FilmService {
@@ -14,12 +13,22 @@ class FilmService {
 
   async getUpcoming(page: number) {
     const response = await API.get("/movie/upcoming", { params: { page } });
-    return UpcomingFilmResponseSchema.parse(response.data);
+    return PaginatedResponseSchema.parse(response.data);
   }
 
   async getPopular(page: number) {
     const response = await API.get("/movie/popular", { params: { page } });
-    return PopularFilmResponseSchema.parse(response.data);
+    return PaginatedResponseSchema.parse(response.data);
+  }
+
+  async searchFilm(searchValue: string, page: number) {
+    const response = await API.get("/search/movie", {
+      params: {
+        query: searchValue,
+        page,
+      },
+    });
+    return PaginatedResponseSchema.parse(response.data);
   }
 }
 

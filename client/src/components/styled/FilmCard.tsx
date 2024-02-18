@@ -1,6 +1,7 @@
 import { Skeleton } from "@components/ui/Skeleton";
 import { StarRating } from "@components/ui/StarRating";
 import { Film } from "@schemas/filmSchema";
+import { ElementRef, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -58,26 +59,28 @@ type FilmCardProps = {
   film: Film;
 };
 
-export function FilmCard({ film }: FilmCardProps) {
-  return (
-    <Link to={`/films/${film.id}`}>
-      <Card>
-        <FilmImage
-          src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
-        />
-        <RatingContainer>
-          <StarRating rating={film.vote_average * 0.5} />
-        </RatingContainer>
-        <FilmDetails>
-          <Title>{film.title}</Title>
-          <ReleaseDate dateTime={film.release_date}>
-            {film.release_date}
-          </ReleaseDate>
-        </FilmDetails>
-      </Card>
-    </Link>
-  );
-}
+export const FilmCard = forwardRef<ElementRef<typeof Link>, FilmCardProps>(
+  ({ film }, ref) => {
+    return (
+      <Link to={`/films/${film.id}`} ref={ref}>
+        <Card>
+          <FilmImage
+            src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
+          />
+          <RatingContainer>
+            <StarRating rating={film.vote_average * 0.5} />
+          </RatingContainer>
+          <FilmDetails>
+            <Title>{film.title}</Title>
+            <ReleaseDate dateTime={film.release_date}>
+              {film.release_date}
+            </ReleaseDate>
+          </FilmDetails>
+        </Card>
+      </Link>
+    );
+  }
+);
 
 export function SkeletonFilmCard() {
   return (

@@ -3,4 +3,5 @@ export const QUERY_KEYS = {
   genres: "genres",
   upcoming: "upcoming",
   popular: "popular",
+  search: "search",
 };

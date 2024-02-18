@@ -2,7 +2,7 @@ import { Button } from "@components/ui/Button";
 import { TextInput } from "@components/ui/TextInput";
 import { Icon } from "@iconify/react";
 import { FormEvent, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import styled from "styled-components";
 
 const InputGroup = styled.form`
@@ -75,14 +75,15 @@ const SearchIcon = styled(Icon)`
 `;
 
 export function SearchInput() {
-  const [searchValue, setSearchValue] = useState("");
+  const [searchParams] = useSearchParams();
+  const [searchValue, setSearchValue] = useState(searchParams.get("q") ?? "");
   const navigate = useNavigate();
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
     navigate({
       pathname: "search",
-      search: `?query=${searchValue}`,
+      search: `?q=${searchValue}`,
     });
   }
 
