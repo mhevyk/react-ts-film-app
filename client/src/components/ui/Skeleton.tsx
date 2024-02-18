@@ -11,7 +11,9 @@ const skeletonAnimation = keyframes`
   }
 `;
 
-const SkeletonStyled = styled.div<StyledPick<SkeletonProps, "width">>`
+const SkeletonStyled = styled.div<
+  StyledPick<SkeletonProps, "width" | "height">
+>`
   background: ${(props) => props.theme.colors.light};
   border-radius: 0.5rem;
   height: 0.9em;
@@ -20,6 +22,13 @@ const SkeletonStyled = styled.div<StyledPick<SkeletonProps, "width">>`
     if (props.$width) {
       return css`
         width: ${props.$width}px;
+      `;
+    }
+  }}
+  ${(props) => {
+    if (props.$height) {
+      return css`
+        height: ${props.$height}px;
       `;
     }
   }}
@@ -75,10 +84,11 @@ function Paragraph({ lines = 3 }: ParagraphProps) {
 
 type SkeletonProps = {
   width?: number;
+  height?: number;
 };
 
-export function Skeleton({ width }: SkeletonProps) {
-  return <SkeletonStyled $width={width} />;
+export function Skeleton({ width, height }: SkeletonProps) {
+  return <SkeletonStyled $width={width} $height={height} />;
 }
 
 type SkeletonListProps = {
