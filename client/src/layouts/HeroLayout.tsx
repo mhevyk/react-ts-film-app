@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { PageContentWrapper } from "@components/styled/PageContentWrapper";
+import { PageContentWrapper } from "@layouts/PageContentWrapper";
 import { Navbar } from "./Navbar";
 
 const ParallaxHeader = styled.header`

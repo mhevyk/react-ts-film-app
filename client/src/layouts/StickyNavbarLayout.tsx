@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { PageContentWrapper } from "@components/styled/PageContentWrapper";
+import { PageContentWrapper } from "@layouts/PageContentWrapper";
 import styled from "styled-components";
 import { useMediaQuery } from "@hooks/useMediaQuery";
 import { Navbar } from "./Navbar";
