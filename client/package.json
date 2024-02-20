@@ -10,7 +10,8 @@
   },
   "dependencies": {
     "@iconify/react": "^4.1.1",
-    "@tanstack/react-query": "^5.17.19",
+    "@suspensive/react": "^1.26.4",
+    "@suspensive/react-query": "^1.26.4",
     "axios": "^1.6.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
