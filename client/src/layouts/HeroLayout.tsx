@@ -27,9 +27,7 @@ export function HeroLayout({ HeroComponent }: HeroLayoutProps) {
         <NavbarStyled />
         {HeroComponent}
       </ParallaxHeader>
-      <PageContentWrapper>
-        <Outlet />
-      </PageContentWrapper>
+      <PageContentWrapper>{/* <Outlet /> */}</PageContentWrapper>
     </>
   );
 }
