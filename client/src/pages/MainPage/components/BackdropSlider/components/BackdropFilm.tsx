@@ -44,7 +44,11 @@ const FilmDescription = styled.p`
   }
 `;
 
-export function renderFilm(film: FilmWithDetails) {
+type BackdropFilmProps = {
+  film: FilmWithDetails;
+};
+
+export function BackdropFilm({ film }: BackdropFilmProps) {
   return (
     <>
       <BadgeGroup>

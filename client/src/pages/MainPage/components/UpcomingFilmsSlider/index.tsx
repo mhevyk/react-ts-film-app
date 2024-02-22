@@ -1,14 +1,15 @@
-import { useUpcomingFilms } from "./hooks/useUpcomingFilms";
-import { PosterSlider } from "../PosterSlider";
+import { QueryErrorBoundary } from "@suspensive/react-query";
+import { Suspense } from "@suspensive/react";
+import { UpcomingFilmSliderErrorFallback as ErrorFallback } from "./components/UpcomingFilmSliderErrorFallback";
+import { UpcomingFilmSliderLoadingFallback as LoadingFallback } from "./components/UpcomingFilmSliderLoadingFallback";
+import { UpcomingFilmSlider as Slider } from "./components/UpcomingFilmSlider";
 
 export function UpcomingFilmsSlider() {
-  const query = useUpcomingFilms();
-
   return (
-    <PosterSlider
-      query={query}
-      slideSize={{ width: 292, height: 440 }}
-      spaceBetweenSlides={16}
-    />
+    <QueryErrorBoundary fallback={ErrorFallback}>
+      <Suspense fallback={<LoadingFallback />}>
+        <Slider />
+      </Suspense>
+    </QueryErrorBoundary>
   );
 }

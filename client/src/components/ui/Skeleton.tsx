@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import { StyledPick } from "@type-helpers";
-import { Fragment, ReactElement } from "react";
+import { Fragment, PropsWithChildren } from "react";
 
 const skeletonAnimation = keyframes`
   from {
@@ -91,9 +91,8 @@ export function Skeleton({ width, height }: SkeletonProps) {
   return <SkeletonStyled $width={width} $height={height} />;
 }
 
-type SkeletonListProps = {
+type SkeletonListProps = PropsWithChildren & {
   amount: number;
-  children: ReactElement;
 };
 
 function SkeletonList({ amount, children }: SkeletonListProps) {
