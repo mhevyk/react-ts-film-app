@@ -17,7 +17,7 @@ SkeletonSlides.displayName = "SwiperSlide";
 
 export function PopularFilmSliderLoadingFallback() {
   return (
-    <Slider navigationControls spaceBetween={16} slidesPerView="auto">
+    <Slider navigationControls spaceBetween={1}>
       <SkeletonSlides />
     </Slider>
   );

@@ -11,5 +11,6 @@ export function usePopularFilms({ page = 1 }: UsePopularFilms = {}) {
     queryKey: [QUERY_KEYS.film, QUERY_KEYS.popular],
     queryFn: () => FilmService.getPopular(page),
     select: (data) => data.results,
+    retry: false,
   });
 }

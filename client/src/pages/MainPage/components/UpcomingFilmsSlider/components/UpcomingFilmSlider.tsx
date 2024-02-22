@@ -7,7 +7,7 @@ export function UpcomingFilmSlider() {
   const { data: films } = useUpcomingFilms();
 
   return (
-    <Slider navigationControls spaceBetween={16} slidesPerView="auto">
+    <Slider navigationControls spaceBetween={16}>
       {films.map((film) => (
         <UpcomingFilmSlide key={film.id}>
           <FilmPoster film={film} />

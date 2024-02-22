@@ -11,5 +11,6 @@ export function useUpcomingFilms({ page = 1 }: UseUpcomingFilms = {}) {
     queryKey: [QUERY_KEYS.film, QUERY_KEYS.upcoming],
     queryFn: () => FilmService.getUpcoming(page),
     select: (data) => data.results,
+    retry: false,
   });
 }

@@ -7,7 +7,7 @@ export function PopularFilmSlider() {
   const { data: films } = usePopularFilms();
 
   return (
-    <Slider navigationControls spaceBetween={16} slidesPerView="auto">
+    <Slider navigationControls spaceBetween={1}>
       {films.map((film) => (
         <PopularFilmSlide key={film.id}>
           <FilmPoster film={film} />
