@@ -7,9 +7,7 @@ export function useLazyImage(src: string) {
 
   useEffect(() => {
     function handleLoad() {
-      setTimeout(() => {
-        setSource(src);
-      }, 5000);
+      setSource(src);
     }
 
     function handleError() {
