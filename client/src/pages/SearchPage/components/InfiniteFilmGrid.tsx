@@ -1,66 +1,26 @@
-import { ResponsiveGrid } from "@layouts/ReponsiveGrid";
 import { useInfiniteFilmSearchQuery } from "../hooks/useInfiniteFilmSearchQuery";
-import { FilmCard, SkeletonFilmCard } from "@components/styled/FilmCard";
-import { Skeleton } from "@components/ui/Skeleton";
+import { FilmCard } from "@components/styled/FilmCard";
 import { Film } from "@schemas/filmSchema";
-import { UseInfiniteQueryResult } from "@tanstack/react-query";
-import { ReactNode, useCallback } from "react";
+import { useCallback } from "react";
+import { InfiniteFilmGridLoadingFallback } from "./InfiniteFilmGridLoadingFallback";
+import { UseSuspenseInfiniteQueryResultOnSuccess } from "@suspensive/react-query";
 
-type QueryResult = UseInfiniteQueryResult<Film[]>;
+type QueryResult = UseSuspenseInfiniteQueryResultOnSuccess<Film[]>;
 
 type InfiniteFilmGridProps = {
   searchValue: string;
 };
 
 export function InfiniteFilmGrid({ searchValue }: InfiniteFilmGridProps) {
-  const {
-    data,
-    isLoading,
-    isFetchedAfterMount,
-    isFetchingNextPage,
-    isError,
-    error,
-    fetchNextPage,
-  } = useInfiniteFilmSearchQuery(searchValue);
+  const { data, isFetchingNextPage, fetchNextPage } =
+    useInfiniteFilmSearchQuery(searchValue);
 
-  let gridContentJSX: ReactNode;
-
-  if (isError) {
-    gridContentJSX = renderError(error);
-  } else if (isLoading && !isFetchedAfterMount) {
-    gridContentJSX = renderSkeleton();
-  } else {
-    gridContentJSX = renderCards({ data, fetchNextPage, isFetchingNextPage });
-  }
-
-  return (
-    <ResponsiveGrid minWidth="250px" gap="35px">
-      {gridContentJSX}
-    </ResponsiveGrid>
-  );
-}
-
-function renderError(error: NonNullable<QueryResult["error"]>) {
-  return <p>Error: {error.message}</p>;
-}
-
-function renderSkeleton() {
-  return (
-    <Skeleton.List amount={10}>
-      <SkeletonFilmCard />
-    </Skeleton.List>
-  );
-}
-
-function renderCards({
-  data,
-  fetchNextPage,
-  isFetchingNextPage,
-}: Pick<QueryResult, "data" | "fetchNextPage" | "isFetchingNextPage">) {
   return (
     <>
+      {/* FIXME: */}
+      {/*  @ts-expect-error */}
       <FilmsCardsList films={data} fetchNextPage={fetchNextPage} />
-      {isFetchingNextPage && renderSkeleton()}
+      {isFetchingNextPage && <InfiniteFilmGridLoadingFallback />}
     </>
   );
 }

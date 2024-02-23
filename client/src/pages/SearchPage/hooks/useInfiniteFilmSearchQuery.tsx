@@ -1,10 +1,10 @@
 import { QUERY_KEYS } from "@data/queryKeys";
 import { Film } from "@schemas/filmSchema";
 import FilmService from "@services/FilmService";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useSuspenseInfiniteQuery } from "@suspensive/react-query";
 
 export function useInfiniteFilmSearchQuery(searchValue: string) {
-  return useInfiniteQuery({
+  return useSuspenseInfiniteQuery({
     queryKey: [QUERY_KEYS.film, QUERY_KEYS.search, { searchValue }],
     queryFn: ({ pageParam }) => FilmService.searchFilm(searchValue, pageParam),
     initialPageParam: 1,
@@ -15,6 +15,8 @@ export function useInfiniteFilmSearchQuery(searchValue: string) {
 
       return lastPage.page + 1;
     },
+    /* FIXME: */
+    /*  @ts-expect-error */
     select: (data) => {
       return data.pages.reduce<Film[]>(
         (acc, page) => acc.concat(page.results),

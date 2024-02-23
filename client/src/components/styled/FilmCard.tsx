@@ -1,3 +1,5 @@
+import { Image } from "@components/ui/Image";
+import { OverflowText } from "@components/ui/OverflowText";
 import { Skeleton } from "@components/ui/Skeleton";
 import { StarRating } from "@components/ui/StarRating";
 import { Film } from "@schemas/filmSchema";
@@ -5,29 +7,26 @@ import { ElementRef, forwardRef } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const BaseCard = styled.article`
+const Card = styled.article`
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 4px 6px ${(props) => props.theme.colors.dark};
-  border: 1px solid transparent;
   position: relative;
-`;
-
-const Card = styled(BaseCard)`
-  transition: border-color 400ms;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  outline: 3px solid transparent;
+  transition: outline-color 400ms;
 
   &:hover {
-    border: 1px solid ${(props) => props.theme.colors.accent};
-
-    img {
-      scale: 1.05;
-    }
+    outline-color: ${(props) => props.theme.colors.accent};
   }
 `;
 
-const FilmImage = styled.img`
-  aspect-ratio: 11/15;
-  transition: scale 400ms;
+const RatingContainer = styled.div`
+  position: absolute;
+  top: 12px;
+  right: 12px;
 `;
 
 const FilmDetails = styled.div`
@@ -37,16 +36,10 @@ const FilmDetails = styled.div`
   gap: 8px;
 `;
 
-const Title = styled.h3`
+const Title = styled(OverflowText)`
   font-size: 18px;
   letter-spacing: 1px;
   color: ${(props) => props.theme.colors.white};
-`;
-
-const RatingContainer = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 12px;
 `;
 
 const ReleaseDate = styled.time`
@@ -64,14 +57,17 @@ export const FilmCard = forwardRef<ElementRef<typeof Link>, FilmCardProps>(
     return (
       <Link to={`/films/${film.id}`} ref={ref}>
         <Card>
-          <FilmImage
-            src={`https://image.tmdb.org/t/p/original${film.poster_path}`}
-          />
           <RatingContainer>
             <StarRating rating={film.vote_average * 0.5} />
           </RatingContainer>
+          <Image
+            src={`https://image.tmdb.org/t/p/w342${film.poster_path}`}
+            aspectRatio="11/14"
+          />
           <FilmDetails>
-            <Title>{film.title}</Title>
+            <Title lines={2} forwardedAs="h3">
+              {film.title}
+            </Title>
             <ReleaseDate dateTime={film.release_date}>
               {film.release_date}
             </ReleaseDate>
@@ -82,17 +78,22 @@ export const FilmCard = forwardRef<ElementRef<typeof Link>, FilmCardProps>(
   }
 );
 
+const SkeletonImage = styled.div`
+  aspect-ratio: 11 / 14;
+  background-color: ${(props) => props.theme.colors.lightWithOpacity(0.5)};
+`;
+
 export function SkeletonFilmCard() {
   return (
-    <BaseCard>
-      <div style={{ aspectRatio: "11/15", background: "gray" }}></div>
+    <Card>
       <RatingContainer>
-        <Skeleton width={100} />
+        <Skeleton width={80} />
       </RatingContainer>
+      <SkeletonImage />
       <FilmDetails>
         <Skeleton height={18} />
-        <Skeleton width={80} />
+        <Skeleton width={100} />
       </FilmDetails>
-    </BaseCard>
+    </Card>
   );
 }

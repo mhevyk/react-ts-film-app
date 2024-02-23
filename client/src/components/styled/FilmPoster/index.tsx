@@ -7,6 +7,7 @@ import { Genres } from "./components/Genres";
 import { LazyImageContainer } from "@components/ui/LazyImageContainer";
 import { BadgeGroup } from "../BadgeGroup";
 import { Skeleton } from "@components/ui/Skeleton";
+import { OverflowText } from "@components/ui/OverflowText";
 
 const ANIMATED_CONTAINER_CLASSNAME = "animated";
 const WATCH_NOW_CONTAINER_CLASSNAME = "watch-now";
@@ -50,18 +51,10 @@ const ViewDetailsText = styled.span`
   color: ${(props) => props.theme.colors.white};
 `;
 
-const CardTitle = styled.h5`
+const CardTitle = styled(OverflowText)`
   font-size: 24px;
   line-height: 32px;
   color: ${(props) => props.theme.colors.white};
-
-  // showing limited number of lines if title is very large
-  --shown-lines-count: 3;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: var(--shown-lines-count);
-  line-clamp: var(--shown-lines-count);
-  overflow: hidden;
 `;
 
 const AnimatedCard = styled(Card)`
@@ -96,7 +89,9 @@ export function FilmPoster({ film }: FilmPosterProps) {
       <AnimatedContentContainer className={ANIMATED_CONTAINER_CLASSNAME}>
         <Genres genreIds={film.genre_ids} />
         <StarRating rating={film.vote_average * 0.5} />
-        <CardTitle>{film.title}</CardTitle>
+        <CardTitle lines={3} forwardedAs="h5">
+          {film.title}
+        </CardTitle>
       </AnimatedContentContainer>
       <ViewDetailsContainer
         to={`/films/${film.id}`}
