@@ -23,6 +23,7 @@ const baseButtonStyles = css`
   border: 0;
   outline: none;
   transition: var(--hover-transition);
+  white-space: nowrap;
 `;
 
 type GradientButtonStylesProps = StyledPick<SharedButtonProps, "outlined">;

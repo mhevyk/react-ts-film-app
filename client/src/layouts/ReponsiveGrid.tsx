@@ -7,7 +7,7 @@ type GridProps = StyledPick<ResponsiveGridProps, "gap" | "minWidth">;
 const Grid = styled.div<GridProps>`
   display: grid;
   grid-template-columns: repeat(
-    auto-fit,
+    auto-fill,
     minmax(min(${(props) => props.$minWidth}, 100%), 1fr)
   );
   gap: ${(props) => props.$gap};

@@ -12,12 +12,14 @@ const skeletonAnimation = keyframes`
 `;
 
 const SkeletonStyled = styled.div<
-  StyledPick<SkeletonProps, "width" | "height">
+  StyledPick<SkeletonProps, "width" | "height" | "inline">
 >`
   background: ${(props) => props.theme.colors.light};
   border-radius: 0.5rem;
   height: 0.9em;
   animation: ${skeletonAnimation} 1s infinite alternate ease-in-out;
+  display: ${(props) => (props.$inline ? "inline-block" : "block")};
+  margin-right: ${(props) => (props.$inline ? "5px" : 0)};
   ${(props) => {
     if (props.$width) {
       return css`
@@ -31,7 +33,7 @@ const SkeletonStyled = styled.div<
         height: ${props.$height}px;
       `;
     }
-  }}
+  }};
 `;
 
 const SkeletonButton = styled(SkeletonStyled)`
@@ -51,7 +53,7 @@ const SkeletonBadge = styled(SkeletonStyled)`
   border-radius: 0 8px;
 `;
 
-const SkeletonParagraphContainer = styled.div`
+const SkeletonParagraphContainer = styled.p`
   display: flex;
   flex-direction: column;
   gap: 0.6em;
@@ -85,10 +87,11 @@ function Paragraph({ lines = 3 }: ParagraphProps) {
 type SkeletonProps = {
   width?: number;
   height?: number;
+  inline?: boolean;
 };
 
-export function Skeleton({ width, height }: SkeletonProps) {
-  return <SkeletonStyled $width={width} $height={height} />;
+export function Skeleton({ width, height, inline = false }: SkeletonProps) {
+  return <SkeletonStyled $width={width} $height={height} $inline={inline} />;
 }
 
 type SkeletonListProps = PropsWithChildren & {

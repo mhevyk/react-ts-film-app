@@ -18,6 +18,7 @@ type NavbarMenuProps = {
 export function NavbarMenu({ shouldRenderLogo }: NavbarMenuProps) {
   const navigate = useNavigate();
 
+  // FIXME: can render two logos on Ipad Pro
   return (
     <Group>
       {shouldRenderLogo && <Logo size={45} onClick={() => navigate("/")} />}

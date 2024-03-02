@@ -4,6 +4,18 @@ import { Film } from "@schemas/filmSchema";
 import { useCallback } from "react";
 import { InfiniteFilmGridLoadingFallback } from "./InfiniteFilmGridLoadingFallback";
 import { UseSuspenseInfiniteQueryResultOnSuccess } from "@suspensive/react-query";
+import { ResponsiveGrid } from "@layouts/ReponsiveGrid";
+import styled from "styled-components";
+import { Button } from "@components/ui/Button";
+import { Link } from "react-router-dom";
+
+const FilmsNotFound = styled.p`
+  color: ${(props) => props.theme.colors.lightWithOpacity(0.5)};
+  line-height: 1.5;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
 
 type QueryResult = UseSuspenseInfiniteQueryResultOnSuccess<Film[]>;
 
@@ -15,12 +27,29 @@ export function InfiniteFilmGrid({ searchValue }: InfiniteFilmGridProps) {
   const { data, isFetchingNextPage, fetchNextPage } =
     useInfiniteFilmSearchQuery(searchValue);
 
+  /* FIXME: */
+  /*  @ts-expect-error */
+  const { films, totalResults } = data;
+
+  if (totalResults === 0) {
+    return (
+      <FilmsNotFound>
+        Sorry, but no films were found based on your query!
+        <Button variant="primary" outlined as={Link} to="/discover">
+          Configurable Search
+        </Button>
+      </FilmsNotFound>
+    );
+  }
+
   return (
     <>
-      {/* FIXME: */}
-      {/*  @ts-expect-error */}
-      <FilmsCardsList films={data} fetchNextPage={fetchNextPage} />
-      {isFetchingNextPage && <InfiniteFilmGridLoadingFallback />}
+      <ResponsiveGrid minWidth="250px" gap="35px">
+        {/* FIXME: */}
+        {/*  @ts-expect-error */}
+        <FilmsCardsList films={films} fetchNextPage={fetchNextPage} />
+        {isFetchingNextPage && <InfiniteFilmGridLoadingFallback />}
+      </ResponsiveGrid>
     </>
   );
 }
@@ -29,7 +58,7 @@ function FilmsCardsList({
   films,
   fetchNextPage,
 }: {
-  films?: Film[];
+  films: Film[];
   fetchNextPage: QueryResult["fetchNextPage"];
 }) {
   // triggers fetchNextPage function to run if element with lastCardRef ref is in view
@@ -47,10 +76,6 @@ function FilmsCardsList({
 
     observer.observe(card);
   }, []);
-
-  if (!films || films.length === 0) {
-    return <p>Not found</p>;
-  }
 
   return films.map((film, index) => (
     <FilmCard
