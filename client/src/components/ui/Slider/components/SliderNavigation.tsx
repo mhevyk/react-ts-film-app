@@ -1,4 +1,4 @@
-import chevronLeftIcon from "@icons/chevron-left.svg";
+import LeftArrowIcon from "@icons/chevron-left.svg?react";
 import { IconButton } from "@components/ui/IconButton";
 import styled from "styled-components";
 import { ElementRef, forwardRef, useImperativeHandle, useRef } from "react";
@@ -41,7 +41,7 @@ export const SliderNavigation = forwardRef<SliderNavigationControlsRef>(
     return (
       <>
         <PrevArrow
-          icon={<img src={chevronLeftIcon} alt="Go to previous slide" />}
+          icon={<LeftArrowIcon color="white" />}
           size={22}
           ref={prevArrowRef}
         />

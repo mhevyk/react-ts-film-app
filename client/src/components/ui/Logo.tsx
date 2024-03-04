@@ -1,16 +1,17 @@
-import logoImage from "@icons/logo.svg";
-import { StyledPick } from "@type-helpers";
-import { ComponentPropsWithoutRef } from "react";
-import styled from "styled-components";
+import LogoIcon from "@icons/logo.svg?react";
+import { SVGProps } from "react";
 
-const Image = styled.img<StyledPick<LogoProps, "size">>`
-  width: ${(props) => props.$size}px;
-  height: ${(props) => props.$size}px;
-  cursor: pointer;
-`;
-
-type LogoProps = { size?: number } & ComponentPropsWithoutRef<"img">;
+type LogoProps = SVGProps<SVGSVGElement> & {
+  size?: number;
+};
 
 export function Logo({ size = 50, ...rest }: LogoProps) {
-  return <Image src={logoImage} $size={size} alt="Logo" {...rest} />;
+  return (
+    <LogoIcon
+      width={size}
+      height={size}
+      style={{ cursor: "pointer" }}
+      {...rest}
+    />
+  );
 }

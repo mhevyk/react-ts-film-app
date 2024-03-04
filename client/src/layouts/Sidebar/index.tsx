@@ -19,6 +19,12 @@ const SidebarContainer = styled.aside`
   padding-top: 40px;
 `;
 
+const NavLinkStyled = styled(NavLink)`
+  &.active svg {
+    color: ${(props) => props.theme.colors.accent};
+  }
+`;
+
 export const Sidebar = () => {
   const isLargeScreen = useMediaQuery((media) => media.screens.lg);
 
@@ -35,9 +41,9 @@ export const Sidebar = () => {
       <Menu
         items={mainMenuItems}
         renderItem={(item) => (
-          <NavLink to={item.path}>
+          <NavLinkStyled to={item.path}>
             <IconButton icon={item.icon} size={19.2} />
-          </NavLink>
+          </NavLinkStyled>
         )}
         getKey={(item) => item.label}
         listStyle={{ direction: "column", gap: 80 }}

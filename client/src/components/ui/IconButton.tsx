@@ -11,20 +11,13 @@ type IconButtonStyledProps = {
 };
 
 const IconButtonStyled = styled.button<IconButtonStyledProps>`
-  padding: ${(props) =>
-    props.$iconSize *
-    (5 / 12)}px; // using 5/12 to increase padding proportionally to width */
+  padding: 8px; // using 5/12 to increase padding proportionally to width */
   border-radius: 50%;
   transition: all 200ms;
   cursor: pointer;
   user-select: none;
   background-color: unset;
   border: 0;
-
-  & > :first-child {
-    width: ${(props) => props.$iconSize}px;
-    height: ${(props) => props.$iconSize}px;
-  }
 
   &:hover {
     scale: 1.12;
@@ -43,7 +36,7 @@ export const IconButton = forwardRef<
 >(({ icon, size = 24, ...props }, ref) => {
   return (
     <IconButtonStyled $iconSize={size} ref={ref} {...props}>
-      {icon}
+      <div style={{ width: `${size}px`, height: `${size}px` }}>{icon}</div>
     </IconButtonStyled>
   );
 });

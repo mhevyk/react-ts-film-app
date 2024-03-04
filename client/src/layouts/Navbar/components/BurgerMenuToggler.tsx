@@ -1,6 +1,6 @@
 import { useMediaQuery } from "@hooks/useMediaQuery";
 import { IconButton } from "@components/ui/IconButton";
-import burgerMenuIcon from "@icons/menu.svg";
+import BurgerMenuIcon from "@icons/menu.svg?react";
 import { useState } from "react";
 import { SmallScreenSidebar } from "./SmallScreenSidebar";
 
@@ -15,7 +15,7 @@ export function BurgerMenuToggler() {
   return (
     <>
       <IconButton
-        icon={<img src={burgerMenuIcon} alt="Burger menu icon" />}
+        icon={<BurgerMenuIcon color="white" />}
         onClick={() => setIsMobileSidebarOpen(true)}
       />
       <SmallScreenSidebar

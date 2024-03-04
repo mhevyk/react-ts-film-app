@@ -1,7 +1,7 @@
-import homeIcon from "@icons/home.svg";
-import movieIcon from "@icons/movie.svg";
-import tvIcon from "@icons/tv.svg";
-import startStrokeIcon from "@icons/star-stroke.svg";
+import HomeIcon from "@icons/home.svg?react";
+import MovieIcon from "@icons/movie.svg?react";
+import TVIcon from "@icons/tv.svg?react";
+import StarStrokeIcon from "@icons/star-stroke.svg?react";
 import { ReactElement } from "react";
 
 type MainMenuItem = {
@@ -13,22 +13,22 @@ type MainMenuItem = {
 export const mainMenuItems: MainMenuItem[] = [
   {
     path: "/",
-    icon: <img src={homeIcon} alt="Home icon" />,
+    icon: <HomeIcon color="white" />,
     label: "Home",
   },
   {
     path: "/movies",
-    icon: <img src={movieIcon} alt="Movie icon" />,
+    icon: <MovieIcon color="white" />,
     label: "Movies",
   },
   {
     path: "/tvs",
-    icon: <img src={tvIcon} alt="TV icon" />,
+    icon: <TVIcon color="white" />,
     label: "TV",
   },
   {
     path: "/starred",
-    icon: <img src={startStrokeIcon} alt="Starred icon" />,
+    icon: <StarStrokeIcon color="white" />,
     label: "Starred",
   },
 ];

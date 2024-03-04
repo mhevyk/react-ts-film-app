@@ -2,6 +2,7 @@ import { Skeleton } from "@components/ui/Skeleton";
 import { Suspense } from "@suspensive/react";
 import styled from "styled-components";
 import { useInfiniteFilmSearchQuery } from "../hooks/useInfiniteFilmSearchQuery";
+import { media } from "@theme/mediaQueries";
 
 const Title = styled.h1`
   text-transform: uppercase;
@@ -28,8 +29,12 @@ const DetailsWrapper = styled.div`
   gap: 14px;
   border-bottom: 1px solid
     ${(props) => props.theme.colors.lightWithOpacity(0.1)};
-  padding-bottom: 16px;
+  padding: 20px 0;
   margin-bottom: 32px;
+
+  @media ${media.screens.lg} {
+    text-align: center;
+  }
 `;
 
 export function SearchDetails({ searchValue }: { searchValue: string }) {

@@ -7,9 +7,6 @@ import { SkeletonFilmCard } from "@components/styled/FilmCard";
 import { SearchDetails } from "./components/SearchDetails";
 import { ResponsiveGrid } from "@layouts/ReponsiveGrid";
 
-const PageWrapper = styled.div`
-  padding: 20px 30px;
-`;
 
 const InvalidSearchErrorWrapper = styled.div`
   display: flex;
@@ -35,7 +32,7 @@ export function SearchPage() {
   const isSearchValueValid = searchValue.trim() !== "";
 
   return (
-    <PageWrapper>
+    <>
       {isSearchValueValid && <SearchDetails searchValue={searchValue} />}
       <Suspense
         fallback={
@@ -57,6 +54,6 @@ export function SearchPage() {
           </InvalidSearchErrorWrapper>
         )}
       </Suspense>
-    </PageWrapper>
+    </>
   );
 }

@@ -1,6 +1,6 @@
 import { Logo } from "@components/ui/Logo";
 import styled from "styled-components";
-import closeIcon from "@icons/close.svg";
+import CloseIcon from "@icons/close.svg?react";
 import { Modal } from "@components/ui/Modal";
 import { mainMenuItems } from "../../../data/mainMenuItems";
 import { IconButton } from "@components/ui/IconButton";
@@ -13,12 +13,6 @@ const ModalTopToolbar = styled.div`
   padding-bottom: 10px;
   border-bottom: 1px solid
     ${(props) => props.theme.colors.whiteWithOpacity(0.2)};
-`;
-
-const CloseIcon = styled.img`
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
 `;
 
 const MenuItem = styled.div`
@@ -45,7 +39,13 @@ export function SmallScreenSidebar({
     <Modal isOpen={isOpen} onClose={handleClose} fullscreen locked>
       <ModalTopToolbar>
         <Logo />
-        <CloseIcon src={closeIcon} alt="Close icon" onClick={handleClose} />
+        <CloseIcon
+          color="white"
+          width={40}
+          height={40}
+          style={{ cursor: "pointer" }}
+          onClick={handleClose}
+        />
       </ModalTopToolbar>
       <Menu
         items={mainMenuItems}
